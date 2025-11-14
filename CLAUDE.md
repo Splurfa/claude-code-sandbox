@@ -1,11 +1,25 @@
 # Claude Code Configuration - SPARC Development Environment
 
+## 🚨 CRITICAL: AUTOMATIC SESSION MANAGEMENT
+
+**ON FIRST MESSAGE IN NEW CHAT:**
+1. Auto-generate session ID: `session-$(date +%Y%m%d-%H%M%S)-<topic>`
+2. Auto-create: `sessions/$SESSION_ID/artifacts/{code,tests,docs,scripts,notes}`
+3. Auto-initialize metadata and session-summary.md
+4. **ALL FILES GO TO:** `sessions/$SESSION_ID/artifacts/` subdirectories
+
+**NEVER** write to root `tests/`, `docs/`, `scripts/` - only to session artifacts!
+
+See "Session Artifacts & Collaborative Closeout" section for full protocol.
+
+---
+
 ## 🚨 CRITICAL: CONCURRENT EXECUTION & FILE MANAGEMENT
 
 **ABSOLUTE RULES**:
 1. ALL operations MUST be concurrent/parallel in a single message
 2. **NEVER save working files, text/mds and tests to the root folder**
-3. ALWAYS organize files in appropriate subdirectories
+3. ALWAYS organize files in appropriate subdirectories (session artifacts)
 4. **USE CLAUDE CODE'S TASK TOOL** for spawning agents concurrently, not just MCP
 
 ### ⚡ GOLDEN RULE: "1 MESSAGE = ALL RELATED OPERATIONS"
@@ -389,14 +403,71 @@ Next Session → Restore from backup OR query memory/log
 
 ## Session Artifacts & Collaborative Closeout
 
-- **Session sandbox**: Every interaction spawns agents that auto-run hooks and write **all** artifacts to `sessions/<session-id>/artifacts/`. Agents may create any helpful subfolders (`notes/`, `drafts/`, `handoffs/`, etc.) but must stay inside this directory so nothing scatters.
+### AUTOMATIC SESSION INITIALIZATION (First Message in Chat)
+
+**When a new chat starts, Claude Code MUST automatically:**
+
+1. **Generate Session ID**
+   ```bash
+   SESSION_ID="session-$(date +%Y%m%d-%H%M%S)-<inferred-topic>"
+   # Infer topic from first user message (2-3 words, lowercase-hyphenated)
+   ```
+
+2. **Create Session Structure** (single bash call)
+   ```bash
+   mkdir -p "sessions/$SESSION_ID/artifacts"/{code,tests,docs,scripts,notes} && \
+   cat > "sessions/$SESSION_ID/metadata.json" <<EOF
+   {
+     "session_id": "$SESSION_ID",
+     "created_at": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+     "status": "active"
+   }
+   EOF
+   ```
+
+3. **Initialize Session Summary**
+   ```bash
+   cat > "sessions/$SESSION_ID/session-summary.md" <<EOF
+   # Session: $SESSION_ID
+   **Started:** $(date)
+   **Status:** Active
+   ## Progress
+   - Session initialized
+   EOF
+   ```
+
+4. **Run Pre-Task Hook**
+   ```bash
+   npx claude-flow@alpha hooks pre-task --description "<first task>" --task-id "$SESSION_ID"
+   ```
+
+### FILE ROUTING RULES (Every File Operation)
+
+**ALL file write operations MUST go to session artifacts:**
+
+| Operation | Destination | Example |
+|-----------|-------------|---------|
+| Write code | `sessions/$SESSION_ID/artifacts/code/` | `sessions/.../artifacts/code/server.js` |
+| Write tests | `sessions/$SESSION_ID/artifacts/tests/` | `sessions/.../artifacts/tests/server.test.js` |
+| Write docs | `sessions/$SESSION_ID/artifacts/docs/` | `sessions/.../artifacts/docs/API.md` |
+| Write scripts | `sessions/$SESSION_ID/artifacts/scripts/` | `sessions/.../artifacts/scripts/build.sh` |
+| Write notes | `sessions/$SESSION_ID/artifacts/notes/` | `sessions/.../artifacts/notes/ideas.md` |
+
+**NEVER write to root directories:** `tests/`, `docs/`, `scripts/`, or any file directly in project root (unless explicitly modifying existing project files like `package.json`, `CLAUDE.md`, etc.)
+
+### SESSION TRACKING (During Work)
+
 - **Auto summary**: During work, Claude Code maintains `sessions/<session-id>/artifacts/session-summary.md`, mirroring the chat-level narrative so you can review the session in one file without asking for it.
 - **AgentDB + Reasoning Bank**: Hooks feed these stores continuously; they infer project links from natural-language context, so you never have to tag sessions manually.
-- **Closeout ritual** (always human-in-the-loop):
+
+### SESSION CLOSEOUT (When User Says "Done" or "Close Session")
+
+**Closeout ritual** (always human-in-the-loop):
   1. Agents present the summary artifact plus an index of everything in `artifacts/`.
   2. You review/annotate and approve the summary; only approved text is copied into the Captain's Log and stored in memory.
   3. After approval, run the standard hooks (`post-task`, `session-end`) to archive `.swarm` state and freeze the session folder.
-- **Project promotion**: Once closeout is complete, you can instruct agents (in natural language) to move or copy any artifact into `docs/projects/<name>/...`. Those actions are logged automatically so project history stays linked back to the originating session.
+
+**Project promotion**: Once closeout is complete, you can instruct agents (in natural language) to move or copy any artifact into `docs/projects/<name>/...`. Those actions are logged automatically so project history stays linked back to the originating session.
 
 ## Session Closeout Flow
 
