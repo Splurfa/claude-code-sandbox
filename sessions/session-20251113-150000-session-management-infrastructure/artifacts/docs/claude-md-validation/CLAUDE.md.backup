@@ -12,52 +12,6 @@
 
 See "Session Artifacts & Collaborative Closeout" section for full protocol.
 
-### 📋 SESSION SCOPE & LIFECYCLE
-
-**ONE SESSION = ONE CHAT THREAD** (not per task, not per agent)
-
-**Session Lifecycle:**
-```
-New Chat → Auto-create session-YYYYMMDD-HHMMSS-<topic>/
-         → ALL work goes to: sessions/$SESSION_ID/artifacts/{code,tests,docs,scripts,notes}/
-         → Sub-tasks use subdirectories within artifacts/ (NOT new sessions)
-         → Chat ends → Session closeout → Archive to .swarm/backups/
-```
-
-**✅ CORRECT - Single Session Per Chat:**
-```
-Chat starts:
-  sessions/session-20251113-150000-api-development/
-    artifacts/
-      code/ (backend API implementation)
-      tests/ (all test files for this chat)
-      docs/ (API documentation from this session)
-      scripts/ (deployment scripts created today)
-      notes/
-        backend-decisions.md (sub-task notes)
-        database-schema.md (sub-task notes)
-        authentication-flow.md (sub-task notes)
-```
-
-**❌ WRONG - Multiple Sessions Per Chat:**
-```
-Chat starts:
-  sessions/session-20251113-150000-api-development/
-  sessions/session-20251113-151500-database-design/  ← WRONG! Same chat
-  sessions/session-20251113-160000-auth-implementation/  ← WRONG! Same chat
-```
-
-**Agent Spawning & Session Paths:**
-- When spawning agents, ALWAYS include session path in task description
-- Example: `Task("Backend Developer", "Build REST API. Save to sessions/$SESSION_ID/artifacts/code/.", "backend-dev")`
-- Agents inherit current session ID from environment
-
-**Session Continuity Check:**
-Before creating any files, verify you're in an active session:
-1. Check if `$SESSION_ID` exists in environment
-2. If not, auto-create session per protocol above
-3. ALL file operations must target `sessions/$SESSION_ID/artifacts/`
-
 ---
 
 ## 🚨 CRITICAL: CONCURRENT EXECUTION & FILE MANAGEMENT
@@ -97,16 +51,13 @@ Before creating any files, verify you're in an active session:
 
 ### 📁 File Organization Rules
 
-**File Organization**: ALL working files MUST go to session artifacts directories:
-- `sessions/$SESSION_ID/artifacts/code/` - Source code files
-- `sessions/$SESSION_ID/artifacts/tests/` - Test files
-- `sessions/$SESSION_ID/artifacts/docs/` - Documentation and markdown files
-- `sessions/$SESSION_ID/artifacts/scripts/` - Utility scripts
-- `sessions/$SESSION_ID/artifacts/notes/` - Notes and working files
-
-**Exception**: Only edit existing project files (like `package.json`, `CLAUDE.md`, etc.) in their original locations.
-
-See "Session Artifacts & Collaborative Closeout" section for complete protocol.
+**NEVER save to root folder. Use these directories:**
+- `/src` - Source code files
+- `/tests` - Test files
+- `/docs` - Documentation and markdown files
+- `/config` - Configuration files
+- `/scripts` - Utility scripts
+- `/examples` - Example code
 
 ## Project Overview
 
@@ -258,20 +209,20 @@ Flow-Nexus extends MCP capabilities with 70+ cloud-based orchestration tools:
 ```javascript
 // Single message with all agent spawning via Claude Code's Task tool
 [Parallel Agent Execution]:
-  Task("Backend Developer", "Build REST API with Express. Save to sessions/$SESSION_ID/artifacts/code/. Use hooks for coordination.", "backend-dev")
-  Task("Frontend Developer", "Create React UI. Save to sessions/$SESSION_ID/artifacts/code/. Coordinate with backend via memory.", "coder")
-  Task("Database Architect", "Design PostgreSQL schema. Save to sessions/$SESSION_ID/artifacts/code/. Store schema in memory.", "code-analyzer")
-  Task("Test Engineer", "Write Jest tests to sessions/$SESSION_ID/artifacts/tests/. Check memory for API contracts.", "tester")
-  Task("DevOps Engineer", "Setup Docker and CI/CD. Save configs to sessions/$SESSION_ID/artifacts/scripts/. Document in memory.", "cicd-engineer")
-  Task("Security Auditor", "Review authentication. Report findings to sessions/$SESSION_ID/artifacts/docs/. Report via hooks.", "reviewer")
-
+  Task("Backend Developer", "Build REST API with Express. Use hooks for coordination.", "backend-dev")
+  Task("Frontend Developer", "Create React UI. Coordinate with backend via memory.", "coder")
+  Task("Database Architect", "Design PostgreSQL schema. Store schema in memory.", "code-analyzer")
+  Task("Test Engineer", "Write Jest tests. Check memory for API contracts.", "tester")
+  Task("DevOps Engineer", "Setup Docker and CI/CD. Document in memory.", "cicd-engineer")
+  Task("Security Auditor", "Review authentication. Report findings via hooks.", "reviewer")
+  
   // All todos batched together
   TodoWrite { todos: [...8-10 todos...] }
-
+  
   // All file operations together
-  Write "sessions/$SESSION_ID/artifacts/code/server.js"
-  Write "sessions/$SESSION_ID/artifacts/code/App.jsx"
-  Write "sessions/$SESSION_ID/artifacts/code/schema.sql"
+  Write "backend/server.js"
+  Write "frontend/App.jsx"
+  Write "database/schema.sql"
 ```
 
 ## 📋 Agent Coordination Protocol
@@ -329,12 +280,12 @@ npx claude-flow@alpha hooks session-end --export-metrics true
     {id: "8", content: "Performance optimization", status: "pending", priority: "low"}
   ]}
   
-  // Parallel file operations in session artifacts
-  Bash "mkdir -p sessions/$SESSION_ID/artifacts/{code,tests,docs,scripts}"
-  Write "sessions/$SESSION_ID/artifacts/code/package.json"
-  Write "sessions/$SESSION_ID/artifacts/code/server.js"
-  Write "sessions/$SESSION_ID/artifacts/tests/server.test.js"
-  Write "sessions/$SESSION_ID/artifacts/docs/API.md"
+  // Parallel file operations
+  Bash "mkdir -p app/{src,tests,docs,config}"
+  Write "app/package.json"
+  Write "app/src/server.js"
+  Write "app/tests/server.test.js"
+  Write "app/docs/API.md"
 ```
 
 ### ❌ WRONG (Multiple Messages):
@@ -342,7 +293,7 @@ npx claude-flow@alpha hooks session-end --export-metrics true
 Message 1: mcp__claude-flow__swarm_init
 Message 2: Task("agent 1")
 Message 3: TodoWrite { todos: [single todo] }
-Message 4: Write "sessions/$SESSION_ID/artifacts/code/file.js"
+Message 4: Write "file.js"
 // This breaks parallel coordination!
 ```
 
