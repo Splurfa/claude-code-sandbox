@@ -1,0 +1,249 @@
+# Datasette Auto-Insight Configuration
+# For Derek's Database Visualization
+
+title: "AI Memory & Learning Insights"
+description: "Visual exploration of AgentDB, ReasoningBank, and Memory databases"
+
+databases:
+  memory:
+    source: ".swarm/memory.db"
+    description: "Main memory storage - 45,563+ entries across 19 namespaces"
+    tables:
+      memory_entries:
+        title: "Memory Entries"
+        description: "All stored memories organized by namespace"
+        sort_desc: created_at
+        facets:
+          - namespace
+          - key
+        plugins:
+          datasette-cluster-map:
+            latitude_column: lat
+            longitude_column: lon
+
+      patterns:
+        title: "Learned Patterns"
+        description: "AI patterns learned from experience"
+        sort_desc: success_count
+
+      task_trajectories:
+        title: "Task History"
+        description: "Agent task execution history"
+        sort_desc: created_at
+        facets:
+          - judge_label
+          - status
+
+  reasoningbank:
+    source: ".agentdb/reasoningbank.db"
+    description: "Learning & reasoning data with 33 tables"
+    tables:
+      episodes:
+        title: "Learning Episodes"
+        description: "Individual learning experiences"
+        sort_desc: timestamp
+
+      skills:
+        title: "Acquired Skills"
+        description: "Skills learned over time"
+
+      causal_chains:
+        title: "Causal Relationships"
+        description: "Cause-effect patterns discovered"
+
+  hive:
+    source: ".hive-mind/hive.db"
+    description: "Agent coordination and hive mind data"
+
+# Canned Queries (One-Click Insights)
+queries:
+
+  # Memory Insights
+  memory_by_namespace:
+    title: "📊 Memory Distribution by Namespace"
+    description: "See which categories have the most memories"
+    sql: |
+      SELECT
+        namespace,
+        COUNT(*) as count,
+        COUNT(*) * 100.0 / (SELECT COUNT(*) FROM memory_entries) as percentage
+      FROM memory_entries
+      GROUP BY namespace
+      ORDER BY count DESC
+      LIMIT 20
+    database: memory
+
+  recent_activity:
+    title: "⚡ Recent Activity (Last 24 Hours)"
+    description: "What's been happening recently"
+    sql: |
+      SELECT
+        namespace,
+        key,
+        substr(value, 1, 100) as preview,
+        created_at
+      FROM memory_entries
+      WHERE created_at >= datetime('now', '-1 day')
+      ORDER BY created_at DESC
+      LIMIT 50
+    database: memory
+
+  memory_growth:
+    title: "📈 Memory Growth Over Time"
+    description: "Timeline of memory accumulation"
+    sql: |
+      SELECT
+        DATE(created_at) as date,
+        COUNT(*) as entries_created
+      FROM memory_entries
+      GROUP BY DATE(created_at)
+      ORDER BY date DESC
+      LIMIT 30
+    database: memory
+
+  agent_activity:
+    title: "🤖 Agent Activity Summary"
+    description: "Agent-related memories and assignments"
+    sql: |
+      SELECT
+        namespace,
+        COUNT(*) as count
+      FROM memory_entries
+      WHERE namespace LIKE '%agent%' OR namespace LIKE '%hive%'
+      GROUP BY namespace
+      ORDER BY count DESC
+    database: memory
+
+  hook_executions:
+    title: "🔗 Hook Execution Patterns"
+    description: "Pre/post hooks that have fired"
+    sql: |
+      SELECT
+        namespace,
+        COUNT(*) as executions,
+        MAX(created_at) as last_execution
+      FROM memory_entries
+      WHERE namespace LIKE 'hooks:%'
+      GROUP BY namespace
+      ORDER BY executions DESC
+    database: memory
+
+  # Pattern Insights
+  pattern_success_rates:
+    title: "✅ Pattern Success Rates"
+    description: "Which patterns work best"
+    sql: |
+      SELECT
+        pattern_type,
+        success_count,
+        failure_count,
+        ROUND(success_count * 100.0 / NULLIF(success_count + failure_count, 0), 2) as success_rate_pct
+      FROM patterns
+      WHERE (success_count + failure_count) > 0
+      ORDER BY success_rate_pct DESC, success_count DESC
+      LIMIT 20
+    database: memory
+
+  top_patterns:
+    title: "🏆 Most Used Patterns"
+    description: "Patterns used most frequently"
+    sql: |
+      SELECT
+        pattern_type,
+        success_count + failure_count as total_uses,
+        success_count,
+        failure_count,
+        confidence
+      FROM patterns
+      ORDER BY total_uses DESC
+      LIMIT 15
+    database: memory
+
+  # Task Insights
+  task_outcomes:
+    title: "📊 Task Success vs Failure"
+    description: "How well are tasks completing"
+    sql: |
+      SELECT
+        judge_label,
+        COUNT(*) as count,
+        ROUND(COUNT(*) * 100.0 / (SELECT COUNT(*) FROM task_trajectories WHERE judge_label IS NOT NULL), 2) as percentage
+      FROM task_trajectories
+      WHERE judge_label IS NOT NULL
+      GROUP BY judge_label
+      ORDER BY count DESC
+    database: memory
+
+  recent_tasks:
+    title: "🎯 Recent Task Activity"
+    description: "Latest task executions"
+    sql: |
+      SELECT
+        task_id,
+        judge_label,
+        created_at
+      FROM task_trajectories
+      ORDER BY created_at DESC
+      LIMIT 30
+    database: memory
+
+  # Learning Insights
+  learning_progress:
+    title: "🧠 Learning Progress"
+    description: "Skills and episodes over time"
+    sql: |
+      SELECT
+        DATE(timestamp) as date,
+        COUNT(*) as episodes
+      FROM episodes
+      GROUP BY DATE(timestamp)
+      ORDER BY date DESC
+      LIMIT 30
+    database: reasoningbank
+
+  top_skills:
+    title: "⭐ Top Acquired Skills"
+    description: "Skills learned and ranked"
+    sql: |
+      SELECT
+        skill_name,
+        skill_score,
+        usage_count
+      FROM top_skills
+      ORDER BY skill_score DESC
+      LIMIT 15
+    database: reasoningbank
+
+  causal_insights:
+    title: "🔍 Causal Relationships Discovered"
+    description: "Cause-effect patterns identified"
+    sql: |
+      SELECT
+        cause_id,
+        effect_id,
+        strength,
+        confidence
+      FROM causal_chains
+      ORDER BY strength DESC, confidence DESC
+      LIMIT 20
+    database: reasoningbank
+
+# Settings
+settings:
+  default_page_size: 50
+  max_returned_rows: 1000
+  num_sql_threads: 3
+  allow_facet: true
+  allow_download: true
+  default_facet_size: 30
+  facet_suggest_time_limit_ms: 1000
+
+plugins:
+  datasette-vega:
+    enabled: true
+  datasette-cluster-map:
+    enabled: true
+  datasette-plot:
+    enabled: true
+  datasette-json-html:
+    enabled: true

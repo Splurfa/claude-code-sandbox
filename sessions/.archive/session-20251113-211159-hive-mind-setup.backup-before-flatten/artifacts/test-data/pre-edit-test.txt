@@ -1,0 +1,6 @@
+📝 Executing pre-edit hook...
+📄 File: test-file.js
+⚙️  Operation: edit
+[2025-11-14T05:41:40.230Z] INFO [memory-store] Initialized SQLite at: /Users/splurfa/common-thread-sandbox/.swarm/memory.db
+  💾 Pre-edit state saved to .swarm/memory.db
+✅ ✅ Pre-edit hook completed

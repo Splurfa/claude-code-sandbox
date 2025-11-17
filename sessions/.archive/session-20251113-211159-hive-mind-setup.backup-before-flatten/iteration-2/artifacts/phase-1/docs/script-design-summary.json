@@ -1,0 +1,66 @@
+{
+  "phase": "1B-planning",
+  "task": "script-design",
+  "status": "complete",
+  "timestamp": "2025-11-14T08:10:49Z",
+  "deliverable": "script-design-specification.md",
+  "summary": {
+    "scripts_designed": 3,
+    "total_estimated_lines": 111,
+    "scripts": [
+      {
+        "name": "session-closeout.sh",
+        "size_lines": 45,
+        "purpose": "Orchestrate COLLECT→CLASSIFY→HITL→ARCHIVE workflow",
+        "key_features": [
+          "Human-in-the-loop confirmation",
+          "Error recovery with retry logic",
+          "Child script orchestration",
+          "Session status tracking"
+        ],
+        "stock_hooks": ["session-end", "post-task", "memory:store"]
+      },
+      {
+        "name": "captain-log-append.sh",
+        "size_lines": 28,
+        "purpose": "Append approved summaries to Captain's Log",
+        "key_features": [
+          "Date-based file organization",
+          "Duplicate session warning",
+          "Memory linkage for queries",
+          "Auto-creates log headers"
+        ],
+        "stock_hooks": ["memory:store"]
+      },
+      {
+        "name": "session-backup.sh",
+        "size_lines": 38,
+        "purpose": "Create comprehensive session backups with memory export",
+        "key_features": [
+          "Memory database export",
+          "JSON and tar.gz formats",
+          "Optional session deletion",
+          "Disk space validation"
+        ],
+        "stock_hooks": ["memory:export", "memory:store", "session-metrics"]
+      }
+    ],
+    "integration_flow": "session-closeout.sh → [captain-log-append.sh || session-backup.sh] → finalize",
+    "test_cases_defined": 24,
+    "design_principles": [
+      "Time-neutral (on-demand execution)",
+      "Scale-agnostic (10-10,000+ files)",
+      "Stock-first (95% hooks, 5% custom)"
+    ]
+  },
+  "next_steps": [
+    "Phase 1C: Test Engineer designs test suite",
+    "Phase 2A: Implementation per specifications",
+    "Phase 2B: Integration testing",
+    "Phase 3: Production validation"
+  ],
+  "peer_review_required": [
+    "Test Engineer: Validate testing requirements",
+    "UX Designer: Review HITL approval flow"
+  ]
+}

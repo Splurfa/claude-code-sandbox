@@ -1,0 +1,19 @@
+=== TEST 1: EXECUTING NORMAL SESSION CLOSEOUT ===
+🏁 Executing post-task hook...
+🆔 Task ID: test-workflow-normal
+[2025-11-14T05:30:37.624Z] INFO [memory-store] Initialized SQLite at: /Users/splurfa/common-thread-sandbox/.swarm/memory.db
+  💾 Task completion saved to .swarm/memory.db
+✅ ✅ Post-task hook completed
+🔚 Executing session-end hook...
+📊 Summary generation: ENABLED
+💾 State persistence: ENABLED
+[2025-11-14T05:30:39.803Z] INFO [memory-store] Initialized SQLite at: /Users/splurfa/common-thread-sandbox/.swarm/memory.db
+  💾 Full session state persisted
+
+📊 SESSION SUMMARY:
+  📋 Tasks: 41
+  ✏️  Edits: 139
+  🔧 Commands: 1000
+  🤖 Agents: 0
+  💾 Session saved to .swarm/memory.db
+✅ ✅ Session-end hook completed

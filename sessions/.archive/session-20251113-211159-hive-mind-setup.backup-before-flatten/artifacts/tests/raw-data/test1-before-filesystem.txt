@@ -1,0 +1,14 @@
+test-workflow-normal/
+└── artifacts
+    ├── code
+    │   └── app.js
+    ├── docs
+    │   └── README.md
+    ├── notes
+    │   └── implementation.md
+    ├── scripts
+    │   └── deploy.sh
+    └── tests
+        └── app.test.js
+
+7 directories, 5 files

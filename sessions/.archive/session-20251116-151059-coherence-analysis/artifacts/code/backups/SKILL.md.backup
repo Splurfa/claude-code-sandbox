@@ -1,0 +1,72 @@
+---
+name: session-closeout
+description: Natural language session closeout with HITL approval and Captain's Log integration
+version: 1.0.0
+triggers:
+  - "Close out this session"
+  - "End session"
+  - "Done with this session"
+  - "Session closeout"
+  - "Wrap up this session"
+stock_first: true
+hitl_required: true
+---
+
+# Session Closeout Skill
+
+Stock-first session closeout workflow with mandatory human-in-the-loop approval.
+
+## What This Skill Does
+
+4-step closeout ritual:
+1. **Collect** - Generate summary of session work (post-task hook)
+2. **Review** - Present summary for human approval (HITL checkpoint)
+3. **Archive** - Backup + Captain's Log entry + metadata update
+4. **Cleanup** - Move session directory to sessions/.archive/
+
+## Stock Infrastructure Used
+
+- `npx claude-flow@alpha hooks post-task` - Collect session data
+- `npx claude-flow@alpha hooks session-end --generate-summary true` - Generate summary
+- `npx claude-flow@alpha hooks session-end --export-metrics true` - Create backup
+- `npx claude-flow@alpha hooks journal --entry "[summary]"` - Update Captain's Log
+
+## Implementation Scripts
+
+- `scripts/closeout.sh` - Full closeout orchestration with HITL approval
+- `scripts/archive-session.sh` - Session directory archival (move to .archive)
+
+## Usage
+
+**Invoke via natural language:**
+"Close out this session"
+
+**Invoke as skill:**
+`/session-closeout`
+
+**Invoke via script:**
+```bash
+.claude/skills/session-closeout/scripts/closeout.sh <session-id>
+```
+
+## Progressive Disclosure
+
+- **Beginner:** See examples/basic-closeout.md
+- **Intermediate:** See examples/batch-closeout.md (multiple sessions)
+- **Advanced:** See examples/error-recovery.md (handling failures)
+
+## HITL Protocol
+
+**Mandatory approval before archive:**
+1. Display session summary
+2. Prompt: "Approve closeout and archive? (y/N)"
+3. If yes → Archive + log + cleanup
+4. If no → Cancel and remain in session
+
+**No auto-approval** - Always requires explicit user confirmation.
+
+## Related Documentation
+
+- [Session Management](../../../sessions/README.md)
+- [Captain's Log](../../../sessions/captains-log/README.md)
+- [CLAUDE.md](../../../CLAUDE.md)

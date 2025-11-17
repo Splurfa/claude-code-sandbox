@@ -1,0 +1,121 @@
+{
+  "name": "5-Agent Verification Swarm",
+  "description": "Parallel verification of documentation claims against system reality",
+  "version": "1.0.0",
+  "topology": "hierarchical",
+  "queen_type": "strategic",
+  "consensus": "byzantine",
+  "agents": [
+    {
+      "id": "verification-1",
+      "type": "researcher",
+      "task": "Verify claim #1 against system state",
+      "deliverable": "verification-1-[topic].md",
+      "time_estimate": "15-20 min",
+      "approach": [
+        "Read claim from documentation",
+        "Search codebase for actual implementation",
+        "Compare claim vs reality",
+        "Document evidence with file paths and line numbers",
+        "Flag discrepancies with severity level"
+      ]
+    },
+    {
+      "id": "verification-2",
+      "type": "researcher",
+      "task": "Verify claim #2 against system state",
+      "deliverable": "verification-2-[topic].md",
+      "time_estimate": "15-20 min",
+      "approach": [
+        "Read claim from documentation",
+        "Search codebase for actual implementation",
+        "Compare claim vs reality",
+        "Document evidence with file paths and line numbers",
+        "Flag discrepancies with severity level"
+      ]
+    },
+    {
+      "id": "verification-3",
+      "type": "researcher",
+      "task": "Verify claim #3 against system state",
+      "deliverable": "verification-3-[topic].md",
+      "time_estimate": "15-20 min",
+      "approach": [
+        "Read claim from documentation",
+        "Search codebase for actual implementation",
+        "Compare claim vs reality",
+        "Document evidence with file paths and line numbers",
+        "Flag discrepancies with severity level"
+      ]
+    },
+    {
+      "id": "verification-4",
+      "type": "analyst",
+      "task": "Analyze patterns across claims",
+      "deliverable": "verification-4-analysis.md",
+      "time_estimate": "20-25 min",
+      "approach": [
+        "Read all verification reports (1-3)",
+        "Identify systematic patterns in discrepancies",
+        "Categorize issues (outdated docs, wrong paths, missing features)",
+        "Assess impact severity",
+        "Generate pattern analysis report"
+      ]
+    },
+    {
+      "id": "verification-5",
+      "type": "analyst",
+      "task": "Cross-reference and validate findings",
+      "deliverable": "verification-5-validation.md",
+      "time_estimate": "20-25 min",
+      "approach": [
+        "Read all reports (1-4)",
+        "Cross-validate evidence",
+        "Identify root causes",
+        "Recommend corrective actions",
+        "Create executive summary"
+      ]
+    }
+  ],
+  "execution": {
+    "mode": "parallel",
+    "coordination": "collective_memory",
+    "output_location": "sessions/[SESSION_ID]/artifacts/docs/",
+    "spawning_pattern": "All agents spawned in single message using Task() tool",
+    "memory_usage": "Agents share findings via session artifacts, no cross-agent memory required"
+  },
+  "usage": {
+    "when_to_use": [
+      "Verifying documentation claims against codebase",
+      "Audit trails and compliance checks",
+      "Post-migration validation",
+      "Identifying documentation drift",
+      "Quality assurance reviews"
+    ],
+    "estimated_duration": "30 min (parallel) / 100 min (sequential)",
+    "success_criteria": [
+      "All claims verified with evidence",
+      "Discrepancies documented with file references",
+      "Root cause identified",
+      "Actionable recommendations provided"
+    ],
+    "best_practices": [
+      "Clearly define claims to verify before spawning",
+      "Ensure all agents have access to documentation and codebase",
+      "Review first verification before spawning others (if iterative)",
+      "Use parallel execution for independent verifications"
+    ]
+  },
+  "customization": {
+    "agent_count": "Scale to N claims (2-10 typical)",
+    "agent_types": "Can use specialized agents (code-analyzer, security, performance)",
+    "output_format": "JSON, Markdown, or structured reports",
+    "consensus": "Can switch to 'raft' for faster coordination if byzantine overhead too high"
+  },
+  "notes": [
+    "Based on successful session-20251116-151059 coherence analysis",
+    "Achieved 100% claim verification with parallel execution",
+    "Time savings: 70% vs sequential (30 min vs 100 min)",
+    "Works well for 2-10 independent verification tasks"
+  ]
+}

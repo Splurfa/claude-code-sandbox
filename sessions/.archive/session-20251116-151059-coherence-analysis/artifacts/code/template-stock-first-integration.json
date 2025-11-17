@@ -1,0 +1,200 @@
+{
+  "name": "Stock-First Integration Pattern",
+  "description": "Research stock features before building custom integrations",
+  "version": "1.0.0",
+  "philosophy": "Understand and leverage stock features first, then integrate custom only where needed",
+  "workflow": {
+    "step_1": {
+      "name": "Stock Discovery",
+      "agent": "researcher",
+      "task": "Test and document stock feature behavior",
+      "output": "stock-[feature]-research.md",
+      "time_estimate": "15-20 min",
+      "approach": [
+        "Read official stock documentation",
+        "Test stock feature in isolation",
+        "Document actual behavior vs documented behavior",
+        "Identify stock best practices and recommendations",
+        "Note any stock limitations or gaps"
+      ],
+      "success_criteria": [
+        "Stock feature fully understood",
+        "Behavior documented with examples",
+        "Limitations clearly identified"
+      ]
+    },
+    "step_2": {
+      "name": "Custom Analysis",
+      "agent": "analyst",
+      "task": "Identify where custom implementations exist and why",
+      "output": "custom-vs-stock-comparison.md",
+      "time_estimate": "20-25 min",
+      "approach": [
+        "Search codebase for custom implementations",
+        "Analyze why custom was chosen over stock",
+        "Identify overlaps and conflicts with stock",
+        "Document feature gaps that justified custom",
+        "Assess if custom is still needed"
+      ],
+      "success_criteria": [
+        "All custom implementations cataloged",
+        "Justifications documented",
+        "Conflicts identified",
+        "Recommendations for consolidation"
+      ]
+    },
+    "step_3": {
+      "name": "Integration Design",
+      "agent": "system-architect",
+      "task": "Design coherent integration pattern",
+      "output": "integration-architecture.md",
+      "time_estimate": "25-30 min",
+      "approach": [
+        "Review stock and custom findings",
+        "Design integration that leverages stock where possible",
+        "Plan custom to complement (not compete) with stock",
+        "Define clear boundaries and handoffs",
+        "Document integration patterns for team"
+      ],
+      "success_criteria": [
+        "Integration architecture documented",
+        "Stock features maximally leveraged",
+        "Custom features justified and scoped",
+        "Clear implementation roadmap"
+      ]
+    },
+    "step_4": {
+      "name": "Implementation",
+      "agent": "coder",
+      "task": "Build integration following stock patterns",
+      "output": "integration-implementation/",
+      "time_estimate": "30-45 min",
+      "approach": [
+        "Implement stock integration first",
+        "Add custom features with clear separation",
+        "Follow stock naming and organizational patterns",
+        "Document deviations and justifications",
+        "Create tests validating integration"
+      ],
+      "success_criteria": [
+        "Integration code follows stock patterns",
+        "Custom features clearly separated",
+        "Tests validate both stock and custom",
+        "Documentation updated"
+      ]
+    },
+    "step_5": {
+      "name": "Validation",
+      "agent": "reviewer",
+      "task": "Validate integration coherence and compliance",
+      "output": "integration-validation-report.md",
+      "time_estimate": "15-20 min",
+      "approach": [
+        "Test stock features still work as expected",
+        "Verify custom features don't conflict",
+        "Check documentation accuracy",
+        "Validate team can understand and maintain",
+        "Recommend improvements"
+      ],
+      "success_criteria": [
+        "All tests passing",
+        "No stock conflicts",
+        "Documentation accurate",
+        "Team-ready handoff"
+      ]
+    }
+  },
+  "principles": [
+    "Understand stock recommendations FIRST before building custom",
+    "Work WITH stock architecture, not against it",
+    "Custom should complement stock, not compete or duplicate",
+    "Document integration patterns for team reuse",
+    "Prefer stock solutions even if custom seems faster short-term",
+    "When stock is insufficient, extend it rather than replace it"
+  ],
+  "anti_patterns": [
+    {
+      "pattern": "Build custom without checking stock first",
+      "consequence": "Duplicated effort, conflicts, maintenance burden",
+      "fix": "Always run step 1 (stock discovery) before custom work"
+    },
+    {
+      "pattern": "Custom reimplements stock features",
+      "consequence": "Fragmentation, confusion, double maintenance",
+      "fix": "Refactor custom to delegate to stock where possible"
+    },
+    {
+      "pattern": "Documentation claims stock but uses custom",
+      "consequence": "Team confusion, onboarding failures",
+      "fix": "Run step 5 (validation) to catch doc-reality gaps"
+    },
+    {
+      "pattern": "Custom uses different patterns than stock",
+      "consequence": "Cognitive overhead, inconsistent UX",
+      "fix": "Step 4 (implementation) must follow stock patterns"
+    }
+  ],
+  "execution": {
+    "mode": "sequential_with_gates",
+    "coordination": "hierarchical",
+    "output_location": "sessions/[SESSION_ID]/artifacts/",
+    "gates": [
+      "Step 1 complete before step 2 (must understand stock first)",
+      "Step 2 complete before step 3 (design requires full context)",
+      "Step 3 approved before step 4 (no coding without architecture)",
+      "Step 4 complete before step 5 (validation requires implementation)"
+    ],
+    "hitl_checkpoints": [
+      "After step 2: Approve custom justifications",
+      "After step 3: Approve integration architecture",
+      "After step 5: Approve final implementation"
+    ]
+  },
+  "usage": {
+    "when_to_use": [
+      "Integrating new features into existing system",
+      "Resolving conflicts between stock and custom",
+      "Ensuring coherence across components",
+      "Onboarding features from other systems",
+      "Consolidating fragmented implementations"
+    ],
+    "when_NOT_to_use": [
+      "Pure greenfield projects (no stock to integrate with)",
+      "Emergency hotfixes (skip research, fix fast)",
+      "Deprecated features being removed (no integration needed)"
+    ],
+    "estimated_duration": "105-140 minutes total",
+    "agents_required": 5,
+    "hitl_involvement": "High (3 approval gates)"
+  },
+  "success_metrics": {
+    "stock_leverage": "% of functionality using stock features",
+    "conflict_reduction": "# of stock/custom conflicts eliminated",
+    "documentation_accuracy": "% of claims verified against reality",
+    "team_understanding": "Can new team member understand integration?",
+    "maintenance_burden": "Lines of custom code / total integration code"
+  },
+  "outputs": {
+    "documentation": [
+      "stock-[feature]-research.md",
+      "custom-vs-stock-comparison.md",
+      "integration-architecture.md",
+      "integration-validation-report.md"
+    ],
+    "code": [
+      "integration-implementation/ (source files)",
+      "tests/ (integration tests)"
+    ],
+    "artifacts": [
+      "Templates for future integrations",
+      "Lessons learned document"
+    ]
+  },
+  "notes": [
+    "Designed to prevent doc-reality drift",
+    "Based on coherence analysis findings",
+    "Emphasizes understanding before building",
+    "Sequential gates prevent premature optimization",
+    "HITL checkpoints ensure alignment with team strategy"
+  ]
+}

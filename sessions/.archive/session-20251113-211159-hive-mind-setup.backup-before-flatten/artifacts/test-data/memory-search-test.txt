@@ -1,0 +1,74 @@
+Memory commands:
+  store <key> <value>    Store a key-value pair
+  query <search>         Search for entries
+  stats                  Show memory statistics
+  export [filename]      Export memory to file
+  import <filename>      Import memory from file
+  clear --namespace <ns> Clear a namespace
+  list                   List all namespaces
+
+🧠 ReasoningBank Commands (NEW in v2.7.0):
+  init --reasoningbank   Initialize ReasoningBank (AI-powered memory)
+  status --reasoningbank Show ReasoningBank statistics
+  detect                 Show available memory modes
+  mode                   Show current memory configuration
+  migrate --to <mode>    Migrate between basic/reasoningbank
+
+Options:
+  --namespace <ns>       Specify namespace for operations
+  --ns <ns>              Short form of --namespace
+  --limit <n>            Limit number of results (default: 10)
+  --sort <field>         Sort results by: recent, oldest, key, value
+  --format <type>        Export format: json, yaml
+  --redact               🔒 Enable API key redaction (security feature)
+  --secure               Alias for --redact
+
+🎯 Mode Selection:
+  (no flag)              AUTO MODE (default) - Uses ReasoningBank if initialized, else JSON fallback
+  --reasoningbank, --rb  Force ReasoningBank mode (AI-powered)
+  --basic                Force Basic mode (JSON storage)
+  --auto                 Explicit auto-detect (same as default)
+
+🔒 Security Features (v2.6.0):
+  API Key Protection:    Automatically detects and redacts sensitive data
+  Patterns Detected:     Anthropic, OpenRouter, Gemini, Bearer tokens, etc.
+  Auto-Validation:       Warns when storing unredacted sensitive data
+  Display Redaction:     Redact sensitive data when querying with --redact
+
+Examples:
+  # Basic mode (default - backward compatible)
+  memory store previous_work "Research findings from yesterday"
+  memory store api_config "key=sk-ant-..." --redact  # 🔒 Redacts API key
+  memory query research --namespace sparc
+
+  # ReasoningBank mode (AI-powered, opt-in)
+  memory init --reasoningbank  # One-time setup
+  memory store api_pattern "Always use env vars" --reasoningbank
+  memory query "API configuration" --reasoningbank --limit 5  # Semantic search!
+  memory list --reasoningbank --sort recent --limit 20
+  memory export backup.json --format json --reasoningbank
+  memory status --reasoningbank  # Show AI metrics
+
+  # Auto-detect mode (smart selection)
+  memory query config --auto  # Uses ReasoningBank if available
+
+  # Mode management
+  memory detect  # Show available modes
+  memory mode    # Show current configuration
+
+💡 Tips:
+  • AUTO MODE (default): Automatically uses best available storage
+  • ReasoningBank: AI-powered semantic search (learns from patterns)
+  • JSON fallback: Always available, fast, simple key-value storage
+  • Initialize ReasoningBank once: "memory init --reasoningbank"
+  • Always use --redact when storing API keys or secrets!
+
+🚀 Semantic Search (NEW in v2.7.25):
+  NPX Mode:              Uses hash-based embeddings (text similarity)
+                         • Fast, offline, zero dependencies
+                         • Good for exact/partial text matching
+  Local Install:         Uses transformer embeddings (semantic AI)
+                         • Finds conceptually related content
+                         • 384-dimensional vectors (Xenova/all-MiniLM-L6-v2)
+                         • Install: npm install -g claude-flow@alpha
+  Both modes work perfectly - choose based on your needs!

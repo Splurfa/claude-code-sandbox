@@ -1,0 +1,14 @@
+./.claude/agents/optimization/topology-optimizer.md
+./.claude/commands/optimization/auto-topology.md
+./.claude/commands/optimization/topology-optimize.md
+./.claude/skills/sparc-methodology
+./docs/protocols/captain-log-protocol.md
+./sessions/captains-log
+./sessions/session-20251113-211159-hive-mind-setup/artifacts/test-data/captain-log-search.txt
+./sessions/session-20251113-211159-hive-mind-setup/artifacts/tests/raw-data/test2-execution-log.txt
+./sessions/session-20251113-211159-hive-mind-setup/artifacts/tests/raw-data/test3-execution-log.txt
+./sessions/session-20251113-211159-hive-mind-setup/artifacts/tests/raw-data/test1-execution-log.txt
+./sessions/session-20251113-211159-hive-mind-setup/artifacts/tests/raw-data/test4-execution-log.txt
+./sessions/session-20251113-211159-hive-mind-setup/artifacts/tests/raw-data/test1-after-captains-log.txt
+./sessions/session-20251113-211159-hive-mind-setup/artifacts/tests/raw-data/test1-before-captains-log.txt
+./.hive-mind/logs

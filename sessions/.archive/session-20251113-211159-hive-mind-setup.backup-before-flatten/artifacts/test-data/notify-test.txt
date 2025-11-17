@@ -1,0 +1,11 @@
+📢 Executing notify hook...
+💬 Message: Test notification
+📊 Level: info
+[2025-11-14T05:41:52.141Z] INFO [memory-store] Initialized SQLite at: /Users/splurfa/common-thread-sandbox/.swarm/memory.db
+
+✅ NOTIFICATION:
+  Test notification
+  🐝 Swarm: active
+
+  💾 Notification saved to .swarm/memory.db
+✅ ✅ Notify hook completed

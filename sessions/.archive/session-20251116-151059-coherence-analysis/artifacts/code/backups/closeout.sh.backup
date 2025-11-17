@@ -1,0 +1,114 @@
+#!/bin/bash
+# Complete session closeout workflow with HITL approval
+# Stock-first: wraps claude-flow hooks with thin orchestration
+
+set -e
+
+SESSION_ID="${1:-$SESSION_ID}"
+
+if [[ -z "$SESSION_ID" ]]; then
+  echo "❌ No session ID provided"
+  echo "Usage: $0 <session-id>"
+  echo "  or: export SESSION_ID=<session-id> && $0"
+  exit 1
+fi
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+echo "📊 Collecting session data..."
+npx claude-flow@alpha hooks post-task --task-id "$SESSION_ID"
+echo "✓ Post-task hook complete"
+echo
+
+echo "📝 Generating session summary..."
+npx claude-flow@alpha hooks session-end --generate-summary true
+echo "✓ Summary generated"
+echo
+
+# Calculate session duration
+METADATA="sessions/$SESSION_ID/metadata.json"
+if [[ -f "$METADATA" ]] && command -v jq &> /dev/null; then
+  START_TIME=$(jq -r '.created_at' "$METADATA")
+  if [[ -n "$START_TIME" ]] && [[ "$START_TIME" != "null" ]]; then
+    START_EPOCH=$(date -j -f "%Y-%m-%dT%H:%M:%SZ" "$START_TIME" "+%s" 2>/dev/null || echo "0")
+    END_EPOCH=$(date "+%s")
+    if [[ "$START_EPOCH" != "0" ]]; then
+      DURATION_SECONDS=$((END_EPOCH - START_EPOCH))
+      HOURS=$((DURATION_SECONDS / 3600))
+      MINUTES=$(((DURATION_SECONDS % 3600) / 60))
+      echo "⏱️  Session duration: ${HOURS}h ${MINUTES}m"
+      echo
+    fi
+  fi
+fi
+
+# Display summary
+SUMMARY_FILE="sessions/$SESSION_ID/session-summary.md"
+if [[ -f "$SUMMARY_FILE" ]]; then
+  echo "=== Session Summary ==="
+  cat "$SUMMARY_FILE"
+  echo
+fi
+
+# HITL Approval
+echo "Review the summary above."
+read -p "Approve closeout and archive? (y/N): " -n 1 -r
+echo
+
+if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+  echo "❌ Closeout cancelled. Session remains active."
+  exit 0
+fi
+
+# Archive
+echo
+echo "📦 Archiving session..."
+npx claude-flow@alpha hooks session-end --export-metrics true
+echo "✓ Backup created in .swarm/backups/"
+echo
+
+echo "📖 Updating Captain's Log..."
+# Extract summary for log entry
+if [[ -f "$SUMMARY_FILE" ]]; then
+  SUMMARY_TEXT=$(head -50 "$SUMMARY_FILE" | tail -30)
+  bash .claude/hooks/journal.sh "Session $SESSION_ID closed
+
+$SUMMARY_TEXT" 2>/dev/null || echo "  (Captain's Log update skipped)"
+fi
+echo "✓ Captain's Log updated"
+echo
+
+echo "📝 Updating metadata..."
+# Update metadata status (Patch 3: Mark session as completed)
+METADATA="sessions/$SESSION_ID/metadata.json"
+if [[ -f "$METADATA" ]]; then
+  if command -v jq &> /dev/null; then
+    jq --arg closed_at "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+       '. + {status: "completed", closed_at: $closed_at}' \
+       "$METADATA" > "$METADATA.tmp"
+    mv "$METADATA.tmp" "$METADATA"
+  else
+    echo "  (jq not found, metadata update skipped)"
+  fi
+fi
+echo "✓ Metadata updated to 'completed'"
+echo
+
+echo "🔄 Clearing session environment..."
+# Clear active session environment variable (Patch 3: Session Inheritance cleanup)
+if [[ -n "$ACTIVE_SESSION_ID" ]] && [[ "$ACTIVE_SESSION_ID" == "$SESSION_ID" ]]; then
+  unset ACTIVE_SESSION_ID
+  echo "✓ ACTIVE_SESSION_ID cleared"
+else
+  echo "  (No matching active session variable found)"
+fi
+echo
+
+echo "🗄️  Moving to archive..."
+"$SCRIPT_DIR/archive-session.sh" "$SESSION_ID"
+echo
+
+echo "✅ Session closed successfully"
+echo
+echo "Active sessions remaining:"
+ls -1 sessions/ | grep "^session-" || echo "  (none)"

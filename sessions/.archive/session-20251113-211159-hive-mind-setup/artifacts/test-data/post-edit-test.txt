@@ -1,0 +1,6 @@
+📝 Executing post-edit hook...
+📄 File: test-file.js
+💾 Memory key: test/edit/key
+[2025-11-14T05:41:42.402Z] INFO [memory-store] Initialized SQLite at: /Users/splurfa/common-thread-sandbox/.swarm/memory.db
+  💾 Post-edit data saved to .swarm/memory.db
+✅ ✅ Post-edit hook completed

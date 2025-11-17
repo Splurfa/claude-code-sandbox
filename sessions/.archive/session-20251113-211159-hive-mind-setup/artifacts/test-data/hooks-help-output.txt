@@ -1,0 +1,55 @@
+
+🔗 HOOKS COMMAND - Lifecycle Event Management
+
+USAGE:
+  claude-flow hooks <command> [options]
+
+DESCRIPTION:
+  Execute lifecycle hooks before and after tasks, edits, and sessions with 
+  real ruv-swarm integration for automated preparation, tracking, and cleanup.
+
+COMMANDS:
+  pre-task      Execute before task begins (preparation & setup)
+  post-task     Execute after task completion (analysis & cleanup)
+  pre-edit      Execute before file modifications (backup & validation)
+  post-edit     Execute after file modifications (tracking & coordination)
+  session-end   Execute at session termination (cleanup & export)
+
+PRE-TASK OPTIONS:
+  --description <desc>     Task description
+  --task-id <id>          Task identifier
+  --agent-id <id>         Executing agent identifier
+  --auto-spawn-agents     Auto-spawn agents for task (default: true)
+
+POST-TASK OPTIONS:
+  --task-id <id>               Task identifier
+  --analyze-performance        Generate performance analysis
+  --generate-insights          Create AI-powered insights
+
+PRE-EDIT OPTIONS:
+  --file <path>           Target file path
+  --operation <type>      Edit operation type (edit, create, delete)
+
+POST-EDIT OPTIONS:
+  --file <path>           Modified file path
+  --memory-key <key>      Coordination memory key for storing edit info
+
+SESSION-END OPTIONS:
+  --export-metrics        Export session performance metrics
+  --swarm-id <id>         Swarm identifier for coordination cleanup
+  --generate-summary      Create comprehensive session summary
+
+EXAMPLES:
+  claude-flow hooks pre-task --description "Build API" --task-id task-123 --agent-id agent-456
+  claude-flow hooks post-task --task-id task-123 --analyze-performance --generate-insights
+  claude-flow hooks pre-edit --file "src/api.js" --operation edit
+  claude-flow hooks post-edit --file "src/api.js" --memory-key "swarm/123/edits/timestamp"
+  claude-flow hooks session-end --export-metrics --generate-summary --swarm-id swarm-123
+
+🎯 Hooks enable:
+  • Automated preparation & cleanup
+  • Performance tracking
+  • Coordination synchronization
+  • Error prevention
+  • Insight generation
+

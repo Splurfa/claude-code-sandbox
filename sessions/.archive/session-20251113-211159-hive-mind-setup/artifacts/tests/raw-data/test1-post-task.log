@@ -1,0 +1,5 @@
+🏁 Executing post-task hook...
+🆔 Task ID: test-workflow-normal
+[2025-11-14T18:51:52.473Z] INFO [memory-store] Initialized SQLite at: /Users/splurfa/common-thread-sandbox/.swarm/memory.db
+  💾 Task completion saved to .swarm/memory.db
+✅ ✅ Post-task hook completed

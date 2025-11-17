@@ -1,0 +1,156 @@
+{
+  "name": "Adaptive Research Mission",
+  "description": "Dynamic research with mid-flight replanning based on discoveries",
+  "version": "1.0.0",
+  "topology": "hierarchical",
+  "queen_type": "adaptive",
+  "consensus": "byzantine",
+  "phases": [
+    {
+      "phase": "discovery",
+      "phase_number": 1,
+      "agents": 2,
+      "types": ["researcher", "analyst"],
+      "objective": "Explore problem space and identify patterns",
+      "tasks": [
+        "Survey existing documentation",
+        "Search codebase for relevant implementations",
+        "Identify initial patterns and anomalies"
+      ],
+      "deliverables": [
+        "discovery-initial-findings.md",
+        "discovery-pattern-analysis.md"
+      ],
+      "adaptivity": {
+        "trigger": "Patterns unclear or conflicting evidence found",
+        "action": "Extend to phase 1.5 with focused deep-dive agents",
+        "decision_maker": "Queen (strategic)"
+      },
+      "time_estimate": "20-30 min"
+    },
+    {
+      "phase": "analysis",
+      "phase_number": 2,
+      "agents": 2,
+      "types": ["analyst", "system-architect"],
+      "objective": "Root cause and feature gap analysis",
+      "tasks": [
+        "Analyze root causes of discovered issues",
+        "Map feature gaps and missing integrations",
+        "Design coherent solutions"
+      ],
+      "deliverables": [
+        "analysis-root-cause.md",
+        "analysis-architecture-recommendations.md"
+      ],
+      "adaptivity": {
+        "trigger": "Complex architectural issues requiring deeper analysis",
+        "action": "Insert additional specialized agents (performance, security, etc.)",
+        "decision_maker": "Queen (adaptive)"
+      },
+      "time_estimate": "25-35 min"
+    },
+    {
+      "phase": "documentation",
+      "phase_number": 3,
+      "agents": 3,
+      "types": ["documenter", "coder", "reviewer"],
+      "objective": "Create actionable documentation and templates",
+      "tasks": [
+        "Document findings and recommendations",
+        "Create implementation templates",
+        "Generate integration guides",
+        "Review for completeness and accuracy"
+      ],
+      "deliverables": [
+        "documentation-comprehensive-guide.md",
+        "documentation-implementation-templates/",
+        "documentation-review-report.md"
+      ],
+      "adaptivity": {
+        "trigger": "Findings require custom tooling or automation",
+        "action": "Spawn additional coder agents for template generation",
+        "decision_maker": "Queen (strategic)"
+      },
+      "time_estimate": "30-40 min"
+    }
+  ],
+  "adaptation_triggers": [
+    {
+      "condition": "Discovery of unexpected patterns",
+      "action": "Insert additional analysis layer (phase 1.5)",
+      "agents_added": 1,
+      "time_impact": "+15-20 min"
+    },
+    {
+      "condition": "Scope larger than expected",
+      "action": "Spawn additional parallel agents",
+      "agents_added": "2-4",
+      "time_impact": "+0 min (parallel) or +30-60 min (sequential)"
+    },
+    {
+      "condition": "Critical issues found",
+      "action": "Escalate to HITL for direction",
+      "agents_added": 0,
+      "time_impact": "Pauses until user input"
+    },
+    {
+      "condition": "Conflicting evidence",
+      "action": "Spawn validator agent for cross-referencing",
+      "agents_added": 1,
+      "time_impact": "+20-25 min"
+    }
+  ],
+  "queen_responsibilities": {
+    "pre_mission": [
+      "Define initial research scope",
+      "Select starting topology and consensus",
+      "Identify phase breakpoints"
+    ],
+    "during_mission": [
+      "Monitor agent progress",
+      "Detect adaptation triggers",
+      "Replan phases based on findings",
+      "Coordinate agent hand-offs between phases"
+    ],
+    "post_mission": [
+      "Consolidate findings",
+      "Generate executive summary",
+      "Archive lessons learned"
+    ]
+  },
+  "execution": {
+    "mode": "phased_parallel",
+    "coordination": "hierarchical_memory",
+    "output_location": "sessions/[SESSION_ID]/artifacts/docs/",
+    "hitl_checkpoints": "After each phase for direction approval",
+    "auto_adaptation": "Enabled (queen can replan without HITL for minor adjustments)"
+  },
+  "usage": {
+    "when_to_use": [
+      "Unknown scope exploratory research",
+      "Meta-analysis of complex systems",
+      "Investigating systemic issues",
+      "Feature gap analysis",
+      "Post-mortem investigations"
+    ],
+    "key_feature": "Queen can replan mission based on intermediate findings",
+    "time_range": "60-120 minutes (highly variable based on discoveries)",
+    "hitl_involvement": "Medium (checkpoints at phase boundaries)",
+    "best_for": "Problems where you don't know what you'll find"
+  },
+  "success_criteria": [
+    "All phases completed or adaptively modified",
+    "Root causes identified with evidence",
+    "Actionable recommendations documented",
+    "Templates/guides created for future use",
+    "Lessons learned captured"
+  ],
+  "notes": [
+    "Template designed for unknown unknowns",
+    "Queen's adaptive capability is key differentiator",
+    "HITL checkpoints prevent runaway scope expansion",
+    "Works best with Byzantine consensus for fault tolerance",
+    "Can scale from 4 to 15+ agents based on discoveries"
+  ]
+}

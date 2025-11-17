@@ -1,0 +1,4 @@
+🔄 Executing session-restore hook...
+🆔 Session: test-session
+[2025-11-14T05:41:54.499Z] INFO [memory-store] Initialized SQLite at: /Users/splurfa/common-thread-sandbox/.swarm/memory.db
+⚠️  No session found with ID: test-session

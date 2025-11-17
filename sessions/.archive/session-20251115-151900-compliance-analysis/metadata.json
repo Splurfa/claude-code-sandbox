@@ -1,0 +1,8 @@
+{
+  "session_id": "session-20251115-151900-compliance-analysis",
+  "created_at": "2025-11-15T23:19:00Z",
+  "status": "active",
+  "topic": "Claude-flow+ compliance analysis and documentation",
+  "created_retroactively": true,
+  "original_violation": "Files written to root before session creation"
+}

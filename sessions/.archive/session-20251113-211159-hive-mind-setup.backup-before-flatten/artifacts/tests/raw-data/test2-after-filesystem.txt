@@ -1,0 +1,22 @@
+test-workflow-complex/
+└── artifacts
+    ├── code
+    │   ├── module1.js
+    │   ├── module2.js
+    │   └── module3.js
+    ├── configs
+    │   └── app.json
+    ├── data
+    │   └── sample.csv
+    ├── docs
+    │   ├── doc1.md
+    │   ├── doc2.md
+    │   └── doc3.md
+    ├── notes
+    ├── scripts
+    └── tests
+        ├── module1.test.js
+        ├── module2.test.js
+        └── module3.test.js
+
+9 directories, 11 files

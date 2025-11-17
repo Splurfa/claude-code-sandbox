@@ -1,0 +1,24 @@
+=== TEST 4: BACKUP VERIFICATION ===
+total 0
+drwxr-xr-x@ 2 splurfa  staff    64B Nov 13 13:41 .
+drwxr-xr-x@ 7 splurfa  staff   224B Nov 13 15:46 ..
+agent-recommendation:/Users/splurfa/common-thread-workspace/sessions/hive-wizard-orchestration/refined-implementation-plan.md|agent-assignments|178
+file-history:_Users_splurfa_common-thread-workspace_sessions_hive-wizard-orchestration_refined-implementation-plan.md:1763003978431|file-history|281
+agent-recommendation:/Users/splurfa/common-thread-workspace/sessions/hive-wizard-orchestration/north-star-alignment.md|agent-assignments|171
+file-history:_Users_splurfa_common-thread-workspace_sessions_hive-wizard-orchestration_north-star-alignment.md:1763003993986|file-history|274
+agent-recommendation:/Users/splurfa/common-thread-workspace/sessions/hive-wizard-orchestration/actual-vs-theoretical-analysis.md|agent-assignments|181
+file-history:_Users_splurfa_common-thread-workspace_sessions_hive-wizard-orchestration_actual-vs-theoretical-analysis.md:1763004175328|file-history|284
+session:session-1763004305143-2305s8tmh|sessions|469
+session-state:session-1763004305143-2305s8tmh|session-states|45422
+session-metrics:session-1763004305143-2305s8tmh|session-metrics|242
+session:session-1763005104895-qisyox2va|sessions|470
+session-state:session-1763005104895-qisyox2va|session-states|45422
+session-metrics:session-1763005104895-qisyox2va|session-metrics|243
+session:session-1763005227419-g6fwmpz8w|sessions|470
+session-state:session-1763005227419-g6fwmpz8w|session-states|45422
+session-metrics:session-1763005227419-g6fwmpz8w|session-metrics|243
+session:session-1763005295712-zqip1rl07|sessions|470
+session-state:session-1763005295712-zqip1rl07|session-states|45422
+session-metrics:session-1763005295712-zqip1rl07|session-metrics|243
+session:session-1763005417265-gn1ss2ldd|sessions|470
+session-state:session-1763005417265-gn1ss2ldd|session-states|45422

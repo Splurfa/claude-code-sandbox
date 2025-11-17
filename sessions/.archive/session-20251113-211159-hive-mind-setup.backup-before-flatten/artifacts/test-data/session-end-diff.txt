@@ -1,0 +1,6 @@
+7,8c7,8
+< -rw-r--r--@  1 splurfa  staff     32768 Nov 13 21:39 memory.db-shm
+< -rw-r--r--@  1 splurfa  staff   4235392 Nov 13 21:39 memory.db-wal
+---
+> -rw-r--r--@  1 splurfa  staff     32768 Nov 13 21:40 memory.db-shm
+> -rw-r--r--@  1 splurfa  staff   4235392 Nov 13 21:40 memory.db-wal

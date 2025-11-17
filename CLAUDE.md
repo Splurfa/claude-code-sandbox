@@ -1,62 +1,40 @@
 # Claude Code Configuration - SPARC Development Environment
 
-## 🚨 CRITICAL: AUTOMATIC SESSION MANAGEMENT
+> **⚠️ Important:** This is a **claude-flow+ (custom extended) workspace**, not stock claude-flow.
+> - **Architecture**: See [WORKSPACE-ARCHITECTURE.md](WORKSPACE-ARCHITECTURE.md)
+> - **Custom Features**: See [WORKSPACE-GUIDE.md](WORKSPACE-GUIDE.md)
+> - **Stock-First Score**: 82/100 (68% stock architecture / 97.5% stock implementation)
 
-**ON FIRST MESSAGE IN NEW CHAT:**
-1. Auto-generate session ID: `session-$(date +%Y%m%d-%H%M%S)-<topic>`
-2. Auto-create: `sessions/$SESSION_ID/artifacts/{code,tests,docs,scripts,notes}`
-3. Auto-initialize metadata and session-summary.md
-4. **ALL FILES GO TO:** `sessions/$SESSION_ID/artifacts/` subdirectories
+---
+
+## 📋 SESSION MANAGEMENT PROTOCOL
+
+**User-initiated session commands:**
+- `/session-start <topic>` - Create new session
+- `/session-closeout` - End current session (with HITL approval)
+
+**Session structure:**
+1. Session ID: `session-$(date +%Y%m%d-%H%M%S)-<topic>`
+2. Directory: `sessions/$SESSION_ID/artifacts/{code,tests,docs,scripts,notes}/`
+3. **ALL FILES GO TO:** `sessions/$SESSION_ID/artifacts/` subdirectories
 
 **NEVER** write to root `tests/`, `docs/`, `scripts/` - only to session artifacts!
 
-See "Session Artifacts & Collaborative Closeout" section for full protocol.
+**For full session protocol**, see [WORKSPACE-GUIDE.md - Session Management](WORKSPACE-GUIDE.md#session-management-protocol)
 
 ### 📋 SESSION SCOPE & LIFECYCLE
 
 **ONE SESSION = ONE CHAT THREAD** (not per task, not per agent)
 
-**Session Lifecycle:**
-```
-New Chat → Auto-create session-YYYYMMDD-HHMMSS-<topic>/
-         → ALL work goes to: sessions/$SESSION_ID/artifacts/{code,tests,docs,scripts,notes}/
-         → Sub-tasks use subdirectories within artifacts/ (NOT new sessions)
-         → Chat ends → Session closeout → Archive to .swarm/backups/
-```
+**Key Rules:**
+- New chat → Auto-create `sessions/session-YYYYMMDD-HHMMSS-<topic>/`
+- ALL work → `sessions/$SESSION_ID/artifacts/{code,tests,docs,scripts,notes}/`
+- Chat ends → Session closeout → Archive to `.swarm/backups/`
 
-**✅ CORRECT - Single Session Per Chat:**
-```
-Chat starts:
-  sessions/session-20251113-150000-api-development/
-    artifacts/
-      code/ (backend API implementation)
-      tests/ (all test files for this chat)
-      docs/ (API documentation from this session)
-      scripts/ (deployment scripts created today)
-      notes/
-        backend-decisions.md (sub-task notes)
-        database-schema.md (sub-task notes)
-        authentication-flow.md (sub-task notes)
-```
+**Agent Integration:**
+When spawning agents, include session path: `Task("Agent", "Task. Save to sessions/$SESSION_ID/artifacts/code/.", "type")`
 
-**❌ WRONG - Multiple Sessions Per Chat:**
-```
-Chat starts:
-  sessions/session-20251113-150000-api-development/
-  sessions/session-20251113-151500-database-design/  ← WRONG! Same chat
-  sessions/session-20251113-160000-auth-implementation/  ← WRONG! Same chat
-```
-
-**Agent Spawning & Session Paths:**
-- When spawning agents, ALWAYS include session path in task description
-- Example: `Task("Backend Developer", "Build REST API. Save to sessions/$SESSION_ID/artifacts/code/.", "backend-dev")`
-- Agents inherit current session ID from environment
-
-**Session Continuity Check:**
-Before creating any files, verify you're in an active session:
-1. Check if `$SESSION_ID` exists in environment
-2. If not, auto-create session per protocol above
-3. ALL file operations must target `sessions/$SESSION_ID/artifacts/`
+**Full lifecycle documentation**: See [WORKSPACE-GUIDE.md](WORKSPACE-GUIDE.md#session-management-protocol)
 
 ---
 
@@ -97,16 +75,41 @@ Before creating any files, verify you're in an active session:
 
 ### 📁 File Organization Rules
 
-**File Organization**: ALL working files MUST go to session artifacts directories:
-- `sessions/$SESSION_ID/artifacts/code/` - Source code files
-- `sessions/$SESSION_ID/artifacts/tests/` - Test files
-- `sessions/$SESSION_ID/artifacts/docs/` - Documentation and markdown files
-- `sessions/$SESSION_ID/artifacts/scripts/` - Utility scripts
-- `sessions/$SESSION_ID/artifacts/notes/` - Notes and working files
+**File Organization**: ALL working files MUST go to session artifacts:
+- `sessions/$SESSION_ID/artifacts/code/` - Source code
+- `sessions/$SESSION_ID/artifacts/tests/` - Tests
+- `sessions/$SESSION_ID/artifacts/docs/` - Documentation
+- `sessions/$SESSION_ID/artifacts/scripts/` - Scripts
+- `sessions/$SESSION_ID/artifacts/notes/` - Notes
 
-**Exception**: Only edit existing project files (like `package.json`, `CLAUDE.md`, etc.) in their original locations.
+**Exception**: Only edit existing project files (`package.json`, `CLAUDE.md`, etc.) in their original locations.
 
-See "Session Artifacts & Collaborative Closeout" section for complete protocol.
+**Full file routing rules**: See [WORKSPACE-GUIDE.md - File Routing](WORKSPACE-GUIDE.md#file-routing-system)
+
+## 🤖 Subagent Usage Protocol
+
+**SIMPLE RULE: 99% of substantive work uses subagents.**
+
+**When to use subagents:**
+- Multi-step research (3+ sources)
+- Multiple deliverables (code + docs + tests)
+- Complex analysis (strategic planning, architecture design)
+- Cross-domain work (frontend + backend + database)
+- Any project work
+
+**When NOT to use subagents:**
+- Trivial queries ("What color is a brown cat?")
+- Simple clarifications
+- Quick lookups
+
+**For complex coordination:**
+Nudge user: "This is a complex request. I recommend running `/hive-mind:wizard` to coordinate multiple agents with proper topology."
+
+**Why this matters:**
+- Hooks fire automatically during agent work
+- Memory accumulates across sessions
+- Coordination happens properly
+- Learning system engages
 
 ## Project Overview
 
@@ -146,6 +149,28 @@ This project uses SPARC (Specification, Pseudocode, Architecture, Refinement, Co
 - **Test-First**: Write tests before implementation
 - **Clean Architecture**: Separate concerns
 - **Documentation**: Keep updated
+
+## 🤝 Subagent Coordination
+
+For substantive multi-agent work, use the hive mind wizard:
+
+```bash
+npx claude-flow@alpha hive-mind:wizard
+```
+
+**When to use:**
+- Complex features requiring multiple specialists (backend + frontend + testing)
+- Architecture decisions needing multiple perspectives
+- Large refactors involving coordination
+
+**When NOT to use:**
+- Single-agent tasks (just do it yourself)
+- Simple fixes or changes
+- Quick analysis or reading code
+
+The wizard handles agent spawning, coordination, and result consolidation automatically.
+
+---
 
 ## 🚀 Available Agents (54 Total)
 
@@ -355,26 +380,51 @@ Message 4: Write "sessions/$SESSION_ID/artifacts/code/file.js"
 
 ## Hooks Integration
 
-### Pre-Operation
-- Auto-assign agents by file type
-- Validate commands for safety
-- Prepare resources automatically
-- Optimize topology by complexity
-- Cache searches
+### Available Hooks (Stock Claude-Flow)
 
-### Post-Operation
-- Auto-format code
-- Train neural patterns
+**Manual invocation via CLI:**
+```bash
+# Pre-task hook
+npx claude-flow@alpha hooks pre-task --description "Build API" --task-id "task-1"
+
+# Post-task hook
+npx claude-flow@alpha hooks post-task --task-id "task-1" --status "completed"
+
+# Memory operations (via MCP tool, NOT hooks)
+# Use: mcp__claude-flow_alpha__memory_usage({ action: "store", key: "decision", value: "data", namespace: "default" })
+# Use: mcp__claude-flow_alpha__memory_usage({ action: "retrieve", key: "decision", namespace: "default" })
+
+# Session closeout
+npx claude-flow@alpha hooks session-end --export-metrics true
+```
+
+**Optional: Auto-Fire Hooks**
+
+A stock-first wrapper exists at `.claude/hooks/auto-hooks.js` that can auto-fire hooks during operations:
+
+```javascript
+const { enableAutoHooks } = require('./.claude/hooks/auto-hooks.js');
+enableAutoHooks(); // Hooks will now auto-fire on file writes, tasks, etc.
+```
+
+**Stock-First:** 97% - All hook execution goes through `npx claude-flow@alpha hooks`
+
+### What Hooks Do
+
+**Pre-Operation:**
+- Validate session exists
+- Prepare resources
+- Track task start
+
+**Post-Operation:**
 - Update memory
-- Analyze performance
-- Track token usage
-
-### Session Management
-- Generate summaries
-- Persist state
 - Track metrics
-- Restore context
-- Export workflows
+- Create backups
+
+**Session Management:**
+- Generate summaries
+- Export metrics
+- Create session snapshots
 
 ## Advanced Features (v2.0.0)
 
@@ -409,129 +459,66 @@ Remember: **Claude Flow coordinates, Claude Code creates!**
 
 ---
 
-# WORKSPACE LEARNING INFRASTRUCTURE
+# Custom Features Reference
 
-## The Three Principles
+## Workspace Architecture
+See [WORKSPACE-ARCHITECTURE.md](WORKSPACE-ARCHITECTURE.md) for complete architecture overview, compliance analysis, and stock vs custom comparison.
 
-1. **Time-neutral** - All operations are on-demand via CLI commands. No scheduled tasks, no "daily" routines, no time-based triggers.
-   - **Why:** Work when you're ready, not when a schedule dictates. Automation happens when you invoke it.
+## Custom Extensions
 
-2. **Scale-agnostic** - The system works identically whether managing 10 items or 10,000. Graceful degradation, no hard limits.
-   - **Why:** Start small, scale naturally. No architectural rewrites as your project grows.
+This workspace includes custom extensions. For detailed documentation:
 
-3. **Stock-first** - 95% stock claude-flow infrastructure, 5% thin wrappers for workflow. No custom frameworks, no reinvention.
-   - **Why:** Leverage battle-tested tools. Updates are automatic, maintenance is minimal.
+- **Session Management**: [WORKSPACE-GUIDE.md - Session Management](WORKSPACE-GUIDE.md#session-management-protocol)
+- **File Routing**: [WORKSPACE-GUIDE.md - File Routing](WORKSPACE-GUIDE.md#file-routing-system)
+- **Captain's Log**: [WORKSPACE-GUIDE.md - Captain's Log](WORKSPACE-GUIDE.md#captains-log-journaling)
+- **ReasoningBank**: [WORKSPACE-GUIDE.md - ReasoningBank](WORKSPACE-GUIDE.md#reasoningbank-learning-pipeline)
+- **AgentDB**: [WORKSPACE-GUIDE.md - AgentDB](WORKSPACE-GUIDE.md#agentdb-vector-integration)
+- **Git Checkpoints**: [WORKSPACE-GUIDE.md - Git Checkpoints](WORKSPACE-GUIDE.md#git-checkpoint-system)
 
-## Workspace Structure
+## Stock Claude-Flow Features
 
-Three storage systems working together:
+**Memory Storage** (`.swarm/memory.db`):
 
-1. **`.swarm/memory.db`** (SQLite - Stock)
-   - **What:** Structured storage for agent memory, patterns, and coordination state
-   - **When:** Cross-session context, swarm coordination, pattern learning
-   - **Stock:** `claude-flow hooks memory` commands
+⚠️ **Important**: Memory operations use MCP tools, NOT hooks commands.
 
-2. **`sessions/captains-log/YYYY-MM-DD.md`** (Markdown - Stock)
-   - **What:** Human-readable journal of decisions, insights, and blockers
-   - **When:** Capturing "why" decisions were made, learning from past sessions
-   - **Stock:** `claude-flow hooks journal` command (create-or-append by date)
+```javascript
+// Store data
+mcp__claude-flow_alpha__memory_usage({
+  action: "store",
+  key: "key",
+  value: "data",
+  namespace: "default"
+})
 
-3. **`.swarm/backups/`** (Archives - Stock)
-   - **What:** Session snapshots with full context (memory + logs + metrics)
-   - **When:** Session closeout, restore points for debugging/review
-   - **Stock:** `claude-flow hooks session-end` creates timestamped JSON
+// Retrieve data
+mcp__claude-flow_alpha__memory_usage({
+  action: "retrieve",
+  key: "key",
+  namespace: "default"
+})
 
-**Data Flow:**
+// List entries
+mcp__claude-flow_alpha__memory_usage({
+  action: "list",
+  namespace: "default"
+})
+
+// Search with pattern
+mcp__claude-flow_alpha__memory_usage({
+  action: "search",
+  pattern: "pattern%",
+  namespace: "default"
+})
 ```
-Session Work → Memory (structured) + Log (narrative)
-                ↓
-Session End → Backup (snapshot: memory + log + metrics)
-                ↓
-Next Session → Restore from backup OR query memory/log
+
+**Hooks System**:
+```bash
+npx claude-flow@alpha hooks pre-task --description "task" --task-id "id"
+npx claude-flow@alpha hooks post-task --task-id "id" --status "completed"
+npx claude-flow@alpha hooks session-end --export-metrics true
 ```
 
-## Session Artifacts & Collaborative Closeout
-
-### AUTOMATIC SESSION INITIALIZATION (First Message in Chat)
-
-**When a new chat starts, Claude Code MUST automatically:**
-
-1. **Generate Session ID**
-   ```bash
-   SESSION_ID="session-$(date +%Y%m%d-%H%M%S)-<inferred-topic>"
-   # Infer topic from first user message (2-3 words, lowercase-hyphenated)
-   ```
-
-2. **Create Session Structure** (single bash call)
-   ```bash
-   mkdir -p "sessions/$SESSION_ID/artifacts"/{code,tests,docs,scripts,notes} && \
-   cat > "sessions/$SESSION_ID/metadata.json" <<EOF
-   {
-     "session_id": "$SESSION_ID",
-     "created_at": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
-     "status": "active"
-   }
-   EOF
-   ```
-
-3. **Initialize Session Summary**
-   ```bash
-   cat > "sessions/$SESSION_ID/session-summary.md" <<EOF
-   # Session: $SESSION_ID
-   **Started:** $(date)
-   **Status:** Active
-   ## Progress
-   - Session initialized
-   EOF
-   ```
-
-4. **Run Pre-Task Hook**
-   ```bash
-   npx claude-flow@alpha hooks pre-task --description "<first task>" --task-id "$SESSION_ID"
-   ```
-
-### FILE ROUTING RULES (Every File Operation)
-
-**ALL file write operations MUST go to session artifacts:**
-
-| Operation | Destination | Example |
-|-----------|-------------|---------|
-| Write code | `sessions/$SESSION_ID/artifacts/code/` | `sessions/.../artifacts/code/server.js` |
-| Write tests | `sessions/$SESSION_ID/artifacts/tests/` | `sessions/.../artifacts/tests/server.test.js` |
-| Write docs | `sessions/$SESSION_ID/artifacts/docs/` | `sessions/.../artifacts/docs/API.md` |
-| Write scripts | `sessions/$SESSION_ID/artifacts/scripts/` | `sessions/.../artifacts/scripts/build.sh` |
-| Write notes | `sessions/$SESSION_ID/artifacts/notes/` | `sessions/.../artifacts/notes/ideas.md` |
-
-**NEVER write to root directories:** `tests/`, `docs/`, `scripts/`, or any file directly in project root (unless explicitly modifying existing project files like `package.json`, `CLAUDE.md`, etc.)
-
-### SESSION TRACKING (During Work)
-
-- **Auto summary**: During work, Claude Code maintains `sessions/<session-id>/artifacts/session-summary.md`, mirroring the chat-level narrative so you can review the session in one file without asking for it.
-- **AgentDB + Reasoning Bank**: Hooks feed these stores continuously; they infer project links from natural-language context, so you never have to tag sessions manually.
-
-### SESSION CLOSEOUT (When User Says "Done" or "Close Session")
-
-**Closeout ritual** (always human-in-the-loop):
-  1. Agents present the summary artifact plus an index of everything in `artifacts/`.
-  2. You review/annotate and approve the summary; only approved text is copied into the Captain's Log and stored in memory.
-  3. After approval, run the standard hooks (`post-task`, `session-end`) to archive `.swarm` state and freeze the session folder.
-
-**Project promotion**: Once closeout is complete, you can instruct agents (in natural language) to move or copy any artifact into `docs/projects/<name>/...`. Those actions are logged automatically so project history stays linked back to the originating session.
-
-## Session Closeout Flow
-
-**High-level workflow** (on-demand, when ready to wrap up):
-
-1. **Collect** - Gather session data
-   ```bash
-   npx claude-flow@alpha hooks session-end --generate-summary true
-   ```
-
-2. **Classify** - Organize findings (automatic categorization)
-
-3. **HITL Confirm** - Review summary, approve archive
-
-4. **Archive** - Store backup with timestamp
+**Session Backups**: Auto-created at `.swarm/backups/session-*.json` via session-end hook
 
 ---
 
@@ -541,3 +528,17 @@ NEVER create files unless they're absolutely necessary for achieving your goal.
 ALWAYS prefer editing an existing file to creating a new one.
 NEVER proactively create documentation files (*.md) or README files. Only create documentation files if explicitly requested by the User.
 Never save working files, text/mds and tests to the root folder.
+
+---
+
+## 📚 Integration Documentation
+
+**New**: Comprehensive integration guides created and tested (100% pass rate):
+
+- **[Integration Testing Guide](docs/guides/integration-testing-guide.md)** - Step-by-step testing procedures
+- **[Feature Verification Checklist](docs/guides/feature-verification-checklist.md)** - Quick health checks
+- **[Troubleshooting Guide](docs/guides/troubleshooting-guide.md)** - Common issues and solutions
+- **[Guide Index](docs/guides/README.md)** - Overview and quick start
+
+**Source**: Session session-20251115-210537-claude-flow-integration-testing (2025-11-16)
+

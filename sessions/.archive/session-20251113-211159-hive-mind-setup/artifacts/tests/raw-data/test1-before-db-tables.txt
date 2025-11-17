@@ -1,0 +1,9 @@
+memory_entries
+sqlite_sequence
+patterns
+pattern_embeddings
+pattern_links
+task_trajectories
+matts_runs
+consolidation_runs
+metrics_log

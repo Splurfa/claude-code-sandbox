@@ -1,0 +1,26 @@
+ℹ️  🧠 Using ReasoningBank mode...
+[ReasoningBank] Initializing...
+[ReasoningBank] Enabled: true (initializing...)
+[ReasoningBank] Database: .swarm/memory.db
+[ReasoningBank] Embeddings: local
+[ReasoningBank] Retrieval k: 3
+[INFO] Database migrations completed { path: '/Users/splurfa/common-thread-sandbox/.swarm/memory.db' }
+[ReasoningBank] Database migrated successfully
+[INFO] Connected to ReasoningBank database { path: '/Users/splurfa/common-thread-sandbox/.swarm/memory.db' }
+[ReasoningBank] Database OK: 3 tables found
+[ReasoningBank] Initialization complete
+[ReasoningBank] Node.js backend initialized successfully
+[INFO] Upserted reasoning memory {
+  id: '03fb4a67-1361-40c9-bd6c-ef32865fa963',
+  title: 'hive/investigation/hooks-behavior/critical-findings'
+}
+[Embeddings] NPX environment detected - using hash-based embeddings
+[Embeddings] For semantic search, install globally: npm install -g claude-flow
+✅ ✅ Stored successfully in ReasoningBank
+📝 Key: hive/investigation/hooks-behavior/critical-findings
+🧠 Memory ID: 03fb4a67-1361-40c9-bd6c-ef32865fa963
+📦 Namespace: coordination
+💾 Size: 1041 bytes
+🔍 Semantic search: enabled
+[INFO] Closed ReasoningBank database connection 
+[ReasoningBank] Database connection closed

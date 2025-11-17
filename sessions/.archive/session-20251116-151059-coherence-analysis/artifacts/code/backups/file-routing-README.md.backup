@@ -1,0 +1,125 @@
+# File Routing Skill
+
+AI self-check reference for CLAUDE.md compliance. **For AI agents only** - users are never restricted.
+
+## Quick Lookup Table
+
+| What You're Creating | Correct Location | Wrong Location |
+|---------------------|------------------|----------------|
+| Source code | `sessions/$SESSION_ID/artifacts/code/` | `code/`, `/src/`, root |
+| Test files | `sessions/$SESSION_ID/artifacts/tests/` | `tests/`, `__tests__/`, root |
+| Documentation | `sessions/$SESSION_ID/artifacts/docs/` | `docs/`, root |
+| Build scripts | `sessions/$SESSION_ID/artifacts/scripts/` | `scripts/`, root |
+| Notes, ideas | `sessions/$SESSION_ID/artifacts/notes/` | `notes/`, root |
+
+## When to Use Root Directories
+
+**Only edit existing files in their original locations:**
+- ✅ Edit existing `package.json` (already exists at root)
+- ✅ Edit existing `CLAUDE.md` (already exists at root)
+- ✅ Edit existing `README.md` (after we've created it)
+
+**Never create new files at root:**
+- ❌ Create new `tests/foo.test.js` (should be in session artifacts)
+- ❌ Create new `docs/API.md` (should be in session artifacts)
+
+## Common Mistakes to Avoid
+
+### ❌ Wrong: Creating test directory at root
+```
+tests/
+  api.test.js    # CLAUDE.md violation
+  auth.test.js   # CLAUDE.md violation
+```
+
+### ✅ Correct: Tests in session artifacts
+```
+sessions/session-20251114-153041-api-development/
+  artifacts/
+    tests/
+      api.test.js
+      auth.test.js
+```
+
+### ❌ Wrong: Multiple sessions per chat
+```
+sessions/
+  session-20251114-120000-api/
+  session-20251114-130000-database/  # Wrong - same chat!
+```
+
+### ✅ Correct: One session per chat
+```
+sessions/
+  session-20251114-120000-api-development/
+    artifacts/
+      code/api.js
+      code/database.js  # Sub-task in same session
+      notes/api-decisions.md
+      notes/db-schema.md
+```
+
+## Self-Check Questions (For AI Agents)
+
+Before creating a file, ask:
+
+1. **Is this an existing file I'm editing?**
+   - YES → Use its current location
+   - NO → Continue to question 2
+
+2. **Is this session work (code, tests, docs, scripts, notes)?**
+   - YES → Use `sessions/$SESSION_ID/artifacts/{type}/`
+   - NO → Ask user where it should go
+
+3. **Am I certain of the session ID?**
+   - YES → Proceed with session path
+   - NO → Check `.current-session` file or environment variable
+
+## Quick Reference Commands
+
+**Get current session ID:**
+```bash
+cat .current-session
+# or
+echo $SESSION_ID
+```
+
+**Verify session directory exists:**
+```bash
+ls -la sessions/$SESSION_ID/artifacts/
+```
+
+**List recent sessions:**
+```bash
+ls -lt sessions/ | head -10
+```
+
+## Why This Matters
+
+**Workspace pollution:** Root-level files clutter the workspace and make it hard to find project vs. session files
+
+**Session isolation:** Each chat gets its own workspace, making it easy to review/archive/delete without affecting the project
+
+**Traceability:** Clear link between session work and git history (we can see which session created which code)
+
+## User vs AI Operations
+
+**For AI Agents (Claude):**
+- ✅ Follow this guide before writing files
+- ✅ Use session artifact paths
+- ✅ Consult skill when uncertain
+
+**For Users:**
+- ✅ Write files anywhere (no restrictions)
+- ✅ Override AI suggestions freely
+- ✅ Full control always
+
+## Related Documentation
+
+- [CLAUDE.md](../../../CLAUDE.md) - Full file organization rules
+- [Session Management](../../../sessions/README.md) - Complete session lifecycle
+- [North Star Spec](../../session-20251114-153041-dream-hive-meta-coordination/artifacts/docs/north-star-spec.md) - Why we do this
+
+---
+
+**Remember:** When in doubt, use session artifacts. This is guidance for AI agents to self-check before writing files.

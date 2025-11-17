@@ -1,0 +1,76 @@
+❌ Unknown hooks command: journal
+Claude Flow Hooks (with .swarm/memory.db persistence):
+
+Pre-Operation Hooks:
+  pre-task        Execute before starting a task
+  pre-edit        Validate before file modifications
+                  --auto-assign-agents  Auto-assign agents based on file type
+                  --load-context        Load file context
+  pre-bash        Check command safety (alias: pre-command)
+  pre-command     Same as pre-bash
+                  --validate-safety     Enable safety validation
+                  --prepare-resources   Prepare execution resources
+
+Post-Operation Hooks:
+  post-task       Execute after completing a task
+  post-edit       Auto-format and log edits
+                  --format              Auto-format code
+                  --update-memory       Update agent memory
+                  --train-neural        Train neural patterns
+  post-bash       Log command execution (alias: post-command)
+  post-command    Same as post-bash
+                  --track-metrics       Track performance metrics
+                  --store-results       Store detailed results
+  post-search     Cache search results
+
+MCP Integration Hooks:
+  mcp-initialized    Persist MCP configuration
+  agent-spawned      Update agent roster
+  task-orchestrated  Monitor task progress
+  neural-trained     Save pattern improvements
+
+Session Hooks:
+  session-end        Generate summary and save state
+                     --generate-summary    Generate session summary
+                     --persist-state       Persist session state
+                     --export-metrics      Export performance metrics
+  session-restore    Load previous session state
+  notify             Custom notifications
+
+===== NEW: PreToolUse Modification Hooks (v2.0.10+) =====
+  modify-bash        Modify Bash tool inputs (reads/writes JSON via stdin/stdout)
+                     • Safety: Adds -i flag to rm commands
+                     • Aliases: ll → ls -lah, la → ls -la
+                     • Path correction: Redirects test files to /tmp
+                     • Secret detection: Warns about sensitive keywords
+
+  modify-file        Modify Write/Edit tool inputs (reads/writes JSON via stdin/stdout)
+                     • Root folder protection: Moves files to appropriate directories
+                     • Organization: Tests → /tests/, Sources → /src/, Docs → /docs/
+                     • Format hints: Suggests Prettier, Black, etc.
+
+  modify-git-commit  Modify git commit messages (reads/writes JSON via stdin/stdout)
+                     • Conventional commits: Auto-adds [feat], [fix], [docs], etc.
+                     • Ticket extraction: Extracts JIRA tickets from branch names
+                     • Co-author: Adds Claude Flow co-author footer
+
+Examples:
+  hooks pre-command --command "npm test" --validate-safety true
+  hooks pre-edit --file "src/app.js" --auto-assign-agents true
+  hooks post-command --command "build" --track-metrics true
+  hooks post-edit --file "src/app.js" --format true --train-neural true
+  hooks session-end --generate-summary true --export-metrics true
+  hooks agent-spawned --name "CodeReviewer" --type "reviewer"
+  hooks notify --message "Build completed" --level "success"
+
+  # New modification hooks (stdin/stdout JSON):
+  echo '{"tool_input":{"command":"rm test.txt"}}' | hooks modify-bash
+  echo '{"tool_input":{"file_path":"test.js"}}' | hooks modify-file
+  echo '{"tool_input":{"command":"git commit -m \"fix bug\""}}' | hooks modify-git-commit
+
+Compatibility:
+  • pre-command and pre-bash are aliases
+  • post-command and post-bash are aliases
+  • Both --dash-case and camelCase parameters supported
+  • All parameters from settings.json template supported
+  • New modification hooks work with Claude Code v2.0.10+ PreToolUse feature

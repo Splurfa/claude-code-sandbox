@@ -1,0 +1,203 @@
+{
+  "name": "Documentation Reality Check",
+  "description": "Systematic audit of documentation accuracy against actual codebase implementation",
+  "version": "1.0.0",
+  "topology": "mesh",
+  "consensus": "raft",
+  "workflow": {
+    "step_1": {
+      "name": "Extract Claims",
+      "agent": "analyst",
+      "task": "Extract verifiable claims from documentation",
+      "output": "extracted-claims.json",
+      "time_estimate": "10-15 min",
+      "approach": [
+        "Read target documentation files",
+        "Identify factual claims about system behavior",
+        "Extract file paths, command examples, feature descriptions",
+        "Tag claims by type (file_location, feature_behavior, api_contract, etc.)",
+        "Prioritize high-impact claims"
+      ],
+      "claim_types": [
+        "file_location: Claims about where files exist",
+        "feature_behavior: Claims about what features do",
+        "api_contract: Claims about API interfaces",
+        "command_usage: Claims about CLI commands",
+        "configuration: Claims about config options",
+        "integration: Claims about how components interact"
+      ],
+      "output_format": {
+        "claim_id": "unique_identifier",
+        "claim_text": "exact text from docs",
+        "claim_type": "file_location | feature_behavior | etc",
+        "source_file": "path/to/doc.md",
+        "source_line": 123,
+        "priority": "high | medium | low",
+        "testable": true
+      }
+    },
+    "step_2": {
+      "name": "Parallel Verification",
+      "agents": "N (scaled to claim count)",
+      "types": ["researcher", "code-analyzer"],
+      "task": "Verify each claim against actual codebase",
+      "output": "verification-results-[claim_id].md",
+      "time_estimate": "15-20 min per claim (parallel)",
+      "approach": [
+        "Read assigned claim from extracted-claims.json",
+        "Search codebase for relevant implementation",
+        "Test claim against actual behavior",
+        "Document evidence (file paths, line numbers, output)",
+        "Flag discrepancies with severity"
+      ],
+      "verification_methods": {
+        "file_location": "Glob/find for file existence",
+        "feature_behavior": "Code analysis + test execution",
+        "api_contract": "Interface inspection + type checking",
+        "command_usage": "Execute command and verify output",
+        "configuration": "Read config files and validate options",
+        "integration": "Trace call chains and data flow"
+      },
+      "output_format": {
+        "claim_id": "matches extracted claim",
+        "status": "verified | falsified | partial | unclear",
+        "evidence": "file paths, line numbers, test output",
+        "discrepancies": "list of doc vs reality differences",
+        "severity": "critical | major | minor | cosmetic",
+        "recommendation": "update doc | fix code | add tests | clarify wording"
+      }
+    },
+    "step_3": {
+      "name": "Pattern Analysis",
+      "agent": "analyst",
+      "task": "Identify systematic documentation issues",
+      "output": "pattern-analysis.md",
+      "time_estimate": "20-25 min",
+      "approach": [
+        "Read all verification results",
+        "Cluster discrepancies by type and cause",
+        "Identify systematic patterns (outdated docs, wrong assumptions, etc.)",
+        "Assess impact by user journey",
+        "Prioritize fixes"
+      ],
+      "pattern_categories": [
+        "outdated: Docs describe old implementation",
+        "wrong_path: File paths incorrect",
+        "missing_feature: Docs claim feature doesn't exist",
+        "extra_feature: Feature exists but undocumented",
+        "wrong_behavior: Feature behaves differently than documented",
+        "ambiguous: Documentation unclear or contradictory"
+      ],
+      "output_sections": [
+        "Executive Summary (top 5 issues)",
+        "Pattern Analysis (systematic issues)",
+        "Impact Assessment (which users affected)",
+        "Prioritized Fix List",
+        "Root Cause Analysis"
+      ]
+    },
+    "step_4": {
+      "name": "Fix Recommendations",
+      "agent": "documenter",
+      "task": "Generate corrected documentation",
+      "output": "documentation-fixes/",
+      "time_estimate": "25-35 min",
+      "approach": [
+        "Read pattern analysis and verification results",
+        "Draft corrected documentation snippets",
+        "Generate diff patches for doc updates",
+        "Create new documentation for undocumented features",
+        "Write update guide for documentation maintainers"
+      ],
+      "deliverables": [
+        "corrected-snippets.md (copy-paste ready fixes)",
+        "doc-patches/ (git diff patches)",
+        "new-documentation/ (for undocumented features)",
+        "documentation-maintenance-guide.md"
+      ]
+    }
+  },
+  "execution": {
+    "mode": "hybrid",
+    "step_1": "sequential (single analyst)",
+    "step_2": "parallel (N researchers, one per claim)",
+    "step_3": "sequential (single analyst)",
+    "step_4": "sequential (single documenter)",
+    "coordination": "mesh_memory",
+    "output_location": "sessions/[SESSION_ID]/artifacts/docs/"
+  },
+  "usage": {
+    "when_to_use": [
+      "Documentation drift suspected",
+      "After major refactoring",
+      "Before public releases",
+      "During onboarding failures (docs don't match reality)",
+      "Periodic quality audits (quarterly/yearly)"
+    ],
+    "when_NOT_to_use": [
+      "Documentation doesn't make factual claims (philosophy docs, etc.)",
+      "Pure narrative/tutorial content without specific claims",
+      "Work-in-progress documentation explicitly marked as draft"
+    ],
+    "estimated_duration": "70-95 minutes total (with parallel verification)",
+    "agents_required": "3 + N (where N = claim count)",
+    "best_for": "Systematic documentation quality assurance"
+  },
+  "scaling": {
+    "small_audit": {
+      "claims": "5-10",
+      "agents": "3-5",
+      "time": "60-90 min"
+    },
+    "medium_audit": {
+      "claims": "10-25",
+      "agents": "5-10",
+      "time": "90-120 min"
+    },
+    "large_audit": {
+      "claims": "25-50",
+      "agents": "10-20",
+      "time": "120-180 min"
+    },
+    "full_system_audit": {
+      "claims": "50+",
+      "agents": "20+",
+      "time": "180-300 min",
+      "recommendation": "Break into multiple sessions"
+    }
+  },
+  "success_criteria": [
+    "All high-priority claims verified",
+    "Discrepancies documented with evidence",
+    "Systematic patterns identified",
+    "Fix recommendations provided",
+    "Documentation maintainers have clear action items"
+  ],
+  "outputs": {
+    "extracted_claims": "extracted-claims.json",
+    "verification_results": "verification-results-[claim_id].md (N files)",
+    "pattern_analysis": "pattern-analysis.md",
+    "fixes": "documentation-fixes/ (patches and new docs)",
+    "metrics": {
+      "total_claims": "number",
+      "verified": "number",
+      "falsified": "number",
+      "partial": "number",
+      "critical_issues": "number",
+      "accuracy_rate": "percentage"
+    }
+  },
+  "integration": {
+    "ci_cd": "Can be automated as pre-release gate",
+    "version_control": "Generate git patches for doc fixes",
+    "issue_tracking": "Auto-create issues for each discrepancy",
+    "continuous_monitoring": "Run weekly/monthly for ongoing accuracy"
+  },
+  "notes": [
+    "Based on successful coherence analysis methodology",
+    "Parallel verification achieves 3-4x speedup vs sequential",
+    "Works best with mesh topology for peer verification",
+    "Raft consensus faster than Byzantine for doc checks",
+    "Can be fully automated with CI/CD integration"
+  ]
+}
