@@ -1,0 +1,714 @@
+
+> hive-mind-100-verification-tests@1.0.0 test
+> node run-all-tests.js
+
+[36m
+════════════════════════════════════════════════════════════════════════════════[0m
+[1m  🚀 HIVE MIND 100/100 VERIFICATION - COMPREHENSIVE TEST SUITE[0m
+[36m════════════════════════════════════════════════════════════════════════════════
+[0m
+[1mTest Suites to Execute:[0m
+[34m  1. Integration Tests - Full Workflow (integration)[0m
+[34m  2. Performance Benchmarks (performance)[0m
+[34m  3. Chaos Engineering - Failure Scenarios (chaos)[0m
+[34m  4. Load Testing - Concurrent Agents (load)[0m
+[34m  5. Stock Adherence Validation (stock)[0m
+[0m[0m
+[36m
+════════════════════════════════════════════════════════════════════════════════[0m
+[1m  📦 Checking Dependencies[0m
+[36m════════════════════════════════════════════════════════════════════════════════
+[0m
+[32m✓ Jest is installed[0m
+[36m
+════════════════════════════════════════════════════════════════════════════════[0m
+[1m  📋 Running: Integration Tests - Full Workflow[0m
+[36m════════════════════════════════════════════════════════════════════════════════
+[0m
+[31m✗ Integration Tests - Full Workflow: FAILED TO RUN[0m
+Command failed: npx jest ./integration/full-workflow.test.js --verbose --detectOpenHandles
+FAIL integration/full-workflow.test.js (6.451 s)
+  Full Workflow Integration Tests
+    1. Session Management Workflow
+      ✓ should create session with proper structure (1 ms)
+      ✓ should store session metadata (1 ms)
+    2. Swarm Coordination Workflow
+      ✓ should initialize swarm with correct topology (1 ms)
+      ✓ should spawn multiple agents concurrently (1 ms)
+      ✓ should orchestrate complex tasks
+    3. Memory Coordination Workflow
+      ✕ should store and retrieve coordination data (1 ms)
+      ✓ should search memory with patterns (1 ms)
+    4. Hook System Workflow
+      ✓ should execute pre-task hooks (4269 ms)
+      ✓ should execute post-task hooks (769 ms)
+      ✓ should handle session-end hooks (1119 ms)
+    5. File Routing Workflow
+      ✓ should route files to session artifacts (1 ms)
+      ✓ should organize files by type (1 ms)
+    6. Neural Pattern Workflow
+      ✓ should train neural patterns (1 ms)
+      ✓ should analyze cognitive patterns (1 ms)
+    7. Performance Monitoring Workflow
+      ✓ should collect performance metrics (1 ms)
+      ✓ should generate performance reports
+      ✓ should identify bottlenecks (1 ms)
+    8. GitHub Integration Workflow
+      ✓ should analyze repository
+      ✓ should manage pull requests (1 ms)
+    9. Complete Multi-Agent Workflow
+      ✓ should execute full development workflow (1 ms)
+    10. Error Handling Workflow
+      ✓ should handle invalid swarm topology gracefully (1 ms)
+      ✓ should recover from agent spawn failures
+
+  ● Full Workflow Integration Tests › 3. Memory Coordination Workflow › should store and retrieve coordination data
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "tester"
+    Received: undefined
+
+      118 |       if (result && result.value) {
+      119 |         const retrieved = JSON.parse(result.value);
+    > 120 |         expect(retrieved.agent).toBe(testData.agent);
+          |                                 ^
+      121 |       } else {
+      122 |         // Fallback: if MCP not available, just verify store succeeded
+      123 |         expect(storeResult).toBeTruthy();
+
+      at Object.toBe (integration/full-workflow.test.js:120:33)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 21 passed, 22 total
+Snapshots:   0 total
+Time:        6.492 s, estimated 7 s
+Ran all test suites matching /.\/integration\/full-workflow.test.js/i.
+
+[36m
+════════════════════════════════════════════════════════════════════════════════[0m
+[1m  📋 Running: Performance Benchmarks[0m
+[36m════════════════════════════════════════════════════════════════════════════════
+[0m
+[31m✗ Performance Benchmarks: FAILED TO RUN[0m
+  console.log
+    Sequential: 1011.37ms
+
+      at Object.log (performance/benchmarks.test.js:37:15)
+
+  console.log
+    Parallel: 201.56ms
+
+      at Object.log (performance/benchmarks.test.js:38:15)
+
+  console.log
+    Speedup: 5.02x
+
+      at Object.log (performance/benchmarks.test.js:39:15)
+
+  console.log
+    Scaling results: [
+      { count: 2, time: 101.38450000000012 },
+      { count: 4, time: 101.50912500000004 },
+      { count: 8, time: 100.80087500000013 },
+      { count: 16, time: 103.55316599999992 }
+    ]
+
+      at Object.log (performance/benchmarks.test.js:67:15)
+
+  console.log
+    1000 memory ops: 1226.54ms
+
+      at Object.log (performance/benchmarks.test.js:81:15)
+
+  console.log
+    Individual: 123.79ms
+
+      at Object.log (performance/benchmarks.test.js:102:15)
+
+  console.log
+    Batch: 11.24ms
+
+      at Object.log (performance/benchmarks.test.js:103:15)
+
+  console.log
+    Speedup: 11.01x
+
+      at Object.log (performance/benchmarks.test.js:104:15)
+
+  console.log
+    100 searches over 10k vectors: 122.27ms
+
+      at Object.log (performance/benchmarks.test.js:125:15)
+
+  console.log
+    Average per query: 1.22ms
+
+      at Object.log (performance/benchmarks.test.js:126:15)
+
+  console.log
+    Linear search: 11.20ms
+
+      at Object.log (performance/benchmarks.test.js:148:15)
+
+  console.log
+    HNSW search: 2.18ms
+
+      at Object.log (performance/benchmarks.test.js:149:15)
+
+  console.log
+    Speedup: 5.13x
+
+      at Object.log (performance/benchmarks.test.js:150:15)
+
+  console.log
+    Full precision: 500.00KB
+
+      at Object.log (performance/benchmarks.test.js:167:15)
+
+  console.log
+    Quantized: 125.00KB
+
+      at Object.log (performance/benchmarks.test.js:168:15)
+
+  console.log
+    Compression: 4x
+
+      at Object.log (performance/benchmarks.test.js:169:15)
+
+  console.log
+    20 tasks orchestrated: 202.86ms
+
+      at Object.log (performance/benchmarks.test.js:188:15)
+
+  console.log
+    Topology performance: [
+      { topology: 'mesh', duration: 101.36137499999995 },
+      { topology: 'hierarchical', duration: 121.45329099999981 },
+      { topology: 'ring', duration: 151.41287499999999 },
+      { topology: 'star', duration: 150.84683399999994 }
+    ]
+
+      at Object.log (performance/benchmarks.test.js:203:15)
+
+  console.log
+    100 pattern training: 581.07ms
+
+      at Object.log (performance/benchmarks.test.js:227:15)
+
+  console.log
+    1000 predictions: 1229.55ms
+
+      at Object.log (performance/benchmarks.test.js:243:15)
+
+  console.log
+    Throughput: 813 predictions/sec
+
+      at Object.log (performance/benchmarks.test.js:244:15)
+
+  console.log
+    Sequential writes: 22.64ms
+
+      at Object.log (performance/benchmarks.test.js:286:17)
+
+  console.log
+    Parallel writes: 7.18ms
+
+      at Object.log (performance/benchmarks.test.js:287:17)
+
+  console.log
+    Speedup: 3.15x
+
+      at Object.log (performance/benchmarks.test.js:288:17)
+
+  console.log
+    Full workflow: 8205.13ms
+
+      at Object.log (performance/benchmarks.test.js:313:15)
+
+
+[36m
+════════════════════════════════════════════════════════════════════════════════[0m
+[1m  📋 Running: Chaos Engineering - Failure Scenarios[0m
+[36m════════════════════════════════════════════════════════════════════════════════
+[0m
+[31m✗ Chaos Engineering - Failure Scenarios: FAILED TO RUN[0m
+Command failed: npx jest ./chaos/failure-scenarios.test.js --verbose --detectOpenHandles
+FAIL chaos/failure-scenarios.test.js (6.718 s)
+  Chaos Engineering - Failure Scenarios
+    1. Agent Failure Recovery
+      ✓ should recover when agent crashes mid-task (3 ms)
+      ✓ should handle multiple simultaneous agent failures (109 ms)
+      ✓ should isolate failures and prevent cascade (1002 ms)
+    2. Network Partition Scenarios
+      ✓ should handle network partitions gracefully (1 ms)
+      ✓ should maintain consistency during split-brain (2003 ms)
+    3. Resource Exhaustion
+      ✓ should handle memory exhaustion gracefully (262 ms)
+      ✓ should throttle when CPU saturated (1 ms)
+      ✓ should handle file descriptor exhaustion (1004 ms)
+    4. Data Corruption Scenarios
+      ✓ should detect and recover from corrupted memory (2 ms)
+      ✓ should handle invalid JSON gracefully (1 ms)
+    5. Timing and Race Conditions
+      ✕ should handle concurrent task assignment (3 ms)
+      ✓ should prevent deadlocks in resource allocation (48 ms)
+    6. Byzantine Failures
+      ✓ should detect malicious agent behavior (1 ms)
+      ✓ should maintain consensus despite byzantine nodes (1 ms)
+    7. State Inconsistency
+      ✕ should detect state divergence (1 ms)
+      ✓ should handle version conflicts in memory
+    8. Cascading Failures
+      ✓ should implement circuit breakers (1 ms)
+      ✓ should implement bulkheads for fault isolation
+    9. Dependency Failures
+      ✓ should handle missing dependencies
+      ✓ should handle circular dependencies (1 ms)
+    10. Recovery and Self-Healing
+      ✓ should auto-restart failed agents (2004 ms)
+      ✓ should rebuild indices after corruption (105 ms)
+
+  ● Chaos Engineering - Failure Scenarios › 5. Timing and Race Conditions › should handle concurrent task assignment
+
+    expect(received).toHaveLength(expected)
+
+    Expected length: 1
+    Received length: 2
+    Received array:  [{"status": "fulfilled", "value": {"assigned": true}}, {"status": "fulfilled", "value": {"assigned": true}}]
+
+      203 |       // Exactly one should succeed
+      204 |       const successful = assignments.filter(a => a.status === 'fulfilled');
+    > 205 |       expect(successful).toHaveLength(1);
+          |                          ^
+      206 |     });
+      207 |
+      208 |     it('should prevent deadlocks in resource allocation', async () => {
+
+      at Object.toHaveLength (chaos/failure-scenarios.test.js:205:26)
+
+  ● Chaos Engineering - Failure Scenarios › 7. State Inconsistency › should detect state divergence
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: undefined
+
+      259 |       // System should detect
+      260 |       const check = await checkStateConsistency();
+    > 261 |       expect(check.divergent).toBe(true);
+          |                               ^
+      262 |
+      263 |       // And reconcile
+      264 |       await reconcileState();
+
+      at Object.toBe (chaos/failure-scenarios.test.js:261:31)
+
+Test Suites: 1 failed, 1 total
+Tests:       2 failed, 20 passed, 22 total
+Snapshots:   0 total
+Time:        6.77 s, estimated 8 s
+Ran all test suites matching /.\/chaos\/failure-scenarios.test.js/i.
+
+Jest has detected the following 1 open handle potentially keeping Jest from exiting:
+
+  ●  Timeout
+
+      498 |
+      499 | async function timeout(ms, value) {
+    > 500 |   return new Promise(resolve => setTimeout(() => resolve(value), ms));
+          |                                 ^
+      501 | }
+      502 |
+      503 | async function simulateMaliciousAgent(agentId, config) {
+
+      at setTimeout (chaos/failure-scenarios.test.js:500:33)
+      at timeout (chaos/failure-scenarios.test.js:500:10)
+      at Object.timeout (chaos/failure-scenarios.test.js:219:9)
+
+
+[36m
+════════════════════════════════════════════════════════════════════════════════[0m
+[1m  📋 Running: Load Testing - Concurrent Agents[0m
+[36m════════════════════════════════════════════════════════════════════════════════
+[0m
+[31m✗ Load Testing - Concurrent Agents: FAILED TO RUN[0m
+  console.log
+    Spawned 100 agents in 34.50ms
+
+      at Object.log (load/concurrent-agents.test.js:27:15)
+
+  console.log
+    Spawned 200 agents in 58.24ms
+
+      at Object.log (load/concurrent-agents.test.js:54:15)
+
+  console.log
+    50 agents: 15.56ms (3214 agents/sec)
+
+      at Object.log (load/concurrent-agents.test.js:76:17)
+
+  console.log
+    100 agents: 15.96ms (6266 agents/sec)
+
+      at Object.log (load/concurrent-agents.test.js:76:17)
+
+  console.log
+    200 agents: 26.56ms (7531 agents/sec)
+
+      at Object.log (load/concurrent-agents.test.js:76:17)
+
+  console.log
+    500 agents: 46.87ms (10668 agents/sec)
+
+      at Object.log (load/concurrent-agents.test.js:76:17)
+
+  console.log
+    Processed 1000 tasks in 145.74ms
+
+      at Object.log (load/concurrent-agents.test.js:110:15)
+
+  console.log
+    Throughput: 6861 tasks/sec
+
+      at Object.log (load/concurrent-agents.test.js:111:15)
+
+  console.log
+    Processed 1730 tasks over 10042ms
+
+      at Object.log (load/concurrent-agents.test.js:143:15)
+
+  console.log
+    Average throughput: 172 tasks/sec
+
+      at Object.log (load/concurrent-agents.test.js:144:15)
+
+  console.log
+    10000 memory ops in 1088.95ms
+
+      at Object.log (load/concurrent-agents.test.js:168:15)
+
+  console.log
+    Throughput: 9183 ops/sec
+
+      at Object.log (load/concurrent-agents.test.js:169:15)
+
+  console.log
+    10 agents, 1000 ops: 7595 ops/sec
+
+      at Object.log (load/concurrent-agents.test.js:191:17)
+
+  console.log
+    50 agents, 5000 ops: 14698 ops/sec
+
+      at Object.log (load/concurrent-agents.test.js:191:17)
+
+  console.log
+    100 agents, 10000 ops: 11636 ops/sec
+
+      at Object.log (load/concurrent-agents.test.js:191:17)
+
+  console.log
+    1000 searches in 114.56ms
+
+      at Object.log (load/concurrent-agents.test.js:213:15)
+
+  console.log
+    Throughput: 8729 searches/sec
+
+      at Object.log (load/concurrent-agents.test.js:214:15)
+
+  console.log
+    5000 mixed ops in 518.18ms
+
+      at Object.log (load/concurrent-agents.test.js:236:15)
+
+  console.log
+    10 agents: 68.00% overhead
+
+      at Object.log (load/concurrent-agents.test.js:260:17)
+
+  console.log
+    50 agents: 200.37% overhead
+
+      at Object.log (load/concurrent-agents.test.js:260:17)
+
+  console.log
+    100 agents: 337.82% overhead
+
+      at Object.log (load/concurrent-agents.test.js:260:17)
+
+  console.log
+    200 agents: 576.38% overhead
+
+      at Object.log (load/concurrent-agents.test.js:260:17)
+
+  console.log
+    10000 messages in 1089.53ms
+
+      at Object.log (load/concurrent-agents.test.js:287:15)
+
+  console.log
+    Throughput: 9178 msg/sec
+
+      at Object.log (load/concurrent-agents.test.js:288:15)
+
+  console.log
+    100 broadcasts to 100 agents: 702.85ms
+
+      at Object.log (load/concurrent-agents.test.js:306:15)
+
+  console.log
+    Total messages: 10000
+
+      at Object.log (load/concurrent-agents.test.js:307:15)
+
+  console.log
+    Memory increase: -0.89MB
+
+      at Object.log (load/concurrent-agents.test.js:336:15)
+
+  console.log
+    Per agent: -4.55KB
+
+      at Object.log (load/concurrent-agents.test.js:337:15)
+
+  console.log
+    mesh: 188.30ms for 500 tasks
+
+      at Object.log (load/concurrent-agents.test.js:367:17)
+
+  console.log
+    hierarchical: 193.37ms for 500 tasks
+
+      at Object.log (load/concurrent-agents.test.js:367:17)
+
+  console.log
+    ring: 190.46ms for 500 tasks
+
+      at Object.log (load/concurrent-agents.test.js:367:17)
+
+  console.log
+    star: 198.20ms for 500 tasks
+
+      at Object.log (load/concurrent-agents.test.js:367:17)
+
+  console.log
+    @5s: 10 tasks/sec
+
+      at Object.log (load/concurrent-agents.test.js:412:19)
+
+  console.log
+    @10s: 10 tasks/sec
+
+      at Object.log (load/concurrent-agents.test.js:412:19)
+
+  console.log
+    @15s: 10 tasks/sec
+
+      at Object.log (load/concurrent-agents.test.js:412:19)
+
+  console.log
+    @20s: 10 tasks/sec
+
+      at Object.log (load/concurrent-agents.test.js:412:19)
+
+  console.log
+    @25s: 10 tasks/sec
+
+      at Object.log (load/concurrent-agents.test.js:412:19)
+
+  console.log
+    @30s: 10 tasks/sec
+
+      at Object.log (load/concurrent-agents.test.js:412:19)
+
+  console.log
+    @35s: 10 tasks/sec
+
+      at Object.log (load/concurrent-agents.test.js:412:19)
+
+  console.log
+    @40s: 10 tasks/sec
+
+      at Object.log (load/concurrent-agents.test.js:412:19)
+
+  console.log
+    @45s: 10 tasks/sec
+
+      at Object.log (load/concurrent-agents.test.js:412:19)
+
+  console.log
+    @50s: 10 tasks/sec
+
+      at Object.log (load/concurrent-agents.test.js:412:19)
+
+  console.log
+    @55s: 10 tasks/sec
+
+      at Object.log (load/concurrent-agents.test.js:412:19)
+
+  console.log
+    Average throughput: 10 tasks/sec
+
+      at Object.log (load/concurrent-agents.test.js:424:15)
+
+  console.log
+    Max variance: 0.58%
+
+      at Object.log (load/concurrent-agents.test.js:425:15)
+
+  console.log
+    100 tasks: 66.51ms - SUCCESS
+
+      at Object.log (load/concurrent-agents.test.js:447:19)
+
+  console.log
+    200 tasks: 68.55ms - SUCCESS
+
+      at Object.log (load/concurrent-agents.test.js:447:19)
+
+  console.log
+    500 tasks: 90.50ms - SUCCESS
+
+      at Object.log (load/concurrent-agents.test.js:447:19)
+
+  console.log
+    1000 tasks: 109.05ms - SUCCESS
+
+      at Object.log (load/concurrent-agents.test.js:447:19)
+
+  console.log
+    2000 tasks: 157.80ms - SUCCESS
+
+      at Object.log (load/concurrent-agents.test.js:447:19)
+
+
+[36m
+════════════════════════════════════════════════════════════════════════════════[0m
+[1m  📋 Running: Stock Adherence Validation[0m
+[36m════════════════════════════════════════════════════════════════════════════════
+[0m
+[31m✗ Stock Adherence Validation: FAILED TO RUN[0m
+Command failed: npx jest ./stock-adherence/stock-validation.test.js --verbose --detectOpenHandles
+FAIL stock-adherence/stock-validation.test.js
+  Stock Adherence Validation
+    1. Memory System Stock Compliance
+      ✓ should use stock memory.db location (3 ms)
+      ✕ should use MCP tools for memory operations, not hooks (8 ms)
+      ✓ should support all stock memory actions (1 ms)
+      ✓ should support namespaces in memory operations
+    2. Hooks System Stock Compliance
+      ✓ should execute hooks via npx claude-flow@alpha (1 ms)
+      ✓ should support all stock hook types (1 ms)
+      ✓ should not modify hook schemas (1 ms)
+    3. MCP Tool Stock Compliance
+      ✓ should use stock MCP tool naming (1 ms)
+      ✓ should use stock MCP server names
+      ✓ should support stock topology types (1 ms)
+      ✓ should support stock agent types
+    4. File Structure Stock Compliance
+      ✓ should use .swarm directory for stock storage (2 ms)
+      ✓ should create backups in .swarm/backups
+      ✓ should store memory in .swarm/memory.db (1 ms)
+      ✓ should not modify stock directory structure
+    5. Session Management Stock Compliance
+      ✓ should use stock session backup format (1 ms)
+      ✓ should trigger backups via session-end hook
+    6. Neural System Stock Compliance
+      ✓ should use stock neural pattern types (1 ms)
+      ✓ should train via stock neural_train tool
+      ✓ should analyze via stock neural_patterns tool (1 ms)
+    7. Coordination Stock Compliance
+      ✓ should use stock swarm initialization
+      ✓ should use stock agent spawning
+      ✓ should use stock task orchestration (1 ms)
+    8. Performance Monitoring Stock Compliance
+      ✓ should use stock performance report format
+      ✓ should use stock timeframes (1 ms)
+      ✓ should collect stock metrics
+    9. No Schema Modifications
+      ✓ should not extend stock MCP tool parameters
+      ✓ should not modify stock hook signatures (1 ms)
+    10. Integration Pattern Compliance
+      ✓ should use stock coordination memory keys
+      ✓ should follow stock agent lifecycle (1 ms)
+      ✓ should use stock task states
+    11. CLI Command Stock Compliance
+      ✓ should use stock CLI namespace
+      ✓ should not create custom CLI commands (1 ms)
+    12. Error Handling Stock Compliance
+      ✓ should return stock error formats
+      ✓ should use stock error codes (3 ms)
+    13. Version Compatibility
+      ✓ should be compatible with claude-flow@alpha
+      ✓ should not require specific version pins (1 ms)
+    14. Documentation Compliance
+      ✓ should document stock patterns correctly
+      ✓ should reference stock documentation
+    15. No Stock Modifications
+      ✓ should not modify stock node_modules (1 ms)
+      ✓ should not patch stock functionality
+
+  ● Stock Adherence Validation › 1. Memory System Stock Compliance › should use MCP tools for memory operations, not hooks
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: false
+    Received: true
+
+      33 |
+      34 |       // Should NOT use hooks for memory
+    > 35 |       expect(hooksMemoryUsage).toBe(false);
+         |                                ^
+      36 |     });
+      37 |
+      38 |     it('should support all stock memory actions', () => {
+
+      at Object.toBe (stock-adherence/stock-validation.test.js:35:32)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 40 passed, 41 total
+Snapshots:   0 total
+Time:        0.209 s, estimated 1 s
+Ran all test suites matching /.\/stock-adherence\/stock-validation.test.js/i.
+
+[36m
+════════════════════════════════════════════════════════════════════════════════[0m
+[1m  📊 Generating Coverage Report[0m
+[36m════════════════════════════════════════════════════════════════════════════════
+[0m
+[36m
+════════════════════════════════════════════════════════════════════════════════[0m
+[1m  🎯 FINAL RESULTS[0m
+[36m════════════════════════════════════════════════════════════════════════════════
+[0m
+[1mOverall Score:[0m
+[31m  0/100[0m
+[0m[0m
+[1mDimension Scores:[0m
+[31m  integration    : 0/100 (0/1 tests)[0m
+[31m  performance    : 0/100 (0/1 tests)[0m
+[31m  chaos          : 0/100 (0/1 tests)[0m
+[31m  load           : 0/100 (0/1 tests)[0m
+[31m  stock          : 0/100 (0/1 tests)[0m
+[0m[0m
+[1mSuite Results:[0m
+[31m  ERROR    Integration Tests - Full Workflow (0/1)[0m
+[31m  ERROR    Performance Benchmarks (0/1)[0m
+[31m  ERROR    Chaos Engineering - Failure Scenarios (0/1)[0m
+[31m  ERROR    Load Testing - Concurrent Agents (0/1)[0m
+[31m  ERROR    Stock Adherence Validation (0/1)[0m
+[0m[0m
+[1mTest Statistics:[0m
+[36m  Total Tests:   5[0m
+[32m  Passed:        0[0m
+[31m  Failed:        5[0m
+[33m  Pass Rate:     0.0%[0m
+[36m  Duration:      113.52s[0m
+[0m[0m
+[36mCoverage report saved to: /Users/splurfa/common-thread-sandbox/sessions/session-20251117-002737-hive-mind-100-integration/artifacts/coverage-report.json[0m
+[36m
+Markdown report saved to: /Users/splurfa/common-thread-sandbox/sessions/session-20251117-002737-hive-mind-100-integration/artifacts/TEST-REPORT.md[0m
+[31m
+❌ Some tests failed. Review the output above.[0m

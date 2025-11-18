@@ -39,14 +39,30 @@ Examples:
 
 ### `codex-agent/` - External Agent Writes, Claude Code Reads 👁️
 **Permissions:** READ-ONLY for Claude Code (external agent manages)
-**Purpose:** External agent (codex) deposits analyses and research
+**Purpose:** External agent (Codex) deposits analyses and research
+
+**⚠️ CRITICAL: Claude Code running Claude Flow should NOT edit this folder.**
 
 **What's here:**
 - claude-flow-curriculum/ (foundational guides, implementation tracks)
 - code-mode-research/ (phase analyses, integration studies)
-- validation-complete.md (verification reports)
+- db-visualization-tools/ (database tooling)
 
-**Claude Code role:** Read and reference this content, do NOT modify or add to this folder
+**Claude Code role:** Read and reference this content ONLY when explicitly directed by user. Do NOT auto-scan, modify, or consolidate.
+
+---
+
+### `cursor-agent/` - External Agent Writes, Claude Code Reads 👁️
+**Permissions:** READ-ONLY for Claude Code (external agent manages)
+**Purpose:** External agent (Cursor) deposits analyses and research
+
+**⚠️ CRITICAL: Claude Code running Claude Flow should NOT edit this folder.**
+
+**What's here:**
+- code-mode-research/ (technical research and analysis)
+- db-visualization-tools/ (database tooling)
+
+**Claude Code role:** Read and reference this content ONLY when explicitly directed by user. Do NOT auto-scan, modify, or consolidate.
 
 ---
 

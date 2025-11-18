@@ -1,0 +1,8 @@
+[0;34m[INFO][0m ===================================================
+[0;34m[INFO][0m WORKSPACE DOCUMENTATION MIGRATION
+[0;34m[INFO][0m Session: session-20251117-233107-workspace-docs-optimization
+[0;34m[INFO][0m Timestamp: Mon Nov 17 23:39:10 PST 2025
+[0;34m[INFO][0m Dry Run: true
+[0;34m[INFO][0m ===================================================
+[0;34m[INFO][0m Checking prerequisites...
+[1;33m[WARNING][0m Working directory has uncommitted changes.

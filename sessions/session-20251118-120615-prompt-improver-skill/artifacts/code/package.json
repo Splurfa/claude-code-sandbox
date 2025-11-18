@@ -1,0 +1,29 @@
+{
+  "name": "prompt-improver-skill",
+  "version": "1.0.0",
+  "description": "Intelligent prompt improvement skill for Claude Flow with mode detection and learning",
+  "main": "prompt-improver.js",
+  "bin": {
+    "prompt-improver": "./prompt-improver.js"
+  },
+  "scripts": {
+    "test": "node test.js",
+    "analyze": "node prompt-improver.js analyze",
+    "improve": "node prompt-improver.js improve",
+    "stats": "node cli.js stats"
+  },
+  "keywords": [
+    "claude-flow",
+    "prompt",
+    "improvement",
+    "analysis",
+    "learning"
+  ],
+  "author": "Claude Flow Team",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

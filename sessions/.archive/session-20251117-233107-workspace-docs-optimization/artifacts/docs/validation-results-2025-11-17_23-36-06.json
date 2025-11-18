@@ -1,0 +1,15 @@
+{
+  "session": "session-20251117-233107-workspace-docs-optimization",
+  "timestamp": "2025-11-18T07:36:06Z",
+  "testSuite": "structure-validation.test.js",
+  "summary": {
+    "totalTests": 16,
+    "passed": 1,
+    "failed": 3,
+    "passRate": 6.25,
+    "status": "❌ FAILED"
+  },
+  "exitCode": 1,
+  "reportFile": "VALIDATION-REPORT-2025-11-17_23-36-06.md",
+  "baselineOutput": "/tmp/validation-baseline-2025-11-17_23-36-06.txt"
+}

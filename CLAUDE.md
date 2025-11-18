@@ -1,8 +1,9 @@
 # Claude Code Configuration - SPARC Development Environment
 
 > **⚠️ Important:** This is a **claude-flow+ (custom extended) workspace**, not stock claude-flow.
-> - **Architecture**: See [WORKSPACE-ARCHITECTURE.md](WORKSPACE-ARCHITECTURE.md)
-> - **Custom Features**: See [WORKSPACE-GUIDE.md](WORKSPACE-GUIDE.md)
+> - **Architecture**: See [Workspace Architecture Explained](docs/reality/architecture.md)
+> - **Session Management**: See [Session Management Explained](docs/essentials/session-management.md)
+> - **File Routing**: See [Quick Start Guide](docs/essentials/quick-start.md)
 > - **Stock-First Score**: 82/100 (68% stock architecture / 97.5% stock implementation)
 
 ---
@@ -20,7 +21,7 @@
 
 **NEVER** write to root `tests/`, `docs/`, `scripts/` - only to session artifacts!
 
-**For full session protocol**, see [WORKSPACE-GUIDE.md - Session Management](WORKSPACE-GUIDE.md#session-management-protocol)
+**For full session protocol**, see [Session Management Explained](docs/essentials/session-management.md)
 
 ### 📋 SESSION SCOPE & LIFECYCLE
 
@@ -34,7 +35,7 @@
 **Agent Integration:**
 When spawning agents, include session path: `Task("Agent", "Task. Save to sessions/$SESSION_ID/artifacts/code/.", "type")`
 
-**Full lifecycle documentation**: See [WORKSPACE-GUIDE.md](WORKSPACE-GUIDE.md#session-management-protocol)
+**Full lifecycle documentation**: See [Session Management Explained](docs/essentials/session-management.md)
 
 ---
 
@@ -84,7 +85,7 @@ When spawning agents, include session path: `Task("Agent", "Task. Save to sessio
 
 **Exception**: Only edit existing project files (`package.json`, `CLAUDE.md`, etc.) in their original locations.
 
-**Full file routing rules**: See [WORKSPACE-GUIDE.md - File Routing](WORKSPACE-GUIDE.md#file-routing-system)
+**Full file routing rules**: See [Quick Start Guide](docs/essentials/quick-start.md)
 
 ## 🤖 Subagent Usage Protocol
 
@@ -172,7 +173,7 @@ The wizard handles agent spawning, coordination, and result consolidation automa
 
 ---
 
-## 🚀 Available Agents (54 Total)
+## 🚀 Available Agents (49 Total)
 
 ### Core Development
 `coder`, `reviewer`, `tester`, `planner`, `researcher`
@@ -398,16 +399,38 @@ npx claude-flow@alpha hooks post-task --task-id "task-1" --status "completed"
 npx claude-flow@alpha hooks session-end --export-metrics true
 ```
 
-**Optional: Auto-Fire Hooks**
+**Auto-Fire via Claude Code Native Hooks**
 
-A stock-first wrapper exists at `.claude/hooks/auto-hooks.js` that can auto-fire hooks during operations:
+Hooks auto-fire through Claude Code's native hook system configured in `.claude/settings.json`:
 
-```javascript
-const { enableAutoHooks } = require('./.claude/hooks/auto-hooks.js');
-enableAutoHooks(); // Hooks will now auto-fire on file writes, tasks, etc.
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [{
+          "type": "command",
+          "command": "npx claude-flow@alpha hooks pre-edit --file '{}'"
+        }]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [{
+          "type": "command",
+          "command": "npx claude-flow@alpha hooks post-edit --file '{}'"
+        }]
+      }
+    ]
+  }
+}
 ```
 
-**Stock-First:** 97% - All hook execution goes through `npx claude-flow@alpha hooks`
+**Stock Adherence:** 98% - All hooks via Claude Code native system + stock CLI
+
+**Note:** `.claude/hooks/auto-hooks.js` is deprecated (violated stock-first via filesystem monkey-patching). See `.claude/hooks/README.md` for migration guide.
 
 ### What Hooks Do
 
@@ -462,18 +485,18 @@ Remember: **Claude Flow coordinates, Claude Code creates!**
 # Custom Features Reference
 
 ## Workspace Architecture
-See [WORKSPACE-ARCHITECTURE.md](WORKSPACE-ARCHITECTURE.md) for complete architecture overview, compliance analysis, and stock vs custom comparison.
 
-## Custom Extensions
+See [Workspace Architecture Explained](docs/reality/architecture.md) for complete overview, compliance analysis, and stock vs custom comparison.
+
+## Core Concepts
 
 This workspace includes custom extensions. For detailed documentation:
 
-- **Session Management**: [WORKSPACE-GUIDE.md - Session Management](WORKSPACE-GUIDE.md#session-management-protocol)
-- **File Routing**: [WORKSPACE-GUIDE.md - File Routing](WORKSPACE-GUIDE.md#file-routing-system)
-- **Captain's Log**: [WORKSPACE-GUIDE.md - Captain's Log](WORKSPACE-GUIDE.md#captains-log-journaling)
-- **ReasoningBank**: [WORKSPACE-GUIDE.md - ReasoningBank](WORKSPACE-GUIDE.md#reasoningbank-learning-pipeline)
-- **AgentDB**: [WORKSPACE-GUIDE.md - AgentDB](WORKSPACE-GUIDE.md#agentdb-vector-integration)
-- **Git Checkpoints**: [WORKSPACE-GUIDE.md - Git Checkpoints](WORKSPACE-GUIDE.md#git-checkpoint-system)
+- **Session Management**: [Session Management Explained](docs/essentials/session-management.md)
+- **File Routing**: [Quick Start Guide](docs/essentials/quick-start.md)
+- **System Architecture**: [Architecture Overview](docs/reality/architecture.md)
+- **Memory & Coordination**: [Memory Coordination Guide](docs/essentials/memory-coordination.md)
+- **Swarm Coordination**: [Swarm Coordination Guide](docs/advanced/swarm-coordination.md)
 
 ## Stock Claude-Flow Features
 
@@ -531,14 +554,21 @@ Never save working files, text/mds and tests to the root folder.
 
 ---
 
-## 📚 Integration Documentation
+## 📚 Documentation & Learning
 
-**New**: Comprehensive integration guides created and tested (100% pass rate):
+**Essential Documentation:**
 
-- **[Integration Testing Guide](docs/guides/integration-testing-guide.md)** - Step-by-step testing procedures
-- **[Feature Verification Checklist](docs/guides/feature-verification-checklist.md)** - Quick health checks
-- **[Troubleshooting Guide](docs/guides/troubleshooting-guide.md)** - Common issues and solutions
-- **[Guide Index](docs/guides/README.md)** - Overview and quick start
+- **[Quick Start Guide](docs/essentials/quick-start.md)** - Get started with sessions and file routing
+- **[Session Management](docs/essentials/session-management.md)** - Complete session lifecycle guide
+- **[Agent Spawning](docs/essentials/agent-spawning.md)** - How to spawn and coordinate agents
+- **[Memory Coordination](docs/essentials/memory-coordination.md)** - Using memory for agent coordination
+- **[Troubleshooting Guide](docs/essentials/troubleshooting.md)** - Common issues and solutions
 
-**Source**: Session session-20251115-210537-claude-flow-integration-testing (2025-11-16)
+**Learning Path:**
+
+- **[Start Here](docs/learning/00-start-here.md)** - Begin your Claude Flow journey
+- **[Foundations](docs/learning/01-foundations/)** - Core concepts and workspace tour
+- **[Essential Skills](docs/learning/02-essential-skills/)** - Session management, spawning agents, memory
+- **[Intermediate](docs/learning/03-intermediate/)** - Swarm topologies, queen selection, consensus
+- **[Advanced](docs/learning/04-advanced/)** - Hive mind, Byzantine consensus, adaptive topology
 

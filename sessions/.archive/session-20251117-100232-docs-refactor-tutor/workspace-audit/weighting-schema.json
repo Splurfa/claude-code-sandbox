@@ -1,0 +1,661 @@
+{
+  "schema_version": "1.0.0",
+  "generated": "2025-11-17",
+  "purpose": "Master weighting schema for wizard decision-making on file reference safety",
+  "total_files_analyzed": 360,
+
+  "scoring_methodology": {
+    "dimensions": {
+      "prescriptiveness": {
+        "weight": 0.35,
+        "description": "How much does content dictate specific actions vs provide information",
+        "scoring": {
+          "0-25": "Purely informational - describes what exists",
+          "26-50": "Mix of description and soft recommendations",
+          "51-75": "Contains prescriptive guidance and workflows",
+          "76-100": "Rigid protocols with mandatory steps and MUST/NEVER language"
+        },
+        "impact": "High prescriptiveness = Lower confidence ceiling for wizard"
+      },
+      "temporal_stability": {
+        "weight": 0.25,
+        "description": "How likely content is to become outdated or change",
+        "scoring": {
+          "0-25": "Highly volatile - session-specific, timestamps, current state",
+          "26-50": "Medium stability - implementation details, API versions",
+          "51-75": "Stable concepts - architectural patterns, methodologies",
+          "76-100": "Timeless - foundational principles, glossaries"
+        },
+        "impact": "Low stability = Higher risk of outdated information"
+      },
+      "user_authority": {
+        "weight": 0.30,
+        "description": "Whether content reflects user intent vs assistant interpretation",
+        "scoring": {
+          "0-25": "Assistant-generated - analysis, research, interpretations",
+          "26-50": "Collaborative - user edits with assistant contributions",
+          "51-75": "User-reviewed - assistant-generated but explicitly approved",
+          "76-100": "User-authored - direct user configuration and intent"
+        },
+        "impact": "User-authored content = Maximum trust and confidence"
+      },
+      "contextual_scope": {
+        "weight": 0.10,
+        "description": "How broadly applicable vs narrowly scoped",
+        "scoring": {
+          "0-25": "Session-specific - applies only to one conversation",
+          "26-50": "Task-specific - applies to a category of work",
+          "51-75": "Project-wide - applies across all work in this workspace",
+          "76-100": "Universal - applies to all projects and contexts"
+        },
+        "impact": "Narrow scope = Limited applicability for general wizard queries"
+      }
+    },
+
+    "weighted_score_formula": "(prescriptiveness * 0.35) + (temporal_stability * 0.25) + (user_authority * 0.30) + (contextual_scope * 0.10)",
+
+    "confidence_ceiling_rules": {
+      "prescriptive_penalty": "Files with prescriptiveness > 75 capped at 55% confidence (sequential work ceiling)",
+      "temporal_decay": "Files with temporal_stability < 25 capped at 40% confidence",
+      "assistant_generated": "Files with user_authority < 25 capped at 65% confidence unless verified",
+      "session_specific": "Files with contextual_scope < 25 excluded from cross-session wizard queries"
+    }
+  },
+
+  "classification_thresholds": {
+    "SAFE": {
+      "weighted_score": ">= 70",
+      "confidence_ceiling": "85-100%",
+      "wizard_action": "Reference directly without caveats",
+      "examples": [
+        "User-authored configuration (CLAUDE.md, .mcp.json)",
+        "Stable glossaries and reference materials",
+        "Architectural decision records",
+        "Foundation concepts and principles"
+      ]
+    },
+    "CAUTIONARY": {
+      "weighted_score": "40-69",
+      "confidence_ceiling": "40-84%",
+      "wizard_action": "Reference with verification warnings",
+      "examples": [
+        "Assistant-generated guides with prescriptive steps",
+        "Session-specific analysis and recommendations",
+        "Implementation details that may change",
+        "Research findings needing validation"
+      ]
+    },
+    "EXCLUDE": {
+      "weighted_score": "< 40",
+      "confidence_ceiling": "0-39%",
+      "wizard_action": "Do not reference in wizard context",
+      "examples": [
+        "Timestamped session artifacts",
+        "Volatile state snapshots",
+        "Unverified experimental code",
+        "Deprecated legacy content"
+      ]
+    }
+  },
+
+  "special_handling_rules": {
+    "read_only_zones": {
+      "files": [
+        "inbox/codex-agent/**",
+        "inbox/cursor-agent/**",
+        ".swarm/backups/**",
+        ".swarm/memory.db*"
+      ],
+      "classification": "CAUTIONARY",
+      "reasoning": "External agent content or immutable snapshots - informational only, not actionable",
+      "confidence_ceiling": 60,
+      "wizard_guidance": "Reference for context only, never as source of truth for current operations"
+    },
+
+    "sequential_work_protocols": {
+      "pattern": "Contains step-by-step workflows with MUST/NEVER language",
+      "examples": [
+        "docs/tutorials/**",
+        "docs/how-to/**",
+        "Session closeout procedures"
+      ],
+      "classification": "CAUTIONARY",
+      "confidence_ceiling": 55,
+      "reasoning": "Prescriptive sequential steps conflict with parallel wizard decision-making",
+      "wizard_guidance": "Extract principles, not procedures. Adapt to parallel context."
+    },
+
+    "user_configuration": {
+      "files": [
+        "CLAUDE.md",
+        ".mcp.json",
+        "package.json",
+        "~/.claude/CLAUDE.md"
+      ],
+      "classification": "SAFE",
+      "confidence_ceiling": 100,
+      "reasoning": "Direct user intent and preferences",
+      "wizard_guidance": "Highest priority - user configuration overrides all other sources"
+    },
+
+    "session_artifacts": {
+      "pattern": "sessions/*/artifacts/**",
+      "classification": "EXCLUDE",
+      "confidence_ceiling": 25,
+      "reasoning": "Session-specific context not applicable to wizard's cross-session queries",
+      "wizard_guidance": "Only reference if wizard query explicitly scoped to that session",
+      "exception": "Session summaries may be CAUTIONARY (50% ceiling) if verified complete"
+    },
+
+    "foundation_concepts": {
+      "files": [
+        "docs/explanation/workspace-architecture.md",
+        "docs/reference/implementation-architecture.md",
+        "docs/internals/architecture-overview.md",
+        ".claude/agents/*/README.md"
+      ],
+      "classification": "SAFE",
+      "confidence_ceiling": 85,
+      "reasoning": "Stable conceptual overviews with high temporal stability",
+      "wizard_guidance": "Excellent for understanding 'why' and 'what', less reliable for 'how' (procedures)"
+    }
+  },
+
+  "file_categories": {
+    "configuration": {
+      "count": 33,
+      "default_classification": "SAFE",
+      "default_confidence": 90,
+      "reasoning": "User-authored, stable, project-wide scope",
+      "exceptions": "Experimental configs may be CAUTIONARY"
+    },
+
+    "documentation": {
+      "count": 58,
+      "default_classification": "CAUTIONARY",
+      "default_confidence": 60,
+      "reasoning": "Mix of stable concepts (SAFE) and prescriptive tutorials (CAUTIONARY)",
+      "subcategories": {
+        "explanation": {
+          "classification": "SAFE",
+          "confidence": 85,
+          "reasoning": "Conceptual understanding, high stability"
+        },
+        "reference": {
+          "classification": "SAFE",
+          "confidence": 80,
+          "reasoning": "Information-oriented, less prescriptive"
+        },
+        "tutorials": {
+          "classification": "CAUTIONARY",
+          "confidence": 55,
+          "reasoning": "Prescriptive step-by-step workflows"
+        },
+        "how_to": {
+          "classification": "CAUTIONARY",
+          "confidence": 55,
+          "reasoning": "Task-oriented with specific procedures"
+        },
+        "internals": {
+          "classification": "SAFE",
+          "confidence": 75,
+          "reasoning": "Architecture details, but implementation may change"
+        }
+      }
+    },
+
+    "agents": {
+      "count": 77,
+      "default_classification": "SAFE",
+      "default_confidence": 80,
+      "reasoning": "Stable agent personas, but specific capabilities may evolve",
+      "wizard_guidance": "Use for understanding agent types and roles, not exact implementation"
+    },
+
+    "commands": {
+      "count": 81,
+      "default_classification": "CAUTIONARY",
+      "default_confidence": 65,
+      "reasoning": "Command definitions stable, but invocation patterns prescriptive",
+      "wizard_guidance": "Reference what commands do, not how to sequence them"
+    },
+
+    "skills": {
+      "count": 43,
+      "default_classification": "CAUTIONARY",
+      "default_confidence": 70,
+      "reasoning": "Skill definitions stable, but usage patterns may be prescriptive",
+      "wizard_guidance": "Understand skill capabilities, adapt usage to context"
+    },
+
+    "hooks": {
+      "count": 11,
+      "default_classification": "CAUTIONARY",
+      "default_confidence": 50,
+      "reasoning": "Implementation details, high prescriptiveness, medium stability",
+      "wizard_guidance": "Reference for understanding automation, not for direct execution patterns"
+    },
+
+    "backups": {
+      "count": 31,
+      "default_classification": "EXCLUDE",
+      "default_confidence": 20,
+      "reasoning": "Immutable snapshots, highly temporal, session-specific",
+      "wizard_guidance": "Never reference unless debugging specific historical session"
+    },
+
+    "external_agent_content": {
+      "count": 29,
+      "default_classification": "CAUTIONARY",
+      "default_confidence": 60,
+      "reasoning": "High-quality research but not authoritative for this workspace",
+      "wizard_guidance": "Reference for concepts and patterns, verify against workspace config"
+    },
+
+    "reasoningbank": {
+      "count": 9,
+      "default_classification": "CAUTIONARY",
+      "default_confidence": 65,
+      "reasoning": "Learning pipeline components, implementation-focused",
+      "wizard_guidance": "Understand learning architecture, don't prescribe exact usage"
+    },
+
+    "integrations": {
+      "count": 4,
+      "default_classification": "CAUTIONARY",
+      "default_confidence": 60,
+      "reasoning": "Integration code may change with external dependencies",
+      "wizard_guidance": "Reference for understanding capabilities, verify current API"
+    }
+  },
+
+  "wizard_decision_matrix": {
+    "query_type_routing": {
+      "conceptual_understanding": {
+        "description": "User asks 'what is' or 'why does'",
+        "preferred_sources": [
+          "docs/explanation/** (85% confidence)",
+          "docs/reference/** (80% confidence)",
+          "CLAUDE.md overview sections (100% confidence)",
+          "Agent README files (80% confidence)"
+        ],
+        "avoid_sources": [
+          "Session artifacts (too specific)",
+          "How-to guides (too procedural)",
+          "Backups (immutable snapshots)"
+        ]
+      },
+
+      "procedural_guidance": {
+        "description": "User asks 'how do I'",
+        "preferred_sources": [
+          "CLAUDE.md protocols (100% confidence but adapt to parallel context)",
+          "docs/how-to/** (55% confidence - extract principles not steps)",
+          "docs/reference/feature-verification-checklist.md (80% confidence)"
+        ],
+        "wizard_adaptation_required": true,
+        "reasoning": "Sequential tutorials need translation to parallel wizard execution",
+        "avoid_sources": [
+          "Step-by-step tutorials (prescriptive ceiling at 55%)",
+          "Session-specific procedures"
+        ]
+      },
+
+      "capability_discovery": {
+        "description": "User asks 'can I' or 'what tools'",
+        "preferred_sources": [
+          ".claude/agents/** (80% confidence)",
+          ".claude/commands/** (65% confidence)",
+          ".claude/skills/** (70% confidence)",
+          "docs/reference/hive-mind-quick-reference.md (80% confidence)"
+        ],
+        "avoid_sources": [
+          "Implementation code (too detailed)",
+          "External agent research (not authoritative)"
+        ]
+      },
+
+      "troubleshooting": {
+        "description": "User reports problem or error",
+        "preferred_sources": [
+          "docs/troubleshooting/troubleshooting-guide.md (75% confidence)",
+          "docs/how-to/integration-testing-guide.md (70% confidence)",
+          "Relevant session artifacts IF debugging that specific session (40% confidence)"
+        ],
+        "wizard_adaptation_required": true,
+        "reasoning": "Diagnose root cause, don't blindly follow troubleshooting steps"
+      },
+
+      "architectural_decisions": {
+        "description": "User asks about design or structure",
+        "preferred_sources": [
+          "WORKSPACE-ARCHITECTURE.md (100% confidence)",
+          "docs/explanation/workspace-architecture.md (85% confidence)",
+          "docs/internals/architecture-overview.md (85% confidence)",
+          "docs/reference/implementation-architecture.md (80% confidence)"
+        ],
+        "avoid_sources": [
+          "Implementation code (too granular)",
+          "Session-specific analyses"
+        ]
+      }
+    }
+  },
+
+  "confidence_adjustment_factors": {
+    "file_age_penalty": {
+      "description": "Reduce confidence for files not modified recently (if implementation-focused)",
+      "calculation": "If file_type == 'implementation' AND days_since_modification > 30: confidence *= 0.9",
+      "reasoning": "Implementation details drift faster than concepts"
+    },
+
+    "cross_reference_boost": {
+      "description": "Increase confidence when multiple sources agree",
+      "calculation": "If 3+ sources with confidence > 70 agree: boost each by 5%",
+      "cap": "Maximum 95% confidence (never 100% except user config)"
+    },
+
+    "contradiction_penalty": {
+      "description": "Reduce confidence when sources contradict",
+      "calculation": "If sources contradict: reduce all to min(confidence, 50%)",
+      "wizard_action": "Flag contradiction and ask user for clarification"
+    },
+
+    "verification_status_boost": {
+      "description": "Increase confidence for explicitly verified content",
+      "markers": [
+        "Verified by user",
+        "100% test pass rate mentioned",
+        "Integration-tested tag"
+      ],
+      "boost": "+15% confidence",
+      "cap": "Maximum 95%"
+    }
+  },
+
+  "wizard_behavioral_guidelines": {
+    "parallel_execution_mandate": {
+      "rule": "Wizard MUST translate sequential tutorials into parallel operations",
+      "example": {
+        "tutorial_says": "1. Create file A, 2. Then create file B, 3. Then test both",
+        "wizard_does": "[Single message]: Write A, Write B, Run tests - all in parallel"
+      },
+      "confidence_impact": "Sequential tutorials capped at 55%, wizard's parallel translation at 85%"
+    },
+
+    "user_config_supremacy": {
+      "rule": "User configuration (CLAUDE.md, ~/.claude/CLAUDE.md) ALWAYS overrides documentation",
+      "example": "If doc says 'use git add -A' but CLAUDE.md says 'NEVER use git add -A', follow CLAUDE.md",
+      "confidence": "100% for user config, 0% for contradicting documentation"
+    },
+
+    "session_scope_awareness": {
+      "rule": "Wizard queries are cross-session by default unless user specifies session context",
+      "impact": "Session artifacts default to EXCLUDE unless query explicitly scoped",
+      "exception": "Session summaries may be referenced at 50% confidence if relevant to current work"
+    },
+
+    "prescriptiveness_adaptation": {
+      "rule": "Extract principles from prescriptive content, don't copy procedures",
+      "example": {
+        "doc_says": "MUST run hook A, then B, then C in sequence",
+        "wizard_understands": "Hooks A, B, C are important, but adapts execution to parallel context"
+      },
+      "confidence_ceiling": 55
+    },
+
+    "read_only_respect": {
+      "rule": "NEVER recommend editing READ-ONLY files, even if documentation suggests it",
+      "files": [
+        ".swarm/backups/**",
+        ".swarm/memory.db*",
+        "inbox/codex-agent/**",
+        "inbox/cursor-agent/**"
+      ],
+      "confidence": "100% on permission boundaries, regardless of what docs say"
+    }
+  },
+
+  "summary_statistics": {
+    "by_classification": {
+      "SAFE": {
+        "estimated_count": 90,
+        "percentage": "25%",
+        "examples": [
+          "User configuration files",
+          "Conceptual documentation",
+          "Architecture explanations",
+          "Stable agent definitions"
+        ]
+      },
+      "CAUTIONARY": {
+        "estimated_count": 210,
+        "percentage": "58%",
+        "examples": [
+          "Prescriptive tutorials",
+          "Implementation code",
+          "External agent research",
+          "Command definitions with usage patterns"
+        ]
+      },
+      "EXCLUDE": {
+        "estimated_count": 60,
+        "percentage": "17%",
+        "examples": [
+          "Session artifacts",
+          "Immutable backups",
+          "Deprecated legacy files",
+          "Highly temporal snapshots"
+        ]
+      }
+    },
+
+    "high_value_references": {
+      "description": "Top 20 files for wizard to prioritize",
+      "files": [
+        {
+          "path": "CLAUDE.md",
+          "confidence": 100,
+          "reasoning": "User configuration, supreme authority"
+        },
+        {
+          "path": "~/.claude/CLAUDE.md",
+          "confidence": 100,
+          "reasoning": "Global user preferences"
+        },
+        {
+          "path": "WORKSPACE-ARCHITECTURE.md",
+          "confidence": 95,
+          "reasoning": "Architectural overview, verified"
+        },
+        {
+          "path": "docs/explanation/workspace-architecture.md",
+          "confidence": 85,
+          "reasoning": "Conceptual clarity, stable"
+        },
+        {
+          "path": "docs/explanation/session-management.md",
+          "confidence": 85,
+          "reasoning": "Core concept explanation"
+        },
+        {
+          "path": "docs/explanation/file-routing.md",
+          "confidence": 85,
+          "reasoning": "Fundamental routing rules"
+        },
+        {
+          "path": "docs/explanation/hive-mind-system.md",
+          "confidence": 85,
+          "reasoning": "Coordination paradigm explanation"
+        },
+        {
+          "path": "docs/reference/implementation-architecture.md",
+          "confidence": 80,
+          "reasoning": "Technical reference, well-tested"
+        },
+        {
+          "path": "docs/reference/hive-mind-quick-reference.md",
+          "confidence": 80,
+          "reasoning": "Quick capability lookup"
+        },
+        {
+          "path": "docs/reference/feature-verification-checklist.md",
+          "confidence": 80,
+          "reasoning": "Verification procedures, tested"
+        },
+        {
+          "path": ".mcp.json",
+          "confidence": 100,
+          "reasoning": "User MCP server config"
+        },
+        {
+          "path": "sessions/README.md",
+          "confidence": 80,
+          "reasoning": "Session protocol explanation"
+        },
+        {
+          "path": ".swarm/README.md",
+          "confidence": 75,
+          "reasoning": "Infrastructure documentation"
+        },
+        {
+          "path": "inbox/README.md",
+          "confidence": 75,
+          "reasoning": "Communication protocol"
+        },
+        {
+          "path": "docs/internals/architecture-overview.md",
+          "confidence": 85,
+          "reasoning": "System architecture details"
+        },
+        {
+          "path": "docs/internals/coordination-mechanics.md",
+          "confidence": 80,
+          "reasoning": "How coordination works"
+        },
+        {
+          "path": "docs/internals/memory-architecture.md",
+          "confidence": 80,
+          "reasoning": "Memory system design"
+        },
+        {
+          "path": "docs/troubleshooting/troubleshooting-guide.md",
+          "confidence": 75,
+          "reasoning": "Problem-solving patterns"
+        },
+        {
+          "path": ".claude/agents/queen-coordinator/README.md",
+          "confidence": 80,
+          "reasoning": "Wizard's own agent definition"
+        },
+        {
+          "path": "docs/how-to/choose-coordination-approach.md",
+          "confidence": 70,
+          "reasoning": "Decision framework (adapt to parallel)"
+        }
+      ]
+    },
+
+    "high_risk_exclusions": {
+      "description": "Files wizard should NEVER reference",
+      "files": [
+        {
+          "pattern": ".swarm/backups/**",
+          "count": 31,
+          "reasoning": "Immutable snapshots, highly temporal"
+        },
+        {
+          "pattern": "sessions/*/artifacts/**",
+          "count": "~100+",
+          "reasoning": "Session-specific, not applicable cross-session"
+        },
+        {
+          "pattern": ".swarm/memory.db*",
+          "count": 3,
+          "reasoning": "Binary database, hook-managed"
+        },
+        {
+          "pattern": ".archive/**",
+          "count": "unknown",
+          "reasoning": "Deprecated legacy content"
+        },
+        {
+          "pattern": "inbox/*/deprecated/**",
+          "count": "unknown",
+          "reasoning": "Explicitly marked as obsolete"
+        }
+      ]
+    }
+  },
+
+  "programmatic_query_interface": {
+    "description": "How wizard should query this schema",
+
+    "get_file_confidence": {
+      "input": "file_path",
+      "logic": [
+        "1. Check special_handling_rules for pattern matches",
+        "2. If matched, use specified confidence_ceiling",
+        "3. Else, check file_categories for default",
+        "4. Apply confidence_adjustment_factors",
+        "5. Return final confidence and classification"
+      ],
+      "output": {
+        "confidence": "0-100",
+        "classification": "SAFE | CAUTIONARY | EXCLUDE",
+        "reasoning": "Why this confidence was assigned",
+        "wizard_guidance": "How to use this file in decision-making"
+      }
+    },
+
+    "get_sources_for_query_type": {
+      "input": "query_type (conceptual | procedural | capability | troubleshooting | architectural)",
+      "logic": [
+        "1. Look up query_type in wizard_decision_matrix.query_type_routing",
+        "2. Return preferred_sources with confidence scores",
+        "3. Return avoid_sources with reasoning",
+        "4. Return wizard_adaptation_required flag"
+      ],
+      "output": {
+        "preferred_sources": [
+          {
+            "path": "file path or pattern",
+            "confidence": "0-100",
+            "reasoning": "why preferred for this query type"
+          }
+        ],
+        "avoid_sources": ["patterns to exclude"],
+        "adaptation_required": "boolean - whether wizard must translate to parallel context"
+      }
+    },
+
+    "validate_source_compatibility": {
+      "input": ["source_file_1", "source_file_2", "..."],
+      "logic": [
+        "1. Check for contradictions between sources",
+        "2. Apply contradiction_penalty if found",
+        "3. Check for cross-reference agreement",
+        "4. Apply cross_reference_boost if 3+ agree",
+        "5. Return compatibility assessment"
+      ],
+      "output": {
+        "compatible": "boolean",
+        "contradictions": ["list of conflicting claims"],
+        "agreement_boost": "percentage boost applied",
+        "final_confidence": "adjusted confidence for this source combination"
+      }
+    }
+  },
+
+  "metadata": {
+    "schema_author": "System Architecture Designer",
+    "audit_basis": "Workspace Infrastructure Audit Report (2025-11-17)",
+    "files_analyzed": 360,
+    "total_lines": 88471,
+    "workspace_size": "2.6 MB",
+    "stock_first_score": "82/100",
+    "version": "1.0.0",
+    "last_updated": "2025-11-17",
+    "validation_status": "Requires empirical testing with actual file scoring"
+  }
+}

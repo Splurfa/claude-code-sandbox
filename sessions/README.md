@@ -179,6 +179,46 @@ This creates a time-indexed narrative of decisions, blockers, and learnings acro
 npx claude-flow@alpha hooks session-restore --session-id "session-20251114-120000-api"
 ```
 
+## Multi-Session Pattern
+
+**Normal behavior**: Multiple workspace sessions can exist simultaneously during complex work.
+
+### Why Multiple Sessions?
+
+When using hive-mind coordination:
+- Each agent spawn may create internal coordination sessions (`.hive-mind/sessions/`)
+- Complex projects may span multiple workspace sessions (`sessions/session-*/`)
+- **This is normal and expected** for multi-agent work
+
+### Example
+
+Current workspace has 8 active sessions from hive-mind integration work:
+- Main integration session: `session-20251117-002737-hive-mind-100-integration/`
+- Supporting research sessions: Various `session-*-research/` directories
+- Current documentation session: `session-20251117-100232-docs-refactor-tutor/`
+
+**All are valid** - complex work naturally creates multiple sessions.
+
+### Session Hygiene
+
+**Workspace sessions** (`sessions/session-*/`):
+- Created per chat thread OR per major subtask
+- Contain artifacts in `artifacts/{code,tests,docs,scripts,notes}/`
+- Closed via `/session-closeout` command
+
+**Coordination sessions** (`.hive-mind/sessions/`):
+- Created automatically by swarm coordination
+- Contain swarm state tracking
+- Managed automatically by hive-mind
+
+**NO files should exist in `sessions/` root** except:
+- `README.md` (this file)
+- `metadata.json` (session tracking)
+- `.archive/` (closed sessions)
+- `.hive-mind/` (coordination state)
+- `captains-log/` (decision journal)
+- `session-*/` (workspace session directories)
+
 ## Related Documentation
 
 - [Infrastructure Storage](../.swarm/README.md) - Where session state is persisted

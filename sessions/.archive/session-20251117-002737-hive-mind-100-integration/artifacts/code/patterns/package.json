@@ -1,0 +1,39 @@
+{
+  "name": "pattern-auto-application-system",
+  "version": "1.0.0",
+  "description": "Pattern auto-application system with AgentDB vector search integration",
+  "main": "pattern-mcp.js",
+  "scripts": {
+    "test": "jest --verbose",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch"
+  },
+  "keywords": [
+    "patterns",
+    "vector-search",
+    "agentdb",
+    "auto-apply",
+    "reasoning-bank"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coverageDirectory": "coverage",
+    "collectCoverageFrom": [
+      "**/*.js",
+      "!**/node_modules/**",
+      "!**/coverage/**",
+      "!jest.config.js"
+    ],
+    "testMatch": [
+      "**/tests/**/*.test.js"
+    ]
+  }
+}

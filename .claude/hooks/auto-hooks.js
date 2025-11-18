@@ -1,13 +1,22 @@
 #!/usr/bin/env node
 /**
- * Auto-Fire Hook Wrapper (Stock-First Architecture)
+ * DEPRECATED: Auto-Fire Hook Wrapper
  *
- * Thin wrapper that automatically fires claude-flow hooks during operations.
- * 95%+ stock: All hook execution goes through npx claude-flow@alpha hooks
- * 5% wrapper: Event detection and parameter extraction only
+ * ⚠️ THIS FILE VIOLATES STOCK-FIRST PRINCIPLE ⚠️
  *
- * Total: ~80 lines (thin wrapper compliance)
+ * Reason: Monkey-patches fs.writeFileSync (lines 88-98)
+ * Migration: Use .claude/settings.json PreToolUse/PostToolUse hooks instead
+ * See: ADR-002 for stock cascade pattern
+ * Status: Deprecated 2025-11-17
+ *
+ * DO NOT USE THIS FILE - Use stock hooks configured in .claude/settings.json
  */
+
+console.warn('⚠️  DEPRECATED: auto-hooks.js violates stock-first principle');
+console.warn('📋 Use .claude/settings.json PreToolUse/PostToolUse hooks instead');
+console.warn('📖 See ADR-002 and WORKSPACE-GUIDE.md for migration guide');
+
+// Deprecated implementation below - DO NOT ENABLE
 
 const { exec } = require('child_process');
 const { promisify } = require('util');

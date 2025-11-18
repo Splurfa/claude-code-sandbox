@@ -1,0 +1,114 @@
+{
+  "timestamp": "2025-11-17T17:44:21.267Z",
+  "duration": 113699,
+  "results": {
+    "total": 5,
+    "passed": 0,
+    "failed": 5,
+    "suites": [
+      {
+        "name": "Integration Tests - Full Workflow",
+        "category": "integration",
+        "passed": 0,
+        "failed": 1,
+        "total": 1,
+        "status": "ERROR"
+      },
+      {
+        "name": "Performance Benchmarks",
+        "category": "performance",
+        "passed": 0,
+        "failed": 1,
+        "total": 1,
+        "status": "ERROR"
+      },
+      {
+        "name": "Chaos Engineering - Failure Scenarios",
+        "category": "chaos",
+        "passed": 0,
+        "failed": 1,
+        "total": 1,
+        "status": "ERROR"
+      },
+      {
+        "name": "Load Testing - Concurrent Agents",
+        "category": "load",
+        "passed": 0,
+        "failed": 1,
+        "total": 1,
+        "status": "ERROR"
+      },
+      {
+        "name": "Stock Adherence Validation",
+        "category": "stock",
+        "passed": 0,
+        "failed": 1,
+        "total": 1,
+        "status": "ERROR"
+      }
+    ]
+  },
+  "dimensions": {
+    "integration": {
+      "score": 0,
+      "passed": 0,
+      "total": 1,
+      "tests": [
+        {
+          "name": "Integration Tests - Full Workflow",
+          "passed": 0,
+          "total": 1
+        }
+      ]
+    },
+    "performance": {
+      "score": 0,
+      "passed": 0,
+      "total": 1,
+      "tests": [
+        {
+          "name": "Performance Benchmarks",
+          "passed": 0,
+          "total": 1
+        }
+      ]
+    },
+    "chaos": {
+      "score": 0,
+      "passed": 0,
+      "total": 1,
+      "tests": [
+        {
+          "name": "Chaos Engineering - Failure Scenarios",
+          "passed": 0,
+          "total": 1
+        }
+      ]
+    },
+    "load": {
+      "score": 0,
+      "passed": 0,
+      "total": 1,
+      "tests": [
+        {
+          "name": "Load Testing - Concurrent Agents",
+          "passed": 0,
+          "total": 1
+        }
+      ]
+    },
+    "stock": {
+      "score": 0,
+      "passed": 0,
+      "total": 1,
+      "tests": [
+        {
+          "name": "Stock Adherence Validation",
+          "passed": 0,
+          "total": 1
+        }
+      ]
+    }
+  },
+  "overallScore": 0
+}

@@ -1,0 +1,106 @@
+OVERSIGHT BASELINE CAPTURE
+=========================
+Timestamp: 2025-11-17 13:20:45
+Session: session-20251117-100232-docs-refactor-tutor
+
+DATABASE STATE
+--------------
+Memory Entries Count: 60398
+Patterns Table Count: 79
+
+Memory Database Tables:
+- memory_entries
+- sqlite_sequence
+- patterns
+- pattern_embeddings
+- pattern_links
+- task_trajectories
+- matts_runs
+- consolidation_runs
+- metrics_log
+- trajectories
+- trajectory_steps
+
+Recent Memory Keys (Last 10):
+1. bash:bash-1763414979899-7wdyw1ux2:pre | namespace: hooks:pre-bash
+2. bash:bash-1763414978207-k8s07jzpv:pre | namespace: hooks:pre-bash
+3. bash:bash-1763414978971-2gu3t8ghk:post | namespace: hooks:post-bash
+4. command-results:bash-1763414978971-2gu3t8ghk | namespace: command-results
+5. command-metrics:bash-1763414978971-2gu3t8ghk | namespace: performance-metrics
+6. command-history:1763414978975 | namespace: command-history
+7. bash:bash-1763414970160-246uyvjve:post | namespace: hooks:post-bash
+8. command-results:bash-1763414970160-246uyvjve | namespace: command-results
+9. command-metrics:bash-1763414970160-246uyvjve | namespace: performance-metrics
+10. command-history:1763414970162 | namespace: command-history
+
+HIVE-MIND STATE
+---------------
+Directory Exists: YES
+Location: .hive-mind/
+
+Config.json Content:
+{
+  "version": "2.0.0",
+  "initialized": "2025-11-14T23:29:28.817Z",
+  "defaults": {
+    "queenType": "strategic",
+    "maxWorkers": 8,
+    "consensusAlgorithm": "majority",
+    "memorySize": 100,
+    "autoScale": true,
+    "encryption": false
+  },
+  "mcpTools": {
+    "enabled": true,
+    "parallel": true,
+    "timeout": 60000
+  }
+}
+
+Hive Database Tables:
+- swarms
+- agents
+- tasks
+- messages
+- consensus_votes
+- knowledge_base
+- performance_metrics
+- sessions
+- collective_memory
+- consensus_decisions
+- session_checkpoints
+- session_logs
+
+SESSION ARTIFACTS STATE
+-----------------------
+Total Files in Session: 100
+
+Directory Structure:
+drwxr-xr-x@  8 splurfa  staff   256 Nov 17 12:30 .
+drwxr-xr-x@  5 splurfa  staff   160 Nov 17 10:32 ..
+drwxr-xr-x@  4 splurfa  staff   128 Nov 17 12:30 backups
+drwxr-xr-x@  4 splurfa  staff   128 Nov 17 10:47 code
+drwxr-xr-x@ 14 splurfa  staff   448 Nov 17 11:56 docs
+drwxr-xr-x@ 35 splurfa  staff  1120 Nov 17 13:20 notes
+drwxr-xr-x@  2 splurfa  staff    64 Nov 17 10:02 scripts
+drwxr-xr-x@  3 splurfa  staff    96 Nov 17 10:49 tests
+
+HOOKS STATE
+-----------
+Hooks Logs Directory: DOES NOT EXIST
+Location Checked: .swarm/hooks/logs/
+
+Note: Hooks appear to be storing data directly in memory.db rather than separate log files.
+
+MONITORING TARGETS
+------------------
+✓ Memory entries count changes
+✓ Patterns table additions
+✓ Hive-mind database updates
+✓ Session artifacts creation
+✓ Config.json modifications
+✓ Database table row counts
+
+BASELINE COMPLETE
+-----------------
+Ready to monitor claims vs reality during session execution.

@@ -1,0 +1,44 @@
+{
+  "name": "hive-mind-100-verification-tests",
+  "version": "1.0.0",
+  "description": "Comprehensive test suite for 100/100 Hive Mind verification",
+  "private": true,
+  "scripts": {
+    "test": "node run-all-tests.js",
+    "test:integration": "jest integration/*.test.js --verbose",
+    "test:performance": "jest performance/*.test.js --verbose",
+    "test:chaos": "jest chaos/*.test.js --verbose",
+    "test:load": "jest load/*.test.js --verbose",
+    "test:stock": "jest stock-adherence/*.test.js --verbose",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/*.test.js"
+    ],
+    "collectCoverageFrom": [
+      "**/*.test.js"
+    ],
+    "coverageReporters": [
+      "text",
+      "lcov",
+      "html"
+    ],
+    "verbose": true,
+    "testTimeout": 30000
+  },
+  "keywords": [
+    "claude-flow",
+    "hive-mind",
+    "integration-testing",
+    "performance",
+    "chaos-engineering"
+  ],
+  "author": "Hive Mind Development Team",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.0.0"
+  }
+}

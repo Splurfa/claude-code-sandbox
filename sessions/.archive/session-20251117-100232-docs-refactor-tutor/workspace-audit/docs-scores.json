@@ -1,0 +1,1145 @@
+{
+  "metadata": {
+    "analysis_timestamp": "2025-11-17T16:00:00Z",
+    "analyzer": "Code Quality Analyzer",
+    "total_files_scored": 53,
+    "scoring_methodology": "4-dimensional analysis with confidence capping for sequential work",
+    "confidence_cap_applied": 55,
+    "confidence_cap_reason": "Sequential work detected - systematic uncertainty for unverified coordination"
+  },
+  "scoring_dimensions": {
+    "informative_value": {
+      "description": "How useful and accurate is the information provided",
+      "scale": "0-100 (0=misleading, 50=basic, 100=comprehensive and accurate)"
+    },
+    "prescriptive_risk": {
+      "description": "Risk of documentation prescribing wrong or outdated approaches",
+      "scale": "0-100 (0=no risk/purely informational, 50=moderate risk, 100=dangerous prescriptions)"
+    },
+    "confidence_score": {
+      "description": "Confidence in accuracy and currentness of content",
+      "scale": "0-100 (capped at 55 for sequential work, 100=verified accurate)",
+      "note": "Sequential work capped at 55 due to lack of coordination verification"
+    },
+    "relevance_score": {
+      "description": "Relevance to actual system usage and user needs",
+      "scale": "0-100 (0=irrelevant, 50=somewhat relevant, 100=critical for users)"
+    }
+  },
+  "classification_categories": {
+    "SAFE": "High confidence, low risk, verified accurate or user-created",
+    "CAUTIONARY": "Moderate confidence, potential prescriptive issues, needs review",
+    "EXCLUDE": "Low confidence, high risk, outdated or unverified claims",
+    "READ-ONLY": "External agent work - reference only, do not modify"
+  },
+  "special_markers": {
+    "outdated": "Created before 100% integration (pre-2025-11-15)",
+    "suspect": "Created sequentially without agent coordination",
+    "high_quality": "User-created or verified accurate",
+    "external_agent": "From codex-agent/cursor-agent (READ-ONLY)"
+  },
+  "files": [
+    {
+      "path": "docs/README.md",
+      "title": "Documentation",
+      "category": "reference",
+      "scores": {
+        "informative_value": 85,
+        "prescriptive_risk": 10,
+        "confidence_score": 90,
+        "relevance_score": 95
+      },
+      "weighted_score": 90,
+      "classification": "SAFE",
+      "markers": ["high_quality"],
+      "rationale": "Navigation-focused, accurate Diátaxis framework implementation, user-facing, no prescriptive content",
+      "last_modified": "2025-11-16",
+      "commit_count": 1
+    },
+    {
+      "path": "docs/advanced/adaptive-pivot-protocol.md",
+      "title": "Adaptive Pivot Protocol",
+      "category": "reference",
+      "scores": {
+        "informative_value": 70,
+        "prescriptive_risk": 45,
+        "confidence_score": 50,
+        "relevance_score": 60
+      },
+      "weighted_score": 56,
+      "classification": "CAUTIONARY",
+      "markers": ["suspect", "outdated"],
+      "rationale": "Design pattern documented but implementation pending. Prescribes confidence monitoring not yet built. Good concept, unverified execution.",
+      "last_modified": "",
+      "commit_count": 0,
+      "concerns": [
+        "Says 'implementation pending' but documented as usable pattern",
+        "Confidence monitoring code examples are theoretical",
+        "No evidence of actual usage or testing"
+      ]
+    },
+    {
+      "path": "docs/explanation/README.md",
+      "title": "Understanding the System",
+      "category": "explanation",
+      "scores": {
+        "informative_value": 80,
+        "prescriptive_risk": 5,
+        "confidence_score": 85,
+        "relevance_score": 90
+      },
+      "weighted_score": 85,
+      "classification": "SAFE",
+      "markers": ["high_quality"],
+      "rationale": "Navigation doc, purely informational, accurate Diátaxis categorization",
+      "last_modified": "",
+      "commit_count": 0
+    },
+    {
+      "path": "docs/explanation/file-routing.md",
+      "title": "File Routing Explained",
+      "category": "explanation",
+      "scores": {
+        "informative_value": 85,
+        "prescriptive_risk": 15,
+        "confidence_score": 80,
+        "relevance_score": 95
+      },
+      "weighted_score": 84,
+      "classification": "SAFE",
+      "markers": ["high_quality"],
+      "rationale": "Explains actual system behavior, verified through usage, minimal prescriptive risk",
+      "last_modified": "",
+      "commit_count": 0
+    },
+    {
+      "path": "docs/explanation/hive-mind-system.md",
+      "title": "Hive-Mind System Overview",
+      "category": "explanation",
+      "scores": {
+        "informative_value": 75,
+        "prescriptive_risk": 30,
+        "confidence_score": 55,
+        "relevance_score": 70
+      },
+      "weighted_score": 65,
+      "classification": "CAUTIONARY",
+      "markers": ["suspect"],
+      "rationale": "Good overview but makes claims about features that may be aspirational. Database size claims need verification. Queen selection guidance reasonable but unverified.",
+      "last_modified": "",
+      "commit_count": 0,
+      "concerns": [
+        "Claims 36,000+ entries but verification needed",
+        "Queen type recommendations may be theoretical",
+        "Performance claims (10-20x speedup) lack local verification"
+      ]
+    },
+    {
+      "path": "docs/explanation/session-management.md",
+      "title": "Session Management Explained",
+      "category": "explanation",
+      "scores": {
+        "informative_value": 90,
+        "prescriptive_risk": 10,
+        "confidence_score": 85,
+        "relevance_score": 100
+      },
+      "weighted_score": 91,
+      "classification": "SAFE",
+      "markers": ["high_quality"],
+      "rationale": "Explains core system behavior accurately, matches implementation, high user value",
+      "last_modified": "",
+      "commit_count": 0
+    },
+    {
+      "path": "docs/explanation/workspace-architecture.md",
+      "title": "Workspace Architecture Explained",
+      "category": "explanation",
+      "scores": {
+        "informative_value": 95,
+        "prescriptive_risk": 5,
+        "confidence_score": 90,
+        "relevance_score": 95
+      },
+      "weighted_score": 94,
+      "classification": "SAFE",
+      "markers": ["high_quality"],
+      "rationale": "Excellent explanation of stock vs custom, accurate percentages, honest about trade-offs",
+      "last_modified": "",
+      "commit_count": 0
+    },
+    {
+      "path": "docs/guides-legacy-readme.md",
+      "title": "Claude Flow Documentation",
+      "category": "unknown",
+      "scores": {
+        "informative_value": 60,
+        "prescriptive_risk": 40,
+        "confidence_score": 40,
+        "relevance_score": 30
+      },
+      "weighted_score": 43,
+      "classification": "CAUTIONARY",
+      "markers": ["outdated", "suspect"],
+      "rationale": "Legacy file from pre-integration, superseded by current docs, marked outdated by name",
+      "last_modified": "",
+      "commit_count": 0,
+      "recommendation": "ARCHIVE - Superseded by docs/README.md and current structure"
+    },
+    {
+      "path": "docs/how-to/choose-coordination-approach.md",
+      "title": "How to Choose the Right Coordination Approach",
+      "category": "how-to",
+      "scores": {
+        "informative_value": 75,
+        "prescriptive_risk": 35,
+        "confidence_score": 55,
+        "relevance_score": 75
+      },
+      "weighted_score": 65,
+      "classification": "CAUTIONARY",
+      "markers": ["suspect"],
+      "rationale": "Useful decision framework but makes unverified claims about hive-mind usage patterns. Decision tree is logical but based on theoretical scenarios.",
+      "last_modified": "",
+      "commit_count": 0,
+      "concerns": [
+        "Claims 'Current Usage: Nearly zero' - needs verification",
+        "Byzantine consensus examples untested",
+        "Performance claims need local validation"
+      ]
+    },
+    {
+      "path": "docs/how-to/integration-testing-guide.md",
+      "title": "Claude Flow Integration Testing Guide",
+      "category": "how-to",
+      "scores": {
+        "informative_value": 95,
+        "prescriptive_risk": 5,
+        "confidence_score": 100,
+        "relevance_score": 100
+      },
+      "weighted_score": 100,
+      "classification": "SAFE",
+      "markers": ["high_quality"],
+      "rationale": "Verified through actual testing, 100% pass rate documented, session-based evidence",
+      "last_modified": "",
+      "commit_count": 0,
+      "evidence": "Session session-20251115-210537 with test artifacts"
+    },
+    {
+      "path": "docs/how-to/operate-the-system.md",
+      "title": "How to Operate Your AI Workspace",
+      "category": "how-to",
+      "scores": {
+        "informative_value": 70,
+        "prescriptive_risk": 30,
+        "confidence_score": 55,
+        "relevance_score": 70
+      },
+      "weighted_score": 63,
+      "classification": "CAUTIONARY",
+      "markers": ["suspect"],
+      "rationale": "Operational guidance but likely contains unverified workflows. Needs testing validation.",
+      "last_modified": "",
+      "commit_count": 0
+    },
+    {
+      "path": "docs/how-to/zero-risk-execution-pattern.md",
+      "title": "Zero-Risk Execution Pattern for Hive-Mind",
+      "category": "how-to",
+      "scores": {
+        "informative_value": 65,
+        "prescriptive_risk": 50,
+        "confidence_score": 45,
+        "relevance_score": 60
+      },
+      "weighted_score": 55,
+      "classification": "CAUTIONARY",
+      "markers": ["suspect"],
+      "rationale": "Prescribes detailed execution pattern that may not match actual hive-mind behavior. Good safety concept but unverified procedures.",
+      "last_modified": "",
+      "commit_count": 0,
+      "concerns": [
+        "Detailed phase-by-phase procedures not tested",
+        "HITL approval gates may not align with actual implementation",
+        "Rollback procedures theoretical"
+      ]
+    },
+    {
+      "path": "docs/internals/README.md",
+      "title": "System Internals Documentation",
+      "category": "explanation",
+      "scores": {
+        "informative_value": 75,
+        "prescriptive_risk": 10,
+        "confidence_score": 70,
+        "relevance_score": 80
+      },
+      "weighted_score": 74,
+      "classification": "SAFE",
+      "markers": [],
+      "rationale": "Navigation for internals, reasonable categorization",
+      "last_modified": "",
+      "commit_count": 0
+    },
+    {
+      "path": "docs/internals/architecture-overview.md",
+      "title": "Architecture Overview",
+      "category": "explanation",
+      "scores": {
+        "informative_value": 80,
+        "prescriptive_risk": 20,
+        "confidence_score": 55,
+        "relevance_score": 85
+      },
+      "weighted_score": 70,
+      "classification": "CAUTIONARY",
+      "markers": ["suspect"],
+      "rationale": "Technical deep-dive but sequential creation raises verification concerns. Architecture diagrams likely accurate but interaction patterns unverified.",
+      "last_modified": "",
+      "commit_count": 0
+    },
+    {
+      "path": "docs/internals/coordination-mechanics.md",
+      "title": "Coordination Mechanics",
+      "category": "explanation",
+      "scores": {
+        "informative_value": 75,
+        "prescriptive_risk": 25,
+        "confidence_score": 55,
+        "relevance_score": 70
+      },
+      "weighted_score": 66,
+      "classification": "CAUTIONARY",
+      "markers": ["suspect"],
+      "rationale": "Explains coordination but likely based on intended behavior vs tested reality. Sequential creation without agent verification.",
+      "last_modified": "",
+      "commit_count": 0
+    },
+    {
+      "path": "docs/internals/data-flow.md",
+      "title": "Data Flow",
+      "category": "explanation",
+      "scores": {
+        "informative_value": 80,
+        "prescriptive_risk": 15,
+        "confidence_score": 55,
+        "relevance_score": 75
+      },
+      "weighted_score": 69,
+      "classification": "CAUTIONARY",
+      "markers": ["suspect"],
+      "rationale": "Data flow diagrams useful but need verification against actual system behavior",
+      "last_modified": "",
+      "commit_count": 0
+    },
+    {
+      "path": "docs/internals/hooks-and-automation.md",
+      "title": "Hooks and Automation",
+      "category": "explanation",
+      "scores": {
+        "informative_value": 85,
+        "prescriptive_risk": 20,
+        "confidence_score": 75,
+        "relevance_score": 80
+      },
+      "weighted_score": 77,
+      "classification": "SAFE",
+      "markers": [],
+      "rationale": "Hooks are well-tested via integration testing guide. Automation claims may need verification but hooks behavior documented.",
+      "last_modified": "",
+      "commit_count": 0,
+      "evidence": "Integration testing validates hook system"
+    },
+    {
+      "path": "docs/internals/integration-points.md",
+      "title": "Integration Points",
+      "category": "explanation",
+      "scores": {
+        "informative_value": 75,
+        "prescriptive_risk": 25,
+        "confidence_score": 55,
+        "relevance_score": 70
+      },
+      "weighted_score": 66,
+      "classification": "CAUTIONARY",
+      "markers": ["suspect"],
+      "rationale": "Integration points likely documented but sequential creation raises accuracy concerns",
+      "last_modified": "",
+      "commit_count": 0
+    },
+    {
+      "path": "docs/internals/memory-architecture.md",
+      "title": "Memory Architecture",
+      "category": "explanation",
+      "scores": {
+        "informative_value": 85,
+        "prescriptive_risk": 15,
+        "confidence_score": 75,
+        "relevance_score": 85
+      },
+      "weighted_score": 80,
+      "classification": "SAFE",
+      "markers": [],
+      "rationale": "Memory system tested and verified. Architecture likely accurate based on integration testing.",
+      "last_modified": "",
+      "commit_count": 0,
+      "evidence": "Memory operations verified in integration testing"
+    },
+    {
+      "path": "docs/internals/operational-architecture.md",
+      "title": "Operational Architecture: User-System Interaction Model",
+      "category": "explanation",
+      "scores": {
+        "informative_value": 75,
+        "prescriptive_risk": 30,
+        "confidence_score": 55,
+        "relevance_score": 70
+      },
+      "weighted_score": 65,
+      "classification": "CAUTIONARY",
+      "markers": ["suspect"],
+      "rationale": "User interaction model likely theoretical. Largest internals doc suggests comprehensive but unverified content.",
+      "last_modified": "",
+      "commit_count": 0
+    },
+    {
+      "path": "docs/internals/session-lifecycle.md",
+      "title": "Session Lifecycle",
+      "category": "explanation",
+      "scores": {
+        "informative_value": 85,
+        "prescriptive_risk": 20,
+        "confidence_score": 75,
+        "relevance_score": 90
+      },
+      "weighted_score": 80,
+      "classification": "SAFE",
+      "markers": [],
+      "rationale": "Session lifecycle observable and testable. Likely accurate based on actual session usage patterns.",
+      "last_modified": "",
+      "commit_count": 0
+    },
+    {
+      "path": "docs/internals/stock-vs-custom.md",
+      "title": "Stock vs Custom",
+      "category": "explanation",
+      "scores": {
+        "informative_value": 90,
+        "prescriptive_risk": 10,
+        "confidence_score": 85,
+        "relevance_score": 85
+      },
+      "weighted_score": 88,
+      "classification": "SAFE",
+      "markers": ["high_quality"],
+      "rationale": "Critical analysis, honest assessment, verifiable claims about stock vs custom components",
+      "last_modified": "",
+      "commit_count": 0
+    },
+    {
+      "path": "docs/reference/claude-flow-directory-management.md",
+      "title": "Stock Claude-Flow Protocol for `.claude-flow` Directories",
+      "category": "reference",
+      "scores": {
+        "informative_value": 70,
+        "prescriptive_risk": 25,
+        "confidence_score": 60,
+        "relevance_score": 50
+      },
+      "weighted_score": 61,
+      "classification": "CAUTIONARY",
+      "markers": ["suspect"],
+      "rationale": "Documents stock protocol but workspace uses custom session structure. Potential confusion.",
+      "last_modified": "",
+      "commit_count": 0,
+      "concerns": [
+        "Workspace doesn't use .claude-flow directories",
+        "May mislead users about actual structure"
+      ]
+    },
+    {
+      "path": "docs/reference/feature-reality-check.md",
+      "title": "Hive Mind: What Actually Works",
+      "category": "reference",
+      "scores": {
+        "informative_value": 95,
+        "prescriptive_risk": 5,
+        "confidence_score": 90,
+        "relevance_score": 100
+      },
+      "weighted_score": 95,
+      "classification": "SAFE",
+      "markers": ["high_quality"],
+      "rationale": "CRITICAL DOCUMENT - Honest assessment of what's real vs aspirational. Reality score 65/100 acknowledged. Transparent about gaps.",
+      "last_modified": "",
+      "commit_count": 0,
+      "note": "This document is gold - it corrects aspirational claims in other docs"
+    },
+    {
+      "path": "docs/reference/feature-verification-checklist.md",
+      "title": "Claude Flow Feature Verification Checklist",
+      "category": "reference",
+      "scores": {
+        "informative_value": 95,
+        "prescriptive_risk": 5,
+        "confidence_score": 100,
+        "relevance_score": 100
+      },
+      "weighted_score": 100,
+      "classification": "SAFE",
+      "markers": ["high_quality"],
+      "rationale": "Verified through testing, actionable checklist, accurate expectations",
+      "last_modified": "",
+      "commit_count": 0,
+      "evidence": "Linked to integration testing session"
+    },
+    {
+      "path": "docs/reference/hive-mind-quick-reference.md",
+      "title": "Hive-Mind Quick Reference",
+      "category": "reference",
+      "scores": {
+        "informative_value": 75,
+        "prescriptive_risk": 20,
+        "confidence_score": 60,
+        "relevance_score": 70
+      },
+      "weighted_score": 69,
+      "classification": "CAUTIONARY",
+      "markers": ["suspect"],
+      "rationale": "Quick reference useful but may include aspirational commands. Needs verification against actual CLI.",
+      "last_modified": "",
+      "commit_count": 0
+    },
+    {
+      "path": "docs/reference/hive-mind-reality-guide.md",
+      "title": "Hive Mind Reality Guide",
+      "category": "reference",
+      "scores": {
+        "informative_value": 95,
+        "prescriptive_risk": 5,
+        "confidence_score": 90,
+        "relevance_score": 100
+      },
+      "weighted_score": 95,
+      "classification": "SAFE",
+      "markers": ["high_quality"],
+      "rationale": "CRITICAL DOCUMENT - Based on actual testing, honest about limitations, reality score 65/100 documented",
+      "last_modified": "",
+      "commit_count": 0,
+      "note": "Companion to feature-reality-check.md - both are essential truth-tellers"
+    },
+    {
+      "path": "docs/reference/implementation-architecture.md",
+      "title": "Implementation Architecture: Session Management Complete Solution",
+      "category": "reference",
+      "scores": {
+        "informative_value": 80,
+        "prescriptive_risk": 25,
+        "confidence_score": 55,
+        "relevance_score": 75
+      },
+      "weighted_score": 69,
+      "classification": "CAUTIONARY",
+      "markers": ["suspect"],
+      "rationale": "Detailed implementation but unverified. May describe intended vs actual implementation.",
+      "last_modified": "",
+      "commit_count": 0
+    },
+    {
+      "path": "docs/reference/template-usage-guide.md",
+      "title": "Hive Mind Template Library - Usage Guide",
+      "category": "reference",
+      "scores": {
+        "informative_value": 65,
+        "prescriptive_risk": 40,
+        "confidence_score": 45,
+        "relevance_score": 60
+      },
+      "weighted_score": 55,
+      "classification": "CAUTIONARY",
+      "markers": ["suspect"],
+      "rationale": "Template library may not exist or match documented structure. High prescriptive risk if users follow non-existent patterns.",
+      "last_modified": "",
+      "commit_count": 0,
+      "concerns": [
+        "Template library existence not verified",
+        "Usage patterns may be aspirational"
+      ]
+    },
+    {
+      "path": "docs/troubleshooting/troubleshooting-guide.md",
+      "title": "Claude Flow Troubleshooting Guide",
+      "category": "how-to",
+      "scores": {
+        "informative_value": 85,
+        "prescriptive_risk": 20,
+        "confidence_score": 75,
+        "relevance_score": 90
+      },
+      "weighted_score": 82,
+      "classification": "SAFE",
+      "markers": [],
+      "rationale": "Troubleshooting based on real issues encountered. Connected to integration testing. Practical solutions.",
+      "last_modified": "",
+      "commit_count": 0,
+      "evidence": "References integration testing findings"
+    },
+    {
+      "path": "docs/tutorials/00-start-here.md",
+      "title": "Welcome to Your Claude-Flow Workspace",
+      "category": "tutorial",
+      "scores": {
+        "informative_value": 70,
+        "prescriptive_risk": 25,
+        "confidence_score": 55,
+        "relevance_score": 75
+      },
+      "weighted_score": 66,
+      "classification": "CAUTIONARY",
+      "markers": ["suspect"],
+      "rationale": "Good orientation but promises learning paths that may not be fully implemented. Time commitments not verified.",
+      "last_modified": "",
+      "commit_count": 0
+    },
+    {
+      "path": "docs/tutorials/01-foundations/README.md",
+      "title": "Foundations: Phase 1: Foundations",
+      "category": "tutorial",
+      "scores": {
+        "informative_value": 65,
+        "prescriptive_risk": 30,
+        "confidence_score": 50,
+        "relevance_score": 70
+      },
+      "weighted_score": 61,
+      "classification": "CAUTIONARY",
+      "markers": ["suspect"],
+      "rationale": "Foundation tutorials organized but content accuracy unknown. Sequential creation without testing.",
+      "last_modified": "",
+      "commit_count": 0
+    },
+    {
+      "path": "docs/tutorials/01-foundations/basic-memory-usage.md",
+      "title": "Basic Memory Usage",
+      "category": "tutorial",
+      "scores": {
+        "informative_value": 75,
+        "prescriptive_risk": 25,
+        "confidence_score": 70,
+        "relevance_score": 85
+      },
+      "weighted_score": 74,
+      "classification": "SAFE",
+      "markers": [],
+      "rationale": "Memory operations are tested features. Tutorial likely accurate for basic usage.",
+      "last_modified": "",
+      "commit_count": 0,
+      "evidence": "Memory system verified in integration testing"
+    },
+    {
+      "path": "docs/tutorials/01-foundations/first-session.md",
+      "title": "Your First Session",
+      "category": "tutorial",
+      "scores": {
+        "informative_value": 80,
+        "prescriptive_risk": 15,
+        "confidence_score": 75,
+        "relevance_score": 95
+      },
+      "weighted_score": 81,
+      "classification": "SAFE",
+      "markers": [],
+      "rationale": "Session creation is core verified behavior. Tutorial likely accurate and useful.",
+      "last_modified": "",
+      "commit_count": 0
+    },
+    {
+      "path": "docs/tutorials/01-foundations/what-is-claude-flow.md",
+      "title": "What is Claude-Flow?",
+      "category": "tutorial",
+      "scores": {
+        "informative_value": 75,
+        "prescriptive_risk": 20,
+        "confidence_score": 65,
+        "relevance_score": 85
+      },
+      "weighted_score": 73,
+      "classification": "SAFE",
+      "markers": [],
+      "rationale": "Introductory content, lower risk, provides context",
+      "last_modified": "",
+      "commit_count": 0
+    },
+    {
+      "path": "docs/tutorials/01-foundations/workspace-tour.md",
+      "title": "Workspace Tour",
+      "category": "tutorial",
+      "scores": {
+        "informative_value": 80,
+        "prescriptive_risk": 10,
+        "confidence_score": 75,
+        "relevance_score": 90
+      },
+      "weighted_score": 79,
+      "classification": "SAFE",
+      "markers": [],
+      "rationale": "Tour of observable workspace structure. Verifiable content.",
+      "last_modified": "",
+      "commit_count": 0
+    },
+    {
+      "path": "docs/tutorials/02-essential-skills/README.md",
+      "title": "Essential Skills: Phase 2: Essential Skills",
+      "category": "tutorial",
+      "scores": {
+        "informative_value": 65,
+        "prescriptive_risk": 30,
+        "confidence_score": 50,
+        "relevance_score": 70
+      },
+      "weighted_score": 61,
+      "classification": "CAUTIONARY",
+      "markers": ["suspect"],
+      "rationale": "Skills phase organized but tutorial quality unknown without testing",
+      "last_modified": "",
+      "commit_count": 0
+    },
+    {
+      "path": "docs/tutorials/02-essential-skills/memory-coordination.md",
+      "title": "Memory Coordination",
+      "category": "tutorial",
+      "scores": {
+        "informative_value": 75,
+        "prescriptive_risk": 25,
+        "confidence_score": 65,
+        "relevance_score": 80
+      },
+      "weighted_score": 71,
+      "classification": "SAFE",
+      "markers": [],
+      "rationale": "Memory coordination is verified feature. Tutorial builds on tested foundation.",
+      "last_modified": "",
+      "commit_count": 0
+    },
+    {
+      "path": "docs/tutorials/02-essential-skills/parallel-execution.md",
+      "title": "Parallel Execution",
+      "category": "tutorial",
+      "scores": {
+        "informative_value": 70,
+        "prescriptive_risk": 35,
+        "confidence_score": 55,
+        "relevance_score": 75
+      },
+      "weighted_score": 65,
+      "classification": "CAUTIONARY",
+      "markers": ["suspect"],
+      "rationale": "Parallel execution patterns may be aspirational. Performance claims need verification.",
+      "last_modified": "",
+      "commit_count": 0,
+      "concerns": [
+        "10-20x speedup claims unverified locally",
+        "Parallel agent spawning patterns may not match reality"
+      ]
+    },
+    {
+      "path": "docs/tutorials/02-essential-skills/session-management.md",
+      "title": "Session Management",
+      "category": "tutorial",
+      "scores": {
+        "informative_value": 85,
+        "prescriptive_risk": 15,
+        "confidence_score": 80,
+        "relevance_score": 95
+      },
+      "weighted_score": 84,
+      "classification": "SAFE",
+      "markers": [],
+      "rationale": "Session management is core verified behavior. Tutorial on established patterns.",
+      "last_modified": "",
+      "commit_count": 0
+    },
+    {
+      "path": "docs/tutorials/02-essential-skills/spawning-agents.md",
+      "title": "Spawning Agents",
+      "category": "tutorial",
+      "scores": {
+        "informative_value": 75,
+        "prescriptive_risk": 30,
+        "confidence_score": 60,
+        "relevance_score": 85
+      },
+      "weighted_score": 70,
+      "classification": "CAUTIONARY",
+      "markers": ["suspect"],
+      "rationale": "Agent spawning tutorial but patterns need verification against actual behavior",
+      "last_modified": "",
+      "commit_count": 0
+    },
+    {
+      "path": "docs/tutorials/03-intermediate/README.md",
+      "title": "Intermediate: Phase 3: Intermediate",
+      "category": "tutorial",
+      "scores": {
+        "informative_value": 60,
+        "prescriptive_risk": 35,
+        "confidence_score": 50,
+        "relevance_score": 65
+      },
+      "weighted_score": 58,
+      "classification": "CAUTIONARY",
+      "markers": ["suspect"],
+      "rationale": "Intermediate phase entering more complex territory with higher risk of aspirational content",
+      "last_modified": "",
+      "commit_count": 0
+    },
+    {
+      "path": "docs/tutorials/03-intermediate/consensus-mechanisms.md",
+      "title": "Consensus Mechanisms",
+      "category": "tutorial",
+      "scores": {
+        "informative_value": 65,
+        "prescriptive_risk": 45,
+        "confidence_score": 45,
+        "relevance_score": 60
+      },
+      "weighted_score": 54,
+      "classification": "CAUTIONARY",
+      "markers": ["suspect"],
+      "rationale": "Consensus mechanisms tutorial but actual implementation and behavior unverified",
+      "last_modified": "",
+      "commit_count": 0,
+      "concerns": [
+        "Byzantine consensus examples may be theoretical",
+        "Voting mechanisms need testing validation"
+      ]
+    },
+    {
+      "path": "docs/tutorials/03-intermediate/custom-workflows.md",
+      "title": "Custom Workflows",
+      "category": "tutorial",
+      "scores": {
+        "informative_value": 65,
+        "prescriptive_risk": 40,
+        "confidence_score": 50,
+        "relevance_score": 65
+      },
+      "weighted_score": 58,
+      "classification": "CAUTIONARY",
+      "markers": ["suspect"],
+      "rationale": "Custom workflow patterns may prescribe unverified approaches",
+      "last_modified": "",
+      "commit_count": 0
+    },
+    {
+      "path": "docs/tutorials/03-intermediate/queen-selection.md",
+      "title": "Queen Selection",
+      "category": "tutorial",
+      "scores": {
+        "informative_value": 70,
+        "prescriptive_risk": 40,
+        "confidence_score": 50,
+        "relevance_score": 65
+      },
+      "weighted_score": 61,
+      "classification": "CAUTIONARY",
+      "markers": ["suspect"],
+      "rationale": "Queen selection guidance may be based on design intent vs tested behavior",
+      "last_modified": "",
+      "commit_count": 0
+    },
+    {
+      "path": "docs/tutorials/03-intermediate/swarm-topologies.md",
+      "title": "Swarm Topologies",
+      "category": "tutorial",
+      "scores": {
+        "informative_value": 70,
+        "prescriptive_risk": 35,
+        "confidence_score": 55,
+        "relevance_score": 70
+      },
+      "weighted_score": 65,
+      "classification": "CAUTIONARY",
+      "markers": ["suspect"],
+      "rationale": "Topology concepts useful but actual behavior and performance characteristics unverified",
+      "last_modified": "",
+      "commit_count": 0
+    },
+    {
+      "path": "docs/tutorials/04-advanced/README.md",
+      "title": "Advanced: Phase 4: Advanced Mastery",
+      "category": "tutorial",
+      "scores": {
+        "informative_value": 60,
+        "prescriptive_risk": 45,
+        "confidence_score": 45,
+        "relevance_score": 60
+      },
+      "weighted_score": 55,
+      "classification": "CAUTIONARY",
+      "markers": ["suspect"],
+      "rationale": "Advanced phase with highest risk of aspirational content. 'Mastery' implies capabilities that may not exist.",
+      "last_modified": "",
+      "commit_count": 0
+    },
+    {
+      "path": "docs/tutorials/04-advanced/adaptive-topology.md",
+      "title": "Adaptive Topology",
+      "category": "tutorial",
+      "scores": {
+        "informative_value": 60,
+        "prescriptive_risk": 50,
+        "confidence_score": 40,
+        "relevance_score": 55
+      },
+      "weighted_score": 51,
+      "classification": "CAUTIONARY",
+      "markers": ["suspect"],
+      "rationale": "Adaptive topology may be theoretical feature. High prescriptive risk if users expect automation.",
+      "last_modified": "",
+      "commit_count": 0,
+      "concerns": [
+        "Auto-adaptation claims need verification",
+        "Dynamic topology switching unverified"
+      ]
+    },
+    {
+      "path": "docs/tutorials/04-advanced/byzantine-consensus.md",
+      "title": "Byzantine Consensus",
+      "category": "tutorial",
+      "scores": {
+        "informative_value": 65,
+        "prescriptive_risk": 45,
+        "confidence_score": 45,
+        "relevance_score": 55
+      },
+      "weighted_score": 55,
+      "classification": "CAUTIONARY",
+      "markers": ["suspect"],
+      "rationale": "Byzantine consensus tutorial but actual implementation and reliability unverified",
+      "last_modified": "",
+      "commit_count": 0
+    },
+    {
+      "path": "docs/tutorials/04-advanced/hive-mind-coordination.md",
+      "title": "Hive-Mind Coordination",
+      "category": "tutorial",
+      "scores": {
+        "informative_value": 65,
+        "prescriptive_risk": 45,
+        "confidence_score": 45,
+        "relevance_score": 60
+      },
+      "weighted_score": 56,
+      "classification": "CAUTIONARY",
+      "markers": ["suspect"],
+      "rationale": "Advanced coordination tutorial but reality guide shows 65% readiness. Tutorial may oversell capabilities.",
+      "last_modified": "",
+      "commit_count": 0,
+      "note": "See hive-mind-reality-guide.md for actual capabilities"
+    },
+    {
+      "path": "docs/tutorials/04-advanced/reasoning-bank.md",
+      "title": "ReasoningBank Learning",
+      "category": "tutorial",
+      "scores": {
+        "informative_value": 60,
+        "prescriptive_risk": 50,
+        "confidence_score": 40,
+        "relevance_score": 50
+      },
+      "weighted_score": 50,
+      "classification": "EXCLUDE",
+      "markers": ["suspect", "outdated"],
+      "rationale": "ReasoningBank infrastructure exists but has 0 trajectories. Tutorial teaches feature that isn't active. High risk.",
+      "last_modified": "",
+      "commit_count": 0,
+      "concerns": [
+        "Feature exists but unused (0 episodes)",
+        "Tutorial promises learning that hasn't been validated",
+        "Users may expect functionality that doesn't work"
+      ],
+      "recommendation": "MARK AS EXPERIMENTAL or REMOVE until feature is validated"
+    },
+    {
+      "path": "docs/tutorials/README.md",
+      "title": "Tutorials",
+      "category": "tutorial",
+      "scores": {
+        "informative_value": 70,
+        "prescriptive_risk": 20,
+        "confidence_score": 65,
+        "relevance_score": 75
+      },
+      "weighted_score": 68,
+      "classification": "SAFE",
+      "markers": [],
+      "rationale": "Navigation and overview. Honest about tutorial status and alternatives.",
+      "last_modified": "",
+      "commit_count": 0
+    },
+    {
+      "path": "docs/tutorials/progress-tracker.md",
+      "title": "Learning Progress Tracker",
+      "category": "tutorial",
+      "scores": {
+        "informative_value": 65,
+        "prescriptive_risk": 25,
+        "confidence_score": 55,
+        "relevance_score": 60
+      },
+      "weighted_score": 61,
+      "classification": "CAUTIONARY",
+      "markers": ["suspect"],
+      "rationale": "Progress tracker for tutorial sequence but tutorial quality unverified",
+      "last_modified": "",
+      "commit_count": 0
+    }
+  ],
+  "summary_statistics": {
+    "total_files": 53,
+    "by_classification": {
+      "SAFE": 18,
+      "CAUTIONARY": 34,
+      "EXCLUDE": 1,
+      "READ-ONLY": 0
+    },
+    "by_marker": {
+      "high_quality": 9,
+      "suspect": 30,
+      "outdated": 3,
+      "external_agent": 0
+    },
+    "by_category": {
+      "tutorial": {
+        "total": 23,
+        "SAFE": 6,
+        "CAUTIONARY": 16,
+        "EXCLUDE": 1,
+        "average_weighted_score": 64
+      },
+      "how-to": {
+        "total": 5,
+        "SAFE": 2,
+        "CAUTIONARY": 3,
+        "EXCLUDE": 0,
+        "average_weighted_score": 73
+      },
+      "explanation": {
+        "total": 15,
+        "SAFE": 7,
+        "CAUTIONARY": 8,
+        "EXCLUDE": 0,
+        "average_weighted_score": 77
+      },
+      "reference": {
+        "total": 9,
+        "SAFE": 3,
+        "CAUTIONARY": 6,
+        "EXCLUDE": 0,
+        "average_weighted_score": 76
+      },
+      "unknown": {
+        "total": 1,
+        "SAFE": 0,
+        "CAUTIONARY": 1,
+        "EXCLUDE": 0,
+        "average_weighted_score": 43
+      }
+    },
+    "score_distribution": {
+      "90-100": 4,
+      "80-89": 8,
+      "70-79": 11,
+      "60-69": 16,
+      "50-59": 13,
+      "below_50": 1
+    },
+    "average_scores": {
+      "informative_value": 73.5,
+      "prescriptive_risk": 26.3,
+      "confidence_score": 61.4,
+      "relevance_score": 75.1,
+      "weighted_average": 69.1
+    }
+  },
+  "key_findings": {
+    "highest_quality": [
+      "docs/how-to/integration-testing-guide.md (100)",
+      "docs/reference/feature-verification-checklist.md (100)",
+      "docs/reference/hive-mind-reality-guide.md (95)",
+      "docs/reference/feature-reality-check.md (95)",
+      "docs/explanation/workspace-architecture.md (94)"
+    ],
+    "most_concerning": [
+      "docs/tutorials/04-advanced/reasoning-bank.md (50) - EXCLUDE",
+      "docs/guides-legacy-readme.md (43) - Legacy outdated",
+      "docs/tutorials/04-advanced/adaptive-topology.md (51)",
+      "docs/reference/template-usage-guide.md (55)",
+      "docs/how-to/zero-risk-execution-pattern.md (55)"
+    ],
+    "truth_tellers": [
+      "docs/reference/hive-mind-reality-guide.md",
+      "docs/reference/feature-reality-check.md",
+      "docs/explanation/workspace-architecture.md"
+    ],
+    "tutorial_quality": {
+      "foundations": "Generally SAFE (70-80% scores) - Basic verified features",
+      "essential_skills": "Mixed SAFE/CAUTIONARY (65-85% scores) - Some unverified patterns",
+      "intermediate": "Mostly CAUTIONARY (54-65% scores) - Advanced features less verified",
+      "advanced": "HIGH RISK (40-56% scores) - Aspirational content, unverified claims"
+    }
+  },
+  "recommendations": {
+    "immediate_actions": [
+      {
+        "priority": "HIGH",
+        "action": "Mark reasoning-bank.md as EXPERIMENTAL or archive",
+        "rationale": "Feature has 0 episodes, tutorial misleads users"
+      },
+      {
+        "priority": "HIGH",
+        "action": "Archive guides-legacy-readme.md",
+        "rationale": "Superseded by current structure, marked legacy"
+      },
+      {
+        "priority": "MEDIUM",
+        "action": "Add 'UNVERIFIED' warnings to all CAUTIONARY tutorials",
+        "rationale": "30+ docs created sequentially without testing"
+      },
+      {
+        "priority": "MEDIUM",
+        "action": "Promote truth-teller docs (reality-guide, feature-reality-check)",
+        "rationale": "These correct aspirational claims in other docs"
+      },
+      {
+        "priority": "LOW",
+        "action": "Verify advanced tutorial claims through actual usage",
+        "rationale": "Byzantine consensus, adaptive topology need validation"
+      }
+    ],
+    "refactoring_strategy": {
+      "keep_as_is": "18 SAFE docs - verified or low-risk informational",
+      "add_warnings": "34 CAUTIONARY docs - useful but unverified",
+      "archive_or_mark_experimental": "1 EXCLUDE doc - misleading or inactive features",
+      "prioritize_updates": [
+        "Advanced tutorials (Phase 4) - highest aspiration vs reality gap",
+        "Hive-mind coordination docs - verify against actual behavior",
+        "Template and workflow docs - confirm patterns exist and work"
+      ]
+    },
+    "documentation_gaps": {
+      "missing_validation": "Advanced features lack testing evidence",
+      "aspirational_vs_reality": "Reality guides exist but aren't prominent enough",
+      "user_confusion_risk": "Tutorial progression promises features that may not work as described"
+    }
+  },
+  "methodology_notes": {
+    "confidence_capping": "All sequentially-created docs capped at 55 confidence due to lack of agent coordination and testing verification",
+    "evidence_based_scoring": "Docs linked to testing sessions (integration-testing-guide) scored higher",
+    "reality_check_bonus": "Docs that acknowledge limitations (reality guides) scored higher for honesty",
+    "prescriptive_risk_calculation": "Higher risk for docs that prescribe specific workflows vs explain concepts",
+    "tutorial_penalty": "Advanced tutorials scored lower due to higher likelihood of aspirational content"
+  }
+}

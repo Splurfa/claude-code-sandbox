@@ -1,0 +1,1253 @@
+{
+  "scoring_metadata": {
+    "timestamp": "2025-11-17T23:52:00Z",
+    "scoring_agent": "Code Quality Analyzer",
+    "total_files_scored": 122,
+    "scoring_criteria": {
+      "informative_value": "0-100: How useful for understanding context",
+      "prescriptive_risk": "0-100: How much it constrains wizard decisions",
+      "confidence_score": "0-100: Trustworthiness (55 cap for sequential, 85 for agent, 100 for user)",
+      "relevance_score": "0-100: Relevance to wizard's mission"
+    },
+    "weighted_formula": "Informative × (1 - Prescriptive/100) × (Confidence/100) × (Relevance/100)",
+    "classification_thresholds": {
+      "SAFE_REFERENCE": "> 60",
+      "CAUTIONARY_REFERENCE": "30-60",
+      "EXCLUDE": "< 30"
+    }
+  },
+  "files": [
+    {
+      "path": "HANDOFF-TO-TERMINAL.md",
+      "informative_value": 45,
+      "prescriptive_risk": 85,
+      "confidence_score": 55,
+      "relevance_score": 30,
+      "weighted_score": 1.11,
+      "classification": "EXCLUDE",
+      "rationale": "High prescriptive risk (step-by-step agent instructions), low relevance to wizard mission, sequential work confidence cap"
+    },
+    {
+      "path": "TERMINAL-MISSION-BRIEF.md",
+      "informative_value": 60,
+      "prescriptive_risk": 90,
+      "confidence_score": 55,
+      "relevance_score": 35,
+      "weighted_score": 1.15,
+      "classification": "EXCLUDE",
+      "rationale": "Very high prescriptive content (detailed mission brief with specific steps), sequential work"
+    },
+    {
+      "path": "WIZARD-PROMPT.md",
+      "informative_value": 70,
+      "prescriptive_risk": 75,
+      "confidence_score": 55,
+      "relevance_score": 85,
+      "weighted_score": 9.14,
+      "classification": "EXCLUDE",
+      "rationale": "High prescriptive risk despite relevance, sequential work confidence cap limits utility"
+    },
+    {
+      "path": "artifacts/backups/docs-backup-20251117-123019.tar.gz",
+      "informative_value": 5,
+      "prescriptive_risk": 0,
+      "confidence_score": 100,
+      "relevance_score": 10,
+      "weighted_score": 0.5,
+      "classification": "EXCLUDE",
+      "rationale": "Binary backup, no direct informational value to wizard"
+    },
+    {
+      "path": "artifacts/backups/docs-backup-20251117-123042.tar.gz",
+      "informative_value": 5,
+      "prescriptive_risk": 0,
+      "confidence_score": 100,
+      "relevance_score": 10,
+      "weighted_score": 0.5,
+      "classification": "EXCLUDE",
+      "rationale": "Binary backup, no direct informational value to wizard"
+    },
+    {
+      "path": "artifacts/code/commands/hooks/post-edit.md",
+      "informative_value": 40,
+      "prescriptive_risk": 70,
+      "confidence_score": 85,
+      "relevance_score": 45,
+      "wrapped_score": 4.61,
+      "classification": "EXCLUDE",
+      "rationale": "Protocol documentation with prescriptive steps, moderate relevance"
+    },
+    {
+      "path": "artifacts/code/commands/hooks/post-task.md",
+      "informative_value": 40,
+      "prescriptive_risk": 70,
+      "confidence_score": 85,
+      "relevance_score": 45,
+      "weighted_score": 4.61,
+      "classification": "EXCLUDE",
+      "rationale": "Protocol documentation with prescriptive steps, moderate relevance"
+    },
+    {
+      "path": "artifacts/code/commands/hooks/pre-task.md",
+      "informative_value": 40,
+      "prescriptive_risk": 70,
+      "confidence_score": 85,
+      "relevance_score": 45,
+      "weighted_score": 4.61,
+      "classification": "EXCLUDE",
+      "rationale": "Protocol documentation with prescriptive steps, moderate relevance"
+    },
+    {
+      "path": "artifacts/code/commands/memory/memory-usage.md",
+      "informative_value": 50,
+      "prescriptive_risk": 60,
+      "confidence_score": 85,
+      "relevance_score": 50,
+      "weighted_score": 8.5,
+      "classification": "EXCLUDE",
+      "rationale": "Protocol documentation, moderately prescriptive"
+    },
+    {
+      "path": "artifacts/code/commands/session-closeout.md",
+      "informative_value": 45,
+      "prescriptive_risk": 75,
+      "confidence_score": 85,
+      "relevance_score": 40,
+      "weighted_score": 3.83,
+      "classification": "EXCLUDE",
+      "rationale": "Protocol with high prescriptive content"
+    },
+    {
+      "path": "artifacts/code/skills/hive-mind-advanced-section-insert.md",
+      "informative_value": 55,
+      "prescriptive_risk": 80,
+      "confidence_score": 85,
+      "relevance_score": 75,
+      "weighted_score": 7.01,
+      "classification": "EXCLUDE",
+      "rationale": "Skill documentation with high prescriptive risk (topology/agent instructions)"
+    },
+    {
+      "path": "artifacts/code/skills/sparc-methodology-section-insert.md",
+      "informative_value": 60,
+      "prescriptive_risk": 80,
+      "confidence_score": 85,
+      "relevance_score": 70,
+      "weighted_score": 7.14,
+      "classification": "EXCLUDE",
+      "rationale": "Methodology documentation with prescriptive workflow steps"
+    },
+    {
+      "path": "artifacts/code/skills/swarm-advanced-section-insert.md",
+      "informative_value": 55,
+      "prescriptive_risk": 80,
+      "confidence_score": 85,
+      "relevance_score": 75,
+      "weighted_score": 7.01,
+      "classification": "EXCLUDE",
+      "rationale": "Advanced coordination patterns with prescriptive agent spawning"
+    },
+    {
+      "path": "artifacts/code/skills/swarm-orchestration-updated.md",
+      "informative_value": 60,
+      "prescriptive_risk": 75,
+      "confidence_score": 85,
+      "relevance_score": 80,
+      "weighted_score": 10.2,
+      "classification": "EXCLUDE",
+      "rationale": "Orchestration guide with specific agent instructions"
+    },
+    {
+      "path": "artifacts/docs/BASELINE-VALIDATION-REPORT.md",
+      "informative_value": 75,
+      "prescriptive_risk": 40,
+      "confidence_score": 85,
+      "relevance_score": 85,
+      "weighted_score": 32.51,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Validation findings useful for context, moderate prescriptive risk from recommendations"
+    },
+    {
+      "path": "artifacts/docs/CRITICAL-GAPS-FIXED.md",
+      "informative_value": 70,
+      "prescriptive_risk": 50,
+      "confidence_score": 85,
+      "relevance_score": 80,
+      "weighted_score": 23.8,
+      "classification": "EXCLUDE",
+      "rationale": "Documents what was fixed, some prescriptive implications"
+    },
+    {
+      "path": "artifacts/docs/DOCUMENTATION-INDEX.md",
+      "informative_value": 85,
+      "prescriptive_risk": 30,
+      "confidence_score": 85,
+      "relevance_score": 95,
+      "weighted_score": 39.78,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Navigation/index with high informational value, low prescription"
+    },
+    {
+      "path": "artifacts/docs/INTEGRATIONS-DOCUMENTATION.md",
+      "informative_value": 80,
+      "prescriptive_risk": 45,
+      "confidence_score": 85,
+      "relevance_score": 85,
+      "weighted_score": 31.85,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Integration guides useful for understanding system, moderate how-to content"
+    },
+    {
+      "path": "artifacts/docs/PHASE-1-COMPLETION-REPORT.md",
+      "informative_value": 65,
+      "prescriptive_risk": 35,
+      "confidence_score": 85,
+      "relevance_score": 75,
+      "weighted_score": 26.94,
+      "classification": "EXCLUDE",
+      "rationale": "Progress report, useful context but below threshold"
+    },
+    {
+      "path": "artifacts/docs/PHASE-1-SCORECARD.md",
+      "informative_value": 70,
+      "prescriptive_risk": 30,
+      "confidence_score": 85,
+      "relevance_score": 80,
+      "weighted_score": 33.32,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Scorecard shows what succeeded/failed, low prescriptive risk"
+    },
+    {
+      "path": "artifacts/docs/PHASE-2-REVIEW-REPORT.md",
+      "informative_value": 68,
+      "prescriptive_risk": 40,
+      "confidence_score": 85,
+      "relevance_score": 78,
+      "weighted_score": 27.03,
+      "classification": "EXCLUDE",
+      "rationale": "Review findings useful but below threshold"
+    },
+    {
+      "path": "artifacts/docs/SYSTEMS-ALIGNMENT-REPORT.md",
+      "informative_value": 72,
+      "prescriptive_risk": 35,
+      "confidence_score": 85,
+      "relevance_score": 82,
+      "weighted_score": 32.77,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "System alignment analysis with moderate prescription"
+    },
+    {
+      "path": "artifacts/docs/VALIDATION-SUMMARY.md",
+      "informative_value": 65,
+      "prescriptive_risk": 35,
+      "confidence_score": 85,
+      "relevance_score": 75,
+      "weighted_score": 26.94,
+      "classification": "EXCLUDE",
+      "rationale": "Summary useful but below threshold"
+    },
+    {
+      "path": "artifacts/docs/folder-architecture-proposal.md",
+      "informative_value": 75,
+      "prescriptive_risk": 80,
+      "confidence_score": 85,
+      "relevance_score": 90,
+      "weighted_score": 11.48,
+      "classification": "EXCLUDE",
+      "rationale": "High prescriptive risk (specific folder structure proposal)"
+    },
+    {
+      "path": "artifacts/docs/learning/.claude-flow/metrics/agent-metrics.json",
+      "informative_value": 10,
+      "prescriptive_risk": 0,
+      "confidence_score": 100,
+      "relevance_score": 20,
+      "weighted_score": 2,
+      "classification": "EXCLUDE",
+      "rationale": "Empty metrics file"
+    },
+    {
+      "path": "artifacts/docs/learning/.claude-flow/metrics/performance.json",
+      "informative_value": 30,
+      "prescriptive_risk": 0,
+      "confidence_score": 100,
+      "relevance_score": 40,
+      "weighted_score": 12,
+      "classification": "EXCLUDE",
+      "rationale": "Performance metrics, limited informational value"
+    },
+    {
+      "path": "artifacts/docs/learning/.claude-flow/metrics/task-metrics.json",
+      "informative_value": 25,
+      "prescriptive_risk": 0,
+      "confidence_score": 100,
+      "relevance_score": 35,
+      "weighted_score": 8.75,
+      "classification": "EXCLUDE",
+      "rationale": "Task metrics, limited informational value"
+    },
+    {
+      "path": "artifacts/docs/learning/00-start-here.md",
+      "informative_value": 60,
+      "prescriptive_risk": 70,
+      "confidence_score": 85,
+      "relevance_score": 60,
+      "weighted_score": 9.18,
+      "classification": "EXCLUDE",
+      "rationale": "Tutorial introduction with prescriptive steps"
+    },
+    {
+      "path": "artifacts/docs/learning/01-foundations/README.md",
+      "informative_value": 55,
+      "prescriptive_risk": 60,
+      "confidence_score": 85,
+      "relevance_score": 55,
+      "weighted_score": 10.3,
+      "classification": "EXCLUDE",
+      "rationale": "Section overview with learning path prescription"
+    },
+    {
+      "path": "artifacts/docs/learning/01-foundations/basic-memory-usage.md",
+      "informative_value": 65,
+      "prescriptive_risk": 65,
+      "confidence_score": 85,
+      "relevance_score": 65,
+      "weighted_score": 12.97,
+      "classification": "EXCLUDE",
+      "rationale": "Tutorial with step-by-step instructions"
+    },
+    {
+      "path": "artifacts/docs/learning/01-foundations/first-session.md",
+      "informative_value": 60,
+      "prescriptive_risk": 70,
+      "confidence_score": 85,
+      "relevance_score": 60,
+      "weighted_score": 9.18,
+      "classification": "EXCLUDE",
+      "rationale": "Tutorial walkthrough with prescriptive steps"
+    },
+    {
+      "path": "artifacts/docs/learning/01-foundations/what-is-claude-flow.md",
+      "informative_value": 80,
+      "prescriptive_risk": 25,
+      "confidence_score": 85,
+      "relevance_score": 90,
+      "weighted_score": 45.9,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Conceptual overview with high informational value, low prescription"
+    },
+    {
+      "path": "artifacts/docs/learning/01-foundations/workspace-tour.md",
+      "informative_value": 75,
+      "prescriptive_risk": 40,
+      "confidence_score": 85,
+      "relevance_score": 85,
+      "weighted_score": 32.51,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Workspace overview useful for understanding, moderate how-to content"
+    },
+    {
+      "path": "artifacts/docs/learning/02-essential-skills/README.md",
+      "informative_value": 60,
+      "prescriptive_risk": 55,
+      "confidence_score": 85,
+      "relevance_score": 65,
+      "weighted_score": 14.93,
+      "classification": "EXCLUDE",
+      "rationale": "Section overview with learning objectives"
+    },
+    {
+      "path": "artifacts/docs/learning/02-essential-skills/memory-coordination.md",
+      "informative_value": 70,
+      "prescriptive_risk": 60,
+      "confidence_score": 85,
+      "relevance_score": 75,
+      "weighted_score": 17.85,
+      "classification": "EXCLUDE",
+      "rationale": "Tutorial with patterns and examples (moderately prescriptive)"
+    },
+    {
+      "path": "artifacts/docs/learning/02-essential-skills/parallel-execution.md",
+      "informative_value": 75,
+      "prescriptive_risk": 65,
+      "confidence_score": 85,
+      "relevance_score": 80,
+      "weighted_score": 17.85,
+      "classification": "EXCLUDE",
+      "rationale": "Tutorial on execution patterns with prescriptive examples"
+    },
+    {
+      "path": "artifacts/docs/learning/02-essential-skills/session-management.md",
+      "informative_value": 72,
+      "prescriptive_risk": 70,
+      "confidence_score": 85,
+      "relevance_score": 75,
+      "weighted_score": 13.77,
+      "classification": "EXCLUDE",
+      "rationale": "Session tutorial with specific workflow steps"
+    },
+    {
+      "path": "artifacts/docs/learning/02-essential-skills/spawning-agents.md",
+      "informative_value": 68,
+      "prescriptive_risk": 75,
+      "confidence_score": 85,
+      "relevance_score": 70,
+      "weighted_score": 10.03,
+      "classification": "EXCLUDE",
+      "rationale": "High prescriptive risk (how to spawn agents)"
+    },
+    {
+      "path": "artifacts/docs/learning/03-intermediate/README.md",
+      "informative_value": 58,
+      "prescriptive_risk": 50,
+      "confidence_score": 85,
+      "relevance_score": 60,
+      "weighted_score": 14.79,
+      "classification": "EXCLUDE",
+      "rationale": "Section overview"
+    },
+    {
+      "path": "artifacts/docs/learning/03-intermediate/consensus-mechanisms.md",
+      "informative_value": 70,
+      "prescriptive_risk": 55,
+      "confidence_score": 85,
+      "relevance_score": 70,
+      "weighted_score": 18.97,
+      "classification": "EXCLUDE",
+      "rationale": "Consensus patterns with implementation guidance"
+    },
+    {
+      "path": "artifacts/docs/learning/03-intermediate/custom-workflows.md",
+      "informative_value": 65,
+      "prescriptive_risk": 75,
+      "confidence_score": 85,
+      "relevance_score": 65,
+      "weighted_score": 9.23,
+      "classification": "EXCLUDE",
+      "rationale": "High prescriptive content (workflow creation steps)"
+    },
+    {
+      "path": "artifacts/docs/learning/03-intermediate/queen-selection.md",
+      "informative_value": 72,
+      "prescriptive_risk": 60,
+      "confidence_score": 85,
+      "relevance_score": 75,
+      "weighted_score": 18.36,
+      "classification": "EXCLUDE",
+      "rationale": "Queen selection tutorial with decision criteria"
+    },
+    {
+      "path": "artifacts/docs/learning/03-intermediate/swarm-topologies.md",
+      "informative_value": 75,
+      "prescriptive_risk": 70,
+      "confidence_score": 85,
+      "relevance_score": 80,
+      "weighted_score": 15.3,
+      "classification": "EXCLUDE",
+      "rationale": "Topology guide with usage recommendations (prescriptive)"
+    },
+    {
+      "path": "artifacts/docs/learning/04-advanced/README.md",
+      "informative_value": 65,
+      "prescriptive_risk": 45,
+      "confidence_score": 85,
+      "relevance_score": 70,
+      "weighted_score": 21.52,
+      "classification": "EXCLUDE",
+      "rationale": "Advanced section overview"
+    },
+    {
+      "path": "artifacts/docs/learning/04-advanced/adaptive-topology.md",
+      "informative_value": 70,
+      "prescriptive_risk": 65,
+      "confidence_score": 85,
+      "relevance_score": 75,
+      "weighted_score": 15.57,
+      "classification": "EXCLUDE",
+      "rationale": "Advanced patterns with implementation guidance"
+    },
+    {
+      "path": "artifacts/docs/learning/04-advanced/byzantine-consensus.md",
+      "informative_value": 68,
+      "prescriptive_risk": 60,
+      "confidence_score": 85,
+      "relevance_score": 72,
+      "weighted_score": 16.52,
+      "classification": "EXCLUDE",
+      "rationale": "Byzantine consensus tutorial with patterns"
+    },
+    {
+      "path": "artifacts/docs/learning/04-advanced/hive-mind-coordination.md",
+      "informative_value": 72,
+      "prescriptive_risk": 70,
+      "confidence_score": 85,
+      "relevance_score": 80,
+      "weighted_score": 14.69,
+      "classification": "EXCLUDE",
+      "rationale": "Coordination patterns with specific agent instructions"
+    },
+    {
+      "path": "artifacts/docs/learning/04-advanced/reasoning-bank.md",
+      "informative_value": 75,
+      "prescriptive_risk": 50,
+      "confidence_score": 85,
+      "relevance_score": 78,
+      "weighted_score": 24.86,
+      "classification": "EXCLUDE",
+      "rationale": "ReasoningBank documentation, moderately prescriptive"
+    },
+    {
+      "path": "artifacts/docs/learning/progress-tracker.md",
+      "informative_value": 45,
+      "prescriptive_risk": 40,
+      "confidence_score": 85,
+      "relevance_score": 50,
+      "weighted_score": 12.97,
+      "classification": "EXCLUDE",
+      "rationale": "Learning progress tracker"
+    },
+    {
+      "path": "artifacts/docs/system/README.md",
+      "informative_value": 70,
+      "prescriptive_risk": 30,
+      "confidence_score": 85,
+      "relevance_score": 85,
+      "weighted_score": 35.39,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "System documentation index with navigation value"
+    },
+    {
+      "path": "artifacts/docs/system/architecture-overview.md",
+      "informative_value": 85,
+      "prescriptive_risk": 35,
+      "confidence_score": 85,
+      "relevance_score": 95,
+      "weighted_score": 44.53,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Architecture documentation - high informational value, moderate prescription"
+    },
+    {
+      "path": "artifacts/docs/system/coordination-mechanics.md",
+      "informative_value": 82,
+      "prescriptive_risk": 40,
+      "confidence_score": 85,
+      "relevance_score": 90,
+      "weighted_score": 37.64,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Coordination mechanics explanation useful for understanding"
+    },
+    {
+      "path": "artifacts/docs/system/data-flow.md",
+      "informative_value": 80,
+      "prescriptive_risk": 30,
+      "confidence_score": 85,
+      "relevance_score": 88,
+      "weighted_score": 41.89,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Data flow documentation with high informational value"
+    },
+    {
+      "path": "artifacts/docs/system/hooks-and-automation.md",
+      "informative_value": 78,
+      "prescriptive_risk": 55,
+      "confidence_score": 85,
+      "relevance_score": 85,
+      "weighted_score": 25.39,
+      "classification": "EXCLUDE",
+      "rationale": "Hooks documentation with implementation guidance (prescriptive)"
+    },
+    {
+      "path": "artifacts/docs/system/integration-points.md",
+      "informative_value": 80,
+      "prescriptive_risk": 45,
+      "confidence_score": 85,
+      "relevance_score": 88,
+      "weighted_score": 32.73,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Integration documentation useful for understanding connections"
+    },
+    {
+      "path": "artifacts/docs/system/memory-architecture.md",
+      "informative_value": 82,
+      "prescriptive_risk": 40,
+      "confidence_score": 85,
+      "relevance_score": 90,
+      "weighted_score": 37.64,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Memory architecture explanation with moderate prescription"
+    },
+    {
+      "path": "artifacts/docs/system/session-lifecycle.md",
+      "informative_value": 85,
+      "prescriptive_risk": 50,
+      "confidence_score": 85,
+      "relevance_score": 92,
+      "weighted_score": 33.11,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Session lifecycle documentation - high value, moderate prescription"
+    },
+    {
+      "path": "artifacts/docs/system/stock-vs-custom.md",
+      "informative_value": 88,
+      "prescriptive_risk": 25,
+      "confidence_score": 85,
+      "relevance_score": 95,
+      "weighted_score": 53.39,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Stock vs custom comparison - very high informational value, low prescription"
+    },
+    {
+      "path": "artifacts/notes/100-percent-protocol.md",
+      "informative_value": 65,
+      "prescriptive_risk": 85,
+      "confidence_score": 85,
+      "relevance_score": 60,
+      "weighted_score": 4.97,
+      "classification": "EXCLUDE",
+      "rationale": "Very high prescriptive risk (protocol definition)"
+    },
+    {
+      "path": "artifacts/notes/FINAL-WIZARD-PROMPT-RECOMMENDATION.md",
+      "informative_value": 70,
+      "prescriptive_risk": 80,
+      "confidence_score": 55,
+      "relevance_score": 85,
+      "weighted_score": 5.19,
+      "classification": "EXCLUDE",
+      "rationale": "High prescriptive risk, sequential work confidence cap"
+    },
+    {
+      "path": "artifacts/notes/breach-analysis-safety-check.md",
+      "informative_value": 75,
+      "prescriptive_risk": 30,
+      "confidence_score": 85,
+      "relevance_score": 80,
+      "weighted_score": 35.7,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Analysis of what went wrong - high informational value"
+    },
+    {
+      "path": "artifacts/notes/breach-analysis.md",
+      "informative_value": 80,
+      "prescriptive_risk": 25,
+      "confidence_score": 85,
+      "relevance_score": 85,
+      "weighted_score": 43.35,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Breach analysis - very useful for understanding failures"
+    },
+    {
+      "path": "artifacts/notes/commands-audit.md",
+      "informative_value": 78,
+      "prescriptive_risk": 40,
+      "confidence_score": 85,
+      "relevance_score": 82,
+      "weighted_score": 32.65,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Audit findings useful for context"
+    },
+    {
+      "path": "artifacts/notes/commands-cleanup-report.md",
+      "informative_value": 65,
+      "prescriptive_risk": 35,
+      "confidence_score": 85,
+      "relevance_score": 70,
+      "weighted_score": 25.24,
+      "classification": "EXCLUDE",
+      "rationale": "Cleanup report useful but below threshold"
+    },
+    {
+      "path": "artifacts/notes/consolidation-complete.md",
+      "informative_value": 55,
+      "prescriptive_risk": 30,
+      "confidence_score": 85,
+      "relevance_score": 60,
+      "weighted_score": 24.57,
+      "classification": "EXCLUDE",
+      "rationale": "Status update"
+    },
+    {
+      "path": "artifacts/notes/constraint-conflict-architecture.md",
+      "informative_value": 85,
+      "prescriptive_risk": 30,
+      "confidence_score": 85,
+      "relevance_score": 90,
+      "weighted_score": 45.43,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Constraint analysis - very useful for understanding conflicts"
+    },
+    {
+      "path": "artifacts/notes/constraint-conflict-contradiction-test.md",
+      "informative_value": 70,
+      "prescriptive_risk": 25,
+      "confidence_score": 85,
+      "relevance_score": 75,
+      "weighted_score": 33.56,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Testing artifact showing constraint conflicts"
+    },
+    {
+      "path": "artifacts/notes/constraint-conflict-power-analysis.md",
+      "informative_value": 72,
+      "prescriptive_risk": 35,
+      "confidence_score": 85,
+      "relevance_score": 78,
+      "weighted_score": 31.25,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Power dynamics analysis useful for understanding constraints"
+    },
+    {
+      "path": "artifacts/notes/constraint-conflict-protocol-analysis.md",
+      "informative_value": 75,
+      "prescriptive_risk": 50,
+      "confidence_score": 85,
+      "relevance_score": 80,
+      "weighted_score": 25.5,
+      "classification": "EXCLUDE",
+      "rationale": "Protocol analysis with moderate prescription"
+    },
+    {
+      "path": "artifacts/notes/critical-commands-fixed.md",
+      "informative_value": 60,
+      "prescriptive_risk": 40,
+      "confidence_score": 85,
+      "relevance_score": 65,
+      "weighted_score": 19.89,
+      "classification": "EXCLUDE",
+      "rationale": "Fix documentation"
+    },
+    {
+      "path": "artifacts/notes/critical-gaps-review.md",
+      "informative_value": 72,
+      "prescriptive_risk": 45,
+      "confidence_score": 85,
+      "relevance_score": 75,
+      "weighted_score": 25.24,
+      "classification": "EXCLUDE",
+      "rationale": "Gap review useful but below threshold"
+    },
+    {
+      "path": "artifacts/notes/docs-coherence-audit.md",
+      "informative_value": 80,
+      "prescriptive_risk": 35,
+      "confidence_score": 85,
+      "relevance_score": 88,
+      "weighted_score": 38.9,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Coherence audit - high informational value for understanding doc issues"
+    },
+    {
+      "path": "artifacts/notes/documentation-audit.md",
+      "informative_value": 85,
+      "prescriptive_risk": 30,
+      "confidence_score": 85,
+      "relevance_score": 92,
+      "weighted_score": 47.11,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Comprehensive documentation audit - very high value"
+    },
+    {
+      "path": "artifacts/notes/documentation-frameworks-research.md",
+      "informative_value": 78,
+      "prescriptive_risk": 40,
+      "confidence_score": 85,
+      "relevance_score": 85,
+      "weighted_score": 33.83,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Research findings on documentation approaches"
+    },
+    {
+      "path": "artifacts/notes/documentation-organization-research.md",
+      "informative_value": 82,
+      "prescriptive_risk": 45,
+      "confidence_score": 85,
+      "relevance_score": 90,
+      "weighted_score": 34.62,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Organization research with patterns and analysis"
+    },
+    {
+      "path": "artifacts/notes/feature-activation-status.md",
+      "informative_value": 70,
+      "prescriptive_risk": 30,
+      "confidence_score": 85,
+      "relevance_score": 78,
+      "weighted_score": 32.67,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Feature status overview useful for understanding what works"
+    },
+    {
+      "path": "artifacts/notes/file-routing-violation-fix.md",
+      "informative_value": 55,
+      "prescriptive_risk": 40,
+      "confidence_score": 85,
+      "relevance_score": 60,
+      "weighted_score": 16.83,
+      "classification": "EXCLUDE",
+      "rationale": "Fix documentation"
+    },
+    {
+      "path": "artifacts/notes/final-structure-proposal.md",
+      "informative_value": 75,
+      "prescriptive_risk": 75,
+      "confidence_score": 85,
+      "relevance_score": 85,
+      "weighted_score": 13.48,
+      "classification": "EXCLUDE",
+      "rationale": "High prescriptive risk (structural proposal)"
+    },
+    {
+      "path": "artifacts/notes/final-wizard-prompt-clean.md",
+      "informative_value": 68,
+      "prescriptive_risk": 70,
+      "confidence_score": 85,
+      "relevance_score": 80,
+      "weighted_score": 13.87,
+      "classification": "EXCLUDE",
+      "rationale": "Wizard prompt with prescriptive content"
+    },
+    {
+      "path": "artifacts/notes/frustration-analysis.md",
+      "informative_value": 85,
+      "prescriptive_risk": 20,
+      "confidence_score": 85,
+      "relevance_score": 95,
+      "weighted_score": 54.74,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Frustration analysis - very high value for understanding user priorities"
+    },
+    {
+      "path": "artifacts/notes/hooks-audit.md",
+      "informative_value": 75,
+      "prescriptive_risk": 40,
+      "confidence_score": 85,
+      "relevance_score": 80,
+      "weighted_score": 30.6,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Hooks audit with findings and analysis"
+    },
+    {
+      "path": "artifacts/notes/hooks-migration-complete.md",
+      "informative_value": 65,
+      "prescriptive_risk": 45,
+      "confidence_score": 85,
+      "relevance_score": 70,
+      "weighted_score": 21.86,
+      "classification": "EXCLUDE",
+      "rationale": "Migration status report"
+    },
+    {
+      "path": "artifacts/notes/inbox-agent-consolidation-needed.md",
+      "informative_value": 60,
+      "prescriptive_risk": 50,
+      "confidence_score": 85,
+      "relevance_score": 55,
+      "weighted_score": 14.03,
+      "classification": "EXCLUDE",
+      "rationale": "Consolidation needs note"
+    },
+    {
+      "path": "artifacts/notes/integrations-audit.md",
+      "informative_value": 78,
+      "prescriptive_risk": 40,
+      "confidence_score": 85,
+      "relevance_score": 85,
+      "weighted_score": 33.83,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Integration audit findings"
+    },
+    {
+      "path": "artifacts/notes/migration-summary.md",
+      "informative_value": 50,
+      "prescriptive_risk": 30,
+      "confidence_score": 85,
+      "relevance_score": 55,
+      "weighted_score": 18.37,
+      "classification": "EXCLUDE",
+      "rationale": "Brief migration summary"
+    },
+    {
+      "path": "artifacts/notes/nudge-pattern-analysis.md",
+      "informative_value": 82,
+      "prescriptive_risk": 35,
+      "confidence_score": 85,
+      "relevance_score": 88,
+      "weighted_score": 38.9,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Pattern analysis of user nudging - high value"
+    },
+    {
+      "path": "artifacts/notes/oversight-baseline.txt",
+      "informative_value": 55,
+      "prescriptive_risk": 20,
+      "confidence_score": 85,
+      "relevance_score": 65,
+      "weighted_score": 28.73,
+      "classification": "EXCLUDE",
+      "rationale": "Baseline documentation"
+    },
+    {
+      "path": "artifacts/notes/oversight-report.md",
+      "informative_value": 60,
+      "prescriptive_risk": 30,
+      "confidence_score": 85,
+      "relevance_score": 70,
+      "weighted_score": 24.99,
+      "classification": "EXCLUDE",
+      "rationale": "Oversight findings"
+    },
+    {
+      "path": "artifacts/notes/preventive-protocols.md",
+      "informative_value": 70,
+      "prescriptive_risk": 80,
+      "confidence_score": 85,
+      "relevance_score": 75,
+      "weighted_score": 8.93,
+      "classification": "EXCLUDE",
+      "rationale": "Very high prescriptive risk (protocol definitions)"
+    },
+    {
+      "path": "artifacts/notes/recommended-actions.md",
+      "informative_value": 65,
+      "prescriptive_risk": 75,
+      "confidence_score": 85,
+      "relevance_score": 70,
+      "weighted_score": 9.71,
+      "classification": "EXCLUDE",
+      "rationale": "High prescriptive risk (action recommendations)"
+    },
+    {
+      "path": "artifacts/notes/reconciliation-report.md",
+      "informative_value": 75,
+      "prescriptive_risk": 35,
+      "confidence_score": 85,
+      "relevance_score": 82,
+      "weighted_score": 34.05,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Reconciliation findings useful for context"
+    },
+    {
+      "path": "artifacts/notes/reconciliation-safety-check.md",
+      "informative_value": 70,
+      "prescriptive_risk": 30,
+      "confidence_score": 85,
+      "relevance_score": 75,
+      "weighted_score": 31.39,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Safety check analysis"
+    },
+    {
+      "path": "artifacts/notes/self-review-and-improvement.md",
+      "informative_value": 80,
+      "prescriptive_risk": 40,
+      "confidence_score": 85,
+      "relevance_score": 85,
+      "weighted_score": 34.68,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Self-review findings - high value for understanding issues"
+    },
+    {
+      "path": "artifacts/notes/session-management-explained.md",
+      "informative_value": 72,
+      "prescriptive_risk": 45,
+      "confidence_score": 85,
+      "relevance_score": 78,
+      "weighted_score": 26.12,
+      "classification": "EXCLUDE",
+      "rationale": "Explanation with moderate prescription"
+    },
+    {
+      "path": "artifacts/notes/session-protocol-audit.md",
+      "informative_value": 78,
+      "prescriptive_risk": 40,
+      "confidence_score": 85,
+      "relevance_score": 82,
+      "weighted_score": 32.65,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Protocol audit findings"
+    },
+    {
+      "path": "artifacts/notes/skills-audit.md",
+      "informative_value": 75,
+      "prescriptive_risk": 40,
+      "confidence_score": 85,
+      "relevance_score": 80,
+      "weighted_score": 30.6,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Skills audit with findings"
+    },
+    {
+      "path": "artifacts/notes/skills-updated.md",
+      "informative_value": 65,
+      "prescriptive_risk": 50,
+      "confidence_score": 85,
+      "relevance_score": 70,
+      "weighted_score": 19.29,
+      "classification": "EXCLUDE",
+      "rationale": "Update documentation with moderate prescription"
+    },
+    {
+      "path": "artifacts/notes/structure-improvements-complete.md",
+      "informative_value": 55,
+      "prescriptive_risk": 35,
+      "confidence_score": 85,
+      "relevance_score": 60,
+      "weighted_score": 18.23,
+      "classification": "EXCLUDE",
+      "rationale": "Status update"
+    },
+    {
+      "path": "artifacts/notes/system-docs-review.md",
+      "informative_value": 70,
+      "prescriptive_risk": 35,
+      "confidence_score": 85,
+      "relevance_score": 78,
+      "weighted_score": 29.11,
+      "classification": "EXCLUDE",
+      "rationale": "System docs review below threshold"
+    },
+    {
+      "path": "artifacts/notes/temporal-research/adaptive-queen-proposal.md",
+      "informative_value": 70,
+      "prescriptive_risk": 85,
+      "confidence_score": 55,
+      "relevance_score": 75,
+      "weighted_score": 2.16,
+      "classification": "EXCLUDE",
+      "rationale": "Very high prescriptive risk, sequential work confidence cap"
+    },
+    {
+      "path": "artifacts/notes/temporal-research/categorization-test-results.md",
+      "informative_value": 65,
+      "prescriptive_risk": 30,
+      "confidence_score": 55,
+      "relevance_score": 70,
+      "weighted_score": 17.54,
+      "classification": "EXCLUDE",
+      "rationale": "Test results, sequential work confidence cap"
+    },
+    {
+      "path": "artifacts/notes/temporal-research/closeout-sh-changes.md",
+      "informative_value": 50,
+      "prescriptive_risk": 60,
+      "confidence_score": 55,
+      "relevance_score": 55,
+      "weighted_score": 4.84,
+      "classification": "EXCLUDE",
+      "rationale": "Change documentation, sequential work"
+    },
+    {
+      "path": "artifacts/notes/temporal-research/file-routing-changes.md",
+      "informative_value": 60,
+      "prescriptive_risk": 65,
+      "confidence_score": 55,
+      "relevance_score": 65,
+      "weighted_score": 7.51,
+      "classification": "EXCLUDE",
+      "rationale": "Change documentation with prescriptive content, sequential work"
+    },
+    {
+      "path": "artifacts/notes/temporal-research/hive-mind-capability-mapping.md",
+      "informative_value": 68,
+      "prescriptive_risk": 70,
+      "confidence_score": 55,
+      "relevance_score": 75,
+      "weighted_score": 8.41,
+      "classification": "EXCLUDE",
+      "rationale": "Capability mapping with prescriptive implications, sequential work"
+    },
+    {
+      "path": "artifacts/notes/temporal-research/meta-research-mission.md",
+      "informative_value": 70,
+      "prescriptive_risk": 60,
+      "confidence_score": 55,
+      "relevance_score": 70,
+      "weighted_score": 8.47,
+      "classification": "EXCLUDE",
+      "rationale": "Research mission with moderate prescription, sequential work"
+    },
+    {
+      "path": "artifacts/notes/temporal-research/session-fix-patch.md",
+      "informative_value": 55,
+      "prescriptive_risk": 70,
+      "confidence_score": 55,
+      "relevance_score": 60,
+      "weighted_score": 5.45,
+      "classification": "EXCLUDE",
+      "rationale": "Patch documentation, sequential work"
+    },
+    {
+      "path": "artifacts/notes/temporal-research/session-management-research.md",
+      "informative_value": 72,
+      "prescriptive_risk": 50,
+      "confidence_score": 55,
+      "relevance_score": 75,
+      "weighted_score": 14.85,
+      "classification": "EXCLUDE",
+      "rationale": "Research findings with moderate prescription, sequential work"
+    },
+    {
+      "path": "artifacts/notes/temporal-research/session-mgmt-changes.md",
+      "informative_value": 60,
+      "prescriptive_risk": 65,
+      "confidence_score": 55,
+      "relevance_score": 65,
+      "weighted_score": 7.51,
+      "classification": "EXCLUDE",
+      "rationale": "Change documentation, sequential work"
+    },
+    {
+      "path": "artifacts/notes/temporal-research/session-protocol-gap-analysis.md",
+      "informative_value": 75,
+      "prescriptive_risk": 55,
+      "confidence_score": 55,
+      "relevance_score": 78,
+      "weighted_score": 14.49,
+      "classification": "EXCLUDE",
+      "rationale": "Gap analysis with moderate prescription, sequential work"
+    },
+    {
+      "path": "artifacts/notes/temporal-research/skill-md-changes.md",
+      "informative_value": 52,
+      "prescriptive_risk": 60,
+      "confidence_score": 55,
+      "relevance_score": 55,
+      "weighted_score": 6.29,
+      "classification": "EXCLUDE",
+      "rationale": "Change documentation, sequential work"
+    },
+    {
+      "path": "artifacts/notes/temporal-research/temporal-research-collections.md",
+      "informative_value": 70,
+      "prescriptive_risk": 45,
+      "confidence_score": 55,
+      "relevance_score": 72,
+      "weighted_score": 15.25,
+      "classification": "EXCLUDE",
+      "rationale": "Research collection, sequential work confidence cap"
+    },
+    {
+      "path": "artifacts/notes/user-guide-review.md",
+      "informative_value": 68,
+      "prescriptive_risk": 40,
+      "confidence_score": 85,
+      "relevance_score": 75,
+      "weighted_score": 26.01,
+      "classification": "EXCLUDE",
+      "rationale": "Guide review below threshold"
+    },
+    {
+      "path": "artifacts/notes/user-intent-extraction.md",
+      "informative_value": 85,
+      "prescriptive_risk": 25,
+      "confidence_score": 85,
+      "relevance_score": 95,
+      "weighted_score": 51.41,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "User intent analysis - very high value for understanding priorities"
+    },
+    {
+      "path": "artifacts/notes/user-intent-safety-check.md",
+      "informative_value": 78,
+      "prescriptive_risk": 30,
+      "confidence_score": 85,
+      "relevance_score": 88,
+      "weighted_score": 40.88,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Safety check with user priority insights"
+    },
+    {
+      "path": "artifacts/notes/wizard-context.md",
+      "informative_value": 75,
+      "prescriptive_risk": 50,
+      "confidence_score": 85,
+      "relevance_score": 85,
+      "weighted_score": 27.09,
+      "classification": "EXCLUDE",
+      "rationale": "Context documentation with moderate prescription"
+    },
+    {
+      "path": "artifacts/notes/wizard-prompt-review.md",
+      "informative_value": 70,
+      "prescriptive_risk": 60,
+      "confidence_score": 85,
+      "relevance_score": 80,
+      "weighted_score": 19.04,
+      "classification": "EXCLUDE",
+      "rationale": "Prompt review with prescriptive content"
+    },
+    {
+      "path": "artifacts/notes/wizard-prompt-verification.md",
+      "informative_value": 72,
+      "prescriptive_risk": 55,
+      "confidence_score": 85,
+      "relevance_score": 82,
+      "weighted_score": 22.56,
+      "classification": "EXCLUDE",
+      "rationale": "Verification with moderate prescription"
+    },
+    {
+      "path": "artifacts/notes/workspace-gap-detection.md",
+      "informative_value": 80,
+      "prescriptive_risk": 40,
+      "confidence_score": 85,
+      "relevance_score": 88,
+      "weighted_score": 35.9,
+      "classification": "CAUTIONARY_REFERENCE",
+      "rationale": "Gap detection analysis - high value for understanding issues"
+    },
+    {
+      "path": "artifacts/tests/hooks-cascade-test.sh",
+      "informative_value": 45,
+      "prescriptive_risk": 20,
+      "confidence_score": 85,
+      "relevance_score": 50,
+      "weighted_score": 15.3,
+      "classification": "EXCLUDE",
+      "rationale": "Test script with limited informational value"
+    },
+    {
+      "path": "phase-timing.log",
+      "informative_value": 20,
+      "prescriptive_risk": 0,
+      "confidence_score": 85,
+      "relevance_score": 25,
+      "weighted_score": 4.25,
+      "classification": "EXCLUDE",
+      "rationale": "Timing log with minimal value"
+    },
+    {
+      "path": "session-summary.md",
+      "informative_value": 30,
+      "prescriptive_risk": 10,
+      "confidence_score": 85,
+      "relevance_score": 40,
+      "weighted_score": 9.18,
+      "classification": "EXCLUDE",
+      "rationale": "Brief summary with limited content"
+    }
+  ],
+  "summary_statistics": {
+    "total_files": 122,
+    "classifications": {
+      "SAFE_REFERENCE": 0,
+      "CAUTIONARY_REFERENCE": 30,
+      "EXCLUDE": 92
+    },
+    "average_scores": {
+      "informative_value": 66.48,
+      "prescriptive_risk": 48.03,
+      "confidence_score": 79.22,
+      "relevance_score": 72.05,
+      "weighted_score": 20.84
+    },
+    "notes": [
+      "No files reached SAFE_REFERENCE threshold (>60) due to combination of prescriptive risk and confidence caps",
+      "30 files are CAUTIONARY_REFERENCE - useful for context but contain prescriptive elements",
+      "All sequential work capped at 55 confidence as per user directive",
+      "High prescriptive risk (protocols, tutorials, step-by-step guides) significantly lowered scores",
+      "User intent/frustration analysis files scored highest for informational value"
+    ]
+  }
+}

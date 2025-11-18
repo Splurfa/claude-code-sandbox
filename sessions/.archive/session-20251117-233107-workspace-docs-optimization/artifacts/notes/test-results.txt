@@ -1,0 +1,64 @@
+MIGRATION TEST RESULTS
+=====================
+Date: Mon Nov 17 23:39:10 PST 2025
+
+[0;34mℹ[0m Test 1: Migration script exists and is executable
+[0;32m✓[0m Migration script exists
+[0;32m✓[0m Script is executable
+[0;34mℹ[0m Test 2: Documentation files exist
+[0;32m✓[0m Found: MIGRATION-GUIDE.md
+[0;32m✓[0m Found: CROSS-REFERENCE-MAP.md
+[0;34mℹ[0m Test 3: Dry run execution
+[0;31m✗[0m Dry run failed
+[0;34mℹ[0m Test 4: Current docs structure validation
+[0;32m✓[0m Current file exists: README.md
+[0;32m✓[0m Current file exists: workspace-architecture.md
+[0;32m✓[0m Current file exists: session-management.md
+[0;32m✓[0m Current file exists: file-routing.md
+[0;32m✓[0m Current file exists: integration-testing-guide.md
+[0;32m✓[0m Current file exists: architecture-overview.md
+[0;34mℹ[0m Test 5: Validate files marked for deletion
+[1;33m⚠[0m No files to delete (may already be clean)
+[0;34mℹ[0m Test 6: Script syntax validation
+[0;32m✓[0m Script syntax is valid
+[0;34mℹ[0m Test 7: Git repository validation
+[0;32m✓[0m Git repository exists
+[0;32m✓[0m Git repository is valid
+[0;34mℹ[0m Test 8: Backup directory preparation
+[0;32m✓[0m Have write permissions in current directory
+[0;32m✓[0m Docs directory is readable for backup
+[0;34mℹ[0m Test 9: Required directory structure
+[0;32m✓[0m Directory exists: docs
+[0;32m✓[0m Directory exists: docs/explanation
+[0;32m✓[0m Directory exists: docs/how-to
+[0;32m✓[0m Directory exists: docs/reference
+[0;32m✓[0m Directory exists: docs/internals
+[0;32m✓[0m Directory exists: docs/tutorials
+[0;34mℹ[0m Test 10: Link validation (sample check)
+[0;34mℹ[0m File has links: README.md
+[0;34mℹ[0m File has links: workspace-architecture.md
+[0;32m✓[0m Sample link check passed
+[0;34mℹ[0m Test 11: Content plan validation
+[0;32m✓[0m Script creates review-needed.txt
+[0;32m✓[0m Script creates content-plan.txt
+[0;34mℹ[0m Test 12: Rollback function validation
+[0;32m✓[0m Rollback function exists
+[0;32m✓[0m Rollback can be invoked via argument
+[0;34mℹ[0m Test 13: Safety check validation
+[0;32m✓[0m Safety check present: check_prerequisites
+[0;32m✓[0m Safety check present: create_backup
+[0;32m✓[0m Safety check present: DRY_RUN
+[0;34mℹ[0m Test 14: Migration guide completeness
+[0;32m✓[0m Guide section: Executive Summary
+[0;32m✓[0m Guide section: Migration Overview
+[0;32m✓[0m Guide section: Migration Phases
+[0;32m✓[0m Guide section: Execution Instructions
+[0;32m✓[0m Guide section: Rollback Procedure
+[0;32m✓[0m Guide section: Safety Guarantees
+[0;34mℹ[0m Test 15: Cross-reference map completeness
+[0;32m✓[0m Cross-ref topic: Session Management
+[0;32m✓[0m Cross-ref topic: File Routing
+[0;32m✓[0m Cross-ref topic: Workspace Architecture
+[0;32m✓[0m Cross-ref topic: Coordination & Agents
+[0;32m✓[0m Cross-ref topic: Memory & State
+

@@ -28,3 +28,4 @@ hive-mind-prompt-*.txt
 
 # Inbox archive (processed items)
 .inbox/
+.env
