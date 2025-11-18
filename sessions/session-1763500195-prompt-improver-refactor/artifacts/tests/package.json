@@ -1,0 +1,39 @@
+{
+  "name": "context-aware-analyzer-tests",
+  "version": "1.0.0",
+  "description": "Comprehensive tests for Context7-informed quality scoring system",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:integration": "jest integration.test.js",
+    "test:unit": "jest --testPathIgnorePatterns=integration.test.js"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coverageDirectory": "../coverage",
+    "collectCoverageFrom": [
+      "../code/**/*.js",
+      "!../code/**/*.test.js",
+      "!../code/**/index.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 90,
+        "lines": 90,
+        "statements": 90
+      }
+    },
+    "testMatch": [
+      "**/*.test.js"
+    ],
+    "setupFilesAfterEnv": [
+      "./jest.setup.js"
+    ]
+  },
+  "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "jest": "^29.7.0"
+  }
+}
