@@ -1,0 +1,16 @@
+
+> context-aware-analyzer-tests@1.0.0 test
+> jest
+
+PASS phase2/fetch-limits.test.js
+PASS phase2/context7-cache.test.js
+PASS ./analyzer-enhanced.test.js
+PASS ./context-aware.test.js
+PASS ./captains-log-enhanced.test.js
+PASS ./integration.test.js
+
+Test Suites: 6 passed, 6 total
+Tests:       113 passed, 113 total
+Snapshots:   0 total
+Time:        0.922 s, estimated 1 s
+Ran all test suites.
