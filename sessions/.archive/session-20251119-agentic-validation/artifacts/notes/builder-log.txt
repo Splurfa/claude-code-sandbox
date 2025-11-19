@@ -1,0 +1,31 @@
+--- BUILDER PERSONA START ---
+>>> ACTION: Searching for "build skill"
+🔍 Search results for ""build skill"" (2 matches):
+
+1. skill-builder (100% match)
+   Create new Claude Code Skills with proper YAML frontmatter, progressive disclosure structure, and complete directory organization. Use when you need to build custom skills for specific workflows, generate skill templates, or understand the Claude Skills specification.
+   Keywords: build, skill
+
+2. meta-skill (73% match)
+   Intelligent skill routing via natural language and menus. Use when you need help finding the right skill, want to explore available skills, or need multi-skill coordination.
+   Keywords: skill
+
+Type a number to select, or refine your search:
+
+>>> ACTION: Reading draft skill from /Users/splurfa/common-thread-sandbox/sessions/session-20251119-agentic-validation/artifacts/skills/test-skill/SKILL.md
+Draft Content: # Test Skill
+This is a test skill for validation.
+It does some stuff.
+
+>>> ACTION: Improving skill draft
+[Security] Invalid score for details: [object Object], defaulting to 0
+>>> RESULT: Skill Improved
+Improved Content: # Test Skill
+This is a test skill for validation.
+It does some stuff.
+
+
+**Please Clarify**: Replace these ambiguous terms: it, stuff
+[LearningLog] Loaded 1 entries
+>>> ACTION: Saved improved skill
+--- BUILDER PERSONA END ---

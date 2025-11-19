@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:code.claude.com)",
+      "WebSearch",
+      "WebFetch(domain:code.claudecom)",
+      "WebFetch(domain:www.anthropic.com)",
+      "WebFetch(domain:www.eesel.ai)",
+      "WebFetch(domain:skywork.ai)",
+      "Bash(npm install:*)",
+      "mcp__claude-flow_alpha__memory_usage",
+      "Bash(npx claude-flow@alpha:*)",
+      "Bash(cat:*)",
+      "SlashCommand(/session-closeout)",
+      "Bash(tar:*)"
+    ],
+    "deny": [],
+    "ask": []
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "claude-flow@alpha",
+    "ruv-swarm",
+    "flow-nexus"
+  ]
+}

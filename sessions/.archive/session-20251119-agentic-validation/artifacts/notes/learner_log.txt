@@ -1,0 +1,57 @@
+--- Learner Persona Execution ---
+1. Starting Tutor...
+🎓 Welcome to Tutor Mode!
+
+I'm your adaptive learning guide for claude-flow orchestration.
+
+Let's get started with a quick assessment to customize your path.
+
+📊 Running knowledge assessment...
+
+Assessment Results:
+===================
+❌ Phase 1: Foundations: ░░░░░░░░░░ 0%
+❌ Phase 2: Essential Skills: ░░░░░░░░░░ 0%
+❌ Phase 3: Intermediate: ░░░░░░░░░░ 0%
+❌ Phase 4: Advanced: ░░░░░░░░░░ 0%
+
+Recommendation: Focus on Phase 1: Foundations to build strong foundation
+
+
+2. Assessing Knowledge...
+📊 Running knowledge assessment...
+
+Assessment Results:
+===================
+❌ Phase 1: Foundations: ░░░░░░░░░░ 0%
+❌ Phase 2: Essential Skills: ░░░░░░░░░░ 0%
+❌ Phase 3: Intermediate: ░░░░░░░░░░ 0%
+❌ Phase 4: Advanced: ░░░░░░░░░░ 0%
+
+Recommendation: Focus on Phase 1: Foundations to build strong foundation
+
+
+3. Explaining Hive Mind...
+🔍 Explaining: hive mind
+
+I can help with claude-flow concepts. Try asking about: agents, memory, sessions, parallel execution, or coordination.
+
+💡 For detailed documentation, check:
+  - docs/explanation/workspace-architecture.md
+  - docs/getting-started/
+  - docs/how-to/
+
+4. Checking Progress...
+📈 Your Learning Progress
+
+Total interactions: 5
+Topics explored: 5
+Exercises completed: 0
+
+Recent activity:
+  - explain: hive mind
+  - exercise: phase-1
+  - question: What is memory coordination?
+  - question: How do I spawn agents in parallel?
+  - question: --help
+
