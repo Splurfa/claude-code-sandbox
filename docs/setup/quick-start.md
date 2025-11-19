@@ -668,7 +668,7 @@ For complete SPARC documentation, see **CLAUDE.md** (lines 115-145):
 - **Performance Tuning**: Optimize token usage and speed
 - **Memory Patterns**: Advanced cross-agent coordination
 
-**See**: `docs/advanced/` for power user documentation
+**See**: `docs/coordinate/` and `docs/build/` for power user documentation
 
 ---
 

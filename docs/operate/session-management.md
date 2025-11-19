@@ -636,11 +636,11 @@ npx claude-flow@alpha hooks session-end --force
 
 ## Related Documentation
 
-- **[File Routing](file-routing.md)** - Where files should go (sessions vs workspace)
-- **[Workspace Architecture](../explanation/workspace-architecture.md)** - Overall system design
-- **[Memory System](../reference/memory-system.md)** - Cross-session persistence
-- **[Hooks System](../reference/hooks-system.md)** - Automation and coordination
-- **[Agent Coordination](../how-to/agent-coordination.md)** - Multi-agent workflows
+- **[File Routing](../setup/quick-start.md#file-routing-rules-critical)** - Where files should go (sessions vs workspace)
+- **[Workspace Architecture](../reference/architecture.md)** - Overall system design
+- **[Memory System](../operate/memory-basics.md)** - Cross-session persistence
+- **[Hooks System](../reference/architecture.md#layer-3-hooks-system)** - Automation and coordination
+- **[Agent Coordination](../coordinate/swarm-coordination.md)** - Multi-agent workflows
 
 ## Technical Implementation
 
