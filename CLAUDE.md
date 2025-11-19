@@ -1,9 +1,9 @@
 # Claude Code Configuration - SPARC Development Environment
 
 > **⚠️ Important:** This is a **claude-flow+ (custom extended) workspace**, not stock claude-flow.
-> - **Architecture**: See [Workspace Architecture Explained](docs/reality/architecture.md)
-> - **Session Management**: See [Session Management Explained](docs/essentials/session-management.md)
-> - **File Routing**: See [Quick Start Guide](docs/essentials/quick-start.md)
+> - **Architecture**: See [Workspace Architecture Explained](docs/reference/architecture.md)
+> - **Session Management**: See [Session Management Explained](docs/operate/session-management.md)
+> - **File Routing**: See [Quick Start Guide](docs/setup/quick-start.md)
 > - **Stock-First Score**: 82/100 (68% stock architecture / 97.5% stock implementation)
 
 ---
@@ -21,7 +21,7 @@
 
 **NEVER** write to root `tests/`, `docs/`, `scripts/` - only to session artifacts!
 
-**For full session protocol**, see [Session Management Explained](docs/essentials/session-management.md)
+**For full session protocol**, see [Session Management Explained](docs/operate/session-management.md)
 
 ### 📋 SESSION SCOPE & LIFECYCLE
 
@@ -35,7 +35,7 @@
 **Agent Integration:**
 When spawning agents, include session path: `Task("Agent", "Task. Save to sessions/$SESSION_ID/artifacts/code/.", "type")`
 
-**Full lifecycle documentation**: See [Session Management Explained](docs/essentials/session-management.md)
+**Full lifecycle documentation**: See [Session Management Explained](docs/operate/session-management.md)
 
 ---
 
@@ -85,7 +85,7 @@ When spawning agents, include session path: `Task("Agent", "Task. Save to sessio
 
 **Exception**: Only edit existing project files (`package.json`, `CLAUDE.md`, etc.) in their original locations.
 
-**Full file routing rules**: See [Quick Start Guide](docs/essentials/quick-start.md)
+**Full file routing rules**: See [Quick Start Guide](docs/setup/quick-start.md)
 
 ## 🤖 Subagent Usage Protocol
 
@@ -486,17 +486,17 @@ Remember: **Claude Flow coordinates, Claude Code creates!**
 
 ## Workspace Architecture
 
-See [Workspace Architecture Explained](docs/reality/architecture.md) for complete overview, compliance analysis, and stock vs custom comparison.
+See [Workspace Architecture Explained](docs/reference/architecture.md) for complete overview, compliance analysis, and stock vs custom comparison.
 
 ## Core Concepts
 
 This workspace includes custom extensions. For detailed documentation:
 
-- **Session Management**: [Session Management Explained](docs/essentials/session-management.md)
-- **File Routing**: [Quick Start Guide](docs/essentials/quick-start.md)
-- **System Architecture**: [Architecture Overview](docs/reality/architecture.md)
-- **Memory & Coordination**: [Memory Coordination Guide](docs/essentials/memory-coordination.md)
-- **Swarm Coordination**: [Swarm Coordination Guide](docs/advanced/swarm-coordination.md)
+- **Session Management**: [Session Management Explained](docs/operate/session-management.md)
+- **File Routing**: [Quick Start Guide](docs/setup/quick-start.md)
+- **System Architecture**: [Architecture Overview](docs/reference/architecture.md)
+- **Memory & Coordination**: [Memory Coordination Guide](docs/operate/memory-coordination-tutorial.md)
+- **Swarm Coordination**: [Swarm Coordination Guide](docs/coordinate/swarm-coordination.md)
 
 ## Stock Claude-Flow Features
 
@@ -545,6 +545,24 @@ npx claude-flow@alpha hooks session-end --export-metrics true
 
 ---
 
+## 📥 External Agent Integration
+
+The `inbox/` directory contains workspaces for external agents contributing to the project:
+
+- **`inbox/gemini-agent/`** - Google Gemini model contributions and validations
+- **`inbox/codex-agent/`** - OpenAI Codex contributions
+- **`inbox/cursor-agent/`** - Cursor editor agent contributions
+- **`inbox/assistant/`** - General assistant contributions
+- **`inbox/user/`** - User-provided materials and external imports
+
+**Protocol for Claude Code:**
+- Claude Code should **NOT** modify files in `inbox/` directories unless explicitly directed by the user
+- Each external agent workspace should have a README.md marking it as external
+- Integration of external work happens only when user explicitly requests synthesis
+- This ensures clean separation between different AI systems and prevents conflicts
+
+---
+
 # important-instruction-reminders
 Do what has been asked; nothing more, nothing less.
 NEVER create files unless they're absolutely necessary for achieving your goal.
@@ -558,17 +576,18 @@ Never save working files, text/mds and tests to the root folder.
 
 **Essential Documentation:**
 
-- **[Quick Start Guide](docs/essentials/quick-start.md)** - Get started with sessions and file routing
-- **[Session Management](docs/essentials/session-management.md)** - Complete session lifecycle guide
-- **[Agent Spawning](docs/essentials/agent-spawning.md)** - How to spawn and coordinate agents
-- **[Memory Coordination](docs/essentials/memory-coordination.md)** - Using memory for agent coordination
-- **[Troubleshooting Guide](docs/essentials/troubleshooting.md)** - Common issues and solutions
+- **[Quick Start Guide](docs/setup/quick-start.md)** - Get started with sessions and file routing
+- **[Session Management](docs/operate/session-management.md)** - Complete session lifecycle guide
+- **[Agent Spawning](docs/build/spawning-agents.md)** - How to spawn and coordinate agents
+- **[Memory Coordination](docs/operate/memory-coordination-tutorial.md)** - Using memory for agent coordination
+- **[Troubleshooting Guide](docs/operate/troubleshooting.md)** - Common issues and solutions
 
 **Learning Path:**
 
-- **[Start Here](docs/learning/00-start-here.md)** - Begin your Claude Flow journey
-- **[Foundations](docs/learning/01-foundations/)** - Core concepts and workspace tour
-- **[Essential Skills](docs/learning/02-essential-skills/)** - Session management, spawning agents, memory
-- **[Intermediate](docs/learning/03-intermediate/)** - Swarm topologies, queen selection, consensus
-- **[Advanced](docs/learning/04-advanced/)** - Hive mind, Byzantine consensus, adaptive topology
+See the [Documentation Overview](docs/README.md) for the complete learning journey organized by workflow stage:
+- **Setup** - Getting started, orientation, installation
+- **Operate** - Daily workflows, session management, memory usage
+- **Build** - Creating agents, custom skills, extending the system
+- **Coordinate** - Multi-agent orchestration, swarm patterns, consensus
+- **Reference** - Architecture, agent catalog, API reference
 
