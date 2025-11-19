@@ -180,7 +180,7 @@ class SemanticMatcher {
       learn: /\b(learn|teach|explain|understand|guide|tutorial)\b/i,
       build: /\b(build|create|generate|make|scaffold|develop)\b/i,
       review: /\b(review|check|analyze|audit|inspect|examine)\b/i,
-      optimize: /\b(optimi[zs]e?|improve|enhance|speed\s*up|fix|better)\b/i,
+      optimize: /\b(optimi[zs](e|ed|ing|ation)?|improve|enhance|speed\s*up|fix|better)\b/i,
       coordinate: /\b(coordinate|orchestrate|swarm|agents?|multi-agent)\b/i,
       help: /\b(how|what|when|why|where|which)\b/i
     };
