@@ -5,7 +5,7 @@ Interactive learning assistant for claude-flow orchestration.
 Execute the tutor-mode interactive learning system:
 
 ```bash
-node sessions/session-20251117-225020-hive-docs-tutor/artifacts/code/tutor-mode/index.js "$@"
+node .claude/skills/tutor-mode/bin/index.js "$@"
 ```
 
 ## Available Commands:

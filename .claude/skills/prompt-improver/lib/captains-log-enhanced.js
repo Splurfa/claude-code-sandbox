@@ -34,6 +34,22 @@ class EnhancedCaptainsLog {
   }
 
   /**
+   * Log security event
+   * @param {object} event - Security event
+   */
+  async logSecurityEvent(event) {
+    if (!this.enabled) return;
+
+    try {
+      const logEntry = this._formatSecurityEntry(event);
+      const logFile = this._getTodaysLogFile();
+      this._appendToLog(logFile, logEntry);
+    } catch (error) {
+      console.error('[CaptainsLog] Error logging security event:', error.message);
+    }
+  }
+
+  /**
    * Log a prompt improvement to captain's log
    * @param {object} entry - Log entry
    */
@@ -139,6 +155,20 @@ class EnhancedCaptainsLog {
 
     logEntry += `\n**Impact**: Grounded prompt improvement in Claude Code best practices\n`;
 
+    return logEntry;
+  }
+
+  _formatSecurityEntry(event) {
+    const timestamp = new Date(event.timestamp || Date.now()).toISOString();
+    let logEntry = `\n### 🛡️ Security Event - ${timestamp}\n\n`;
+    logEntry += `**Type**: ${event.type}\n`;
+    logEntry += `**Severity**: ${event.severity}\n`;
+    logEntry += `**Description**: ${event.description || event.details?.description || 'No description'}\n`;
+    
+    if (event.details) {
+       logEntry += `**Details**: ${JSON.stringify(event.details)}\n`;
+    }
+    
     return logEntry;
   }
 

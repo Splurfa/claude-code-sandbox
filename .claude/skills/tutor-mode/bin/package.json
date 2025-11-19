@@ -1,0 +1,24 @@
+{
+  "name": "tutor-mode",
+  "version": "1.0.0",
+  "description": "Interactive learning assistant for claude-flow orchestration",
+  "main": "index.js",
+  "bin": {
+    "tutor-mode": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "claude-flow",
+    "tutor",
+    "learning",
+    "assistant"
+  ],
+  "author": "Claude Flow Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {}
+}
