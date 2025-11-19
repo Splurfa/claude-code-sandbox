@@ -319,6 +319,4 @@ Reason: Sequential pipeline more efficient
 
 ## Next Step
 
-Final advanced topic: Building self-learning workflows with ReasoningBank.
-
-→ **Next**: [ReasoningBank Learning](reasoning-bank.md)
+You've mastered adaptive topology! Continue exploring advanced coordination patterns in the documentation.

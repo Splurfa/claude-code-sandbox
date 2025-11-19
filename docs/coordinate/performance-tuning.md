@@ -586,8 +586,8 @@ jq '{sessionDuration, totalTasks, successfulTasks, failedTasks}' \
 ## 14. Additional Resources
 
 - **CLAUDE.md**: Concurrent execution protocol and rules (see workspace root)
-- **Session Management**: [Session Management Essentials](../essentials/session-management.md)
-- **Architecture**: [Architecture Guide](../reality/architecture.md)
+- **Session Management**: [Session Management Essentials](../operate/session-management.md)
+- **Architecture**: [Architecture Guide](../reference/architecture.md)
 - **File Routing**: See CLAUDE.md "SESSION MANAGEMENT PROTOCOL" section in workspace root
 
 ---

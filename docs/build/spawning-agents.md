@@ -527,10 +527,10 @@ PERFORMANCE
 
 ## 🔗 Related Documentation
 
-- **Session Management**: [session-management.md](./session-management.md)
-- **Memory Coordination**: [memory-coordination.md](./memory-coordination.md)
-- **Troubleshooting**: [troubleshooting.md](./troubleshooting.md)
-- **Architecture**: [docs/reality/architecture.md](../reality/architecture.md)
+- **Session Management**: [session-management.md](../operate/session-management.md)
+- **Memory Coordination**: [memory-coordination.md](../operate/memory-coordination-tutorial.md)
+- **Troubleshooting**: [troubleshooting.md](../operate/troubleshooting.md)
+- **Architecture**: [docs/reality/architecture.md](../reference/architecture.md)
 
 ---
 

@@ -399,7 +399,7 @@ Congratulations! You've completed Phase 1: Foundations foundations. You now unde
 - Session lifecycle ✅
 - Memory coordination ✅
 
-→ **Next**: [Phase 2: Essential Skills: Essential Skills](../02-essential-skills/README.md)
+→ **Next**: Continue with [Spawning Agents](../build/spawning-agents.md) to learn multi-agent coordination
 
 ---
 

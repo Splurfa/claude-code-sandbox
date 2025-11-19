@@ -43,7 +43,7 @@ npx claude-flow@alpha hooks session-restore --session-id "$SESSION_ID"
 - ✅ Include session path in agent instructions
 - ✅ Use absolute paths: `sessions/$SESSION_ID/artifacts/`
 
-**Reference:** [File Routing Explained](../../explanation/file-routing.md)
+**Reference:** [File Routing Explained](../setup/quick-start.md#file-routing-rules)
 
 ---
 
@@ -138,7 +138,7 @@ mcp__claude-flow_alpha__memory_usage({
 - **MCP Tools** (`mcp__claude-flow_alpha__*`): memory, swarm, agents, neural
 
 **Prevention:**
-- ✅ Check [Stock Claude-Flow Features](../../explanation/workspace-architecture.md#stock-features) section
+- ✅ Check [Stock Claude-Flow Features](../reference/architecture.md#stock-features) section
 - ✅ Use MCP tools for all coordination operations
 - ✅ Use hooks only for lifecycle events
 
@@ -193,7 +193,7 @@ git commit -m "Add feature"
 - ✅ Fix root cause, don't bypass hooks
 - ✅ Test hooks after modifying `.claude/settings.json`
 
-**Reference:** [Hooks System Architecture](../.claude/hooks/README.md)
+**Reference:** [Hooks System Architecture](../../.claude/hooks/README.md)
 
 ---
 
@@ -367,7 +367,7 @@ echo "test" > /tmp/test-file.md
 .claude/hooks/auto-hooks.js → const fs = require('fs'); fs.writeFileSync = ...
 ```
 
-See [Hooks Migration Guide](../../../../.claude/hooks/README.md) for complete migration steps.
+See [Hooks Migration Guide](../../.claude/hooks/README.md) for complete migration steps.
 
 #### 5. Hook Failures Silent (No Errors Shown)
 
@@ -532,9 +532,9 @@ During development:
 - [ ] Test hooks after modifying `.claude/settings.json`
 
 **Reference:**
-- [Hooks System Architecture](../../../../.claude/hooks/README.md)
-- [Stock Cascade Pattern](../../../../.claude/hooks/README.md#stock-claude-code-pattern-adr-002)
-- [Migration Guide](../../../../.claude/hooks/README.md#migration-from-auto-hooksjs)
+- [Hooks System Architecture](../../.claude/hooks/README.md)
+- [Stock Cascade Pattern](../../.claude/hooks/README.md#stock-claude-code-pattern-adr-002)
+- [Migration Guide](../../.claude/hooks/README.md#migration-from-auto-hooksjs)
 
 ---
 
@@ -586,7 +586,7 @@ npx claude-flow@alpha hooks pre-task \
 - ✅ ONE SESSION = ONE CHAT THREAD (not per task)
 - ✅ Include session path in every agent instruction
 
-**Reference:** [Session Management Explained](../../explanation/session-management.md)
+**Reference:** [Session Management Explained](session-management.md)
 
 ---
 
@@ -683,7 +683,7 @@ grep -r "mock\|stub\|spy" tests/
 5. Run session hooks for tracking
 
 **Permanent Solution:**
-- Review [File Routing Explained](../../explanation/file-routing.md)
+- Review [File Routing Explained](../setup/quick-start.md#file-routing-rules)
 - Add session path to all agent instructions
 - Use file routing skill for AI guidance
 
@@ -762,8 +762,8 @@ grep -r "mock\|stub\|spy" tests/
 | Hooks never fire | Restart Claude Code to reload settings |
 
 **Permanent Solution:**
-- Review [Hooks System Architecture](../../../../.claude/hooks/README.md)
-- Follow [Migration Guide](../../../../.claude/hooks/README.md#migration-from-auto-hooksjs)
+- Review [Hooks System Architecture](../../.claude/hooks/README.md)
+- Follow [Migration Guide](../../.claude/hooks/README.md#migration-from-auto-hooksjs)
 - Never bypass with `--no-verify` or `--no-hooks`
 - Fix root cause, don't work around
 - Test hooks after every settings.json change
@@ -982,10 +982,10 @@ Message 4: Write file2
 ## Resources
 
 ### Documentation
-- [Workspace Architecture](../../explanation/workspace-architecture.md) - System overview
-- [Session Management](../../explanation/session-management.md) - Session protocol
-- [File Routing](../../explanation/file-routing.md) - File organization rules
-- [Hooks System](../.claude/hooks/README.md) - Hook architecture
+- [Workspace Architecture](../reference/architecture.md) - System overview
+- [Session Management](session-management.md) - Session protocol
+- [File Routing](../setup/quick-start.md#file-routing-rules) - File organization rules
+- [Hooks System](../../.claude/hooks/README.md) - Hook architecture
 
 ### References
 - CLAUDE.md - Complete configuration and rules

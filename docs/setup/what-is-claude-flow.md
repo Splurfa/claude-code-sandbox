@@ -239,9 +239,9 @@ HITL approval workflow ensures you review before archival.
 
 ## Next Step
 
-Now that you understand what claude-flow is, let's explore your workspace.
+Now that you understand what claude-flow is, start with the Quick Start guide.
 
-→ **Next**: [Workspace Tour](workspace-tour.md)
+→ **Next**: [Quick Start Guide](quick-start.md)
 
 ---
 

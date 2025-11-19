@@ -357,4 +357,4 @@ Message 2: Task("Agent 2", "...", "type2")
 
 Now that you can spawn agents, let's master parallel execution patterns.
 
-→ **Next**: [Parallel Execution](parallel-execution.md)
+→ **Next**: [Parallel Execution](../operate/parallel-execution.md)

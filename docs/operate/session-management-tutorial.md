@@ -541,9 +541,7 @@ You've now mastered:
 ✅ Advanced memory coordination
 ✅ Complete session lifecycle management
 
-**You're ready for Phase 3**: Intermediate topics like swarm topologies, queen selection, and consensus mechanisms.
-
-→ **Next**: [Phase 3: Intermediate](../03-intermediate/README.md)
+**You're ready for coordination topics**: Continue with [Swarm Coordination](../coordinate/swarm-coordination.md) to learn multi-agent orchestration patterns.
 
 ---
 

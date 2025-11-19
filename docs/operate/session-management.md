@@ -636,7 +636,7 @@ npx claude-flow@alpha hooks session-end --force
 
 ## Related Documentation
 
-- **[File Routing](../setup/quick-start.md#file-routing-rules-critical)** - Where files should go (sessions vs workspace)
+- **[File Routing](../setup/quick-start.md#file-routing-rules)** - Where files should go (sessions vs workspace)
 - **[Workspace Architecture](../reference/architecture.md)** - Overall system design
 - **[Memory System](../operate/memory-basics.md)** - Cross-session persistence
 - **[Hooks System](../reference/architecture.md#layer-3-hooks-system)** - Automation and coordination

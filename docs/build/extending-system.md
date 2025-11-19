@@ -499,7 +499,7 @@ npm test src/tests/<resource>.test.ts
 
 ## Advanced Features
 
-See [Performance Tuning](performance-tuning.md) for advanced configuration including:
+See [Performance Tuning](../coordinate/performance-tuning.md) for advanced configuration including:
 - Custom templates
 - Database integration
 - WebSocket endpoints
@@ -636,8 +636,8 @@ Move detailed content to separate files:
 
 ```markdown
 ## Advanced Topics
-See [Performance Tuning](performance-tuning.md) for advanced configuration
-See [Architecture Guide](../reality/architecture.md) for system internals
+See [Performance Tuning](../coordinate/performance-tuning.md) for advanced configuration
+See [Architecture Guide](../reference/architecture.md) for system internals
 ```
 
 ### Skill Integration with Workspace

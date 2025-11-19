@@ -1,6 +1,6 @@
 # Advanced Swarm Coordination
 
-> **Prerequisites**: Complete [Quick Start](../essentials/quick-start.md) and [Agent Spawning](../essentials/agent-spawning.md)
+> **Prerequisites**: Complete [Quick Start](../setup/quick-start.md) and [Agent Spawning](../build/spawning-agents.md)
 
 Master multi-agent coordination with topology selection, consensus mechanisms, collective memory, and queen-led hierarchical orchestration for production-scale Claude Flow systems.
 
@@ -1211,22 +1211,22 @@ reasoning-bank/verdict/{outcome}
 ## Next Steps
 
 **Master swarm coordination**:
-1. ✅ Complete [Quick Start](../essentials/quick-start.md)
+1. ✅ Complete [Quick Start](../setup/quick-start.md)
 2. ✅ Practice topology selection with real projects
 3. ✅ Implement consensus mechanisms
 4. ✅ Build cross-session learning with memory coordination
 5. → **Next**: [Performance Tuning](performance-tuning.md) for optimization
-6. → **Next**: [Extending the System](extending-system.md) for custom workflows
+6. → **Next**: [Extending the System](../build/extending-system.md) for custom workflows
 
 **Related Documentation**:
-- [Architecture Guide](../reality/architecture.md) - System internals and data flow
-- [Memory Coordination](../essentials/memory-coordination.md) - Shared memory patterns
-- [Custom Agents](custom-agents.md) - Building specialized agents
-- [What Actually Works](../reality/what-actually-works.md) - Reality check on features
+- [Architecture Guide](../reference/architecture.md) - System internals and data flow
+- [Memory Coordination](../operate/memory-coordination-tutorial.md) - Shared memory patterns
+- [Custom Agents](../build/custom-agents.md) - Building specialized agents
+- [What Actually Works](../reference/what-actually-works.md) - Reality check on features
 
 ---
 
 **Questions? Issues?**
-- Check [Troubleshooting](../essentials/troubleshooting.md)
+- Check [Troubleshooting](../operate/troubleshooting.md)
 - Review real examples in `sessions/*/COORDINATION-LEDGER.md`
 - Explore active swarms: `npx claude-flow@alpha hive-mind status`

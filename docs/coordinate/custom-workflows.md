@@ -557,9 +557,7 @@ You've now mastered:
 ✅ Consensus mechanisms
 ✅ Custom workflow design
 
-**You're ready for Phase 4: Advanced**: Advanced hive-mind coordination, Byzantine consensus in production, adaptive topology switching, and ReasoningBank learning.
-
-→ **Next**: [Phase 4: Advanced: Advanced](../04-advanced/README.md)
+**You're ready for advanced topics**: Continue with advanced hive-mind coordination, Byzantine consensus, and adaptive topology patterns in the coordinate/ documentation.
 
 ---
 

@@ -970,8 +970,8 @@ npx claude-flow@alpha hooks post-edit --file "path" --memory-key "key"
 ## Next Steps
 
 1. **Try Examples**: Start with production examples in this doc
-2. **Read**: [Swarm Coordination](swarm-coordination.md) for multi-agent patterns
-3. **Read**: [Performance Tuning](performance-tuning.md) for optimization
+2. **Read**: [Swarm Coordination](../coordinate/swarm-coordination.md) for multi-agent patterns
+3. **Read**: [Performance Tuning](../coordinate/performance-tuning.md) for optimization
 4. **Experiment**: Create custom agents for your workflows
 
 ---

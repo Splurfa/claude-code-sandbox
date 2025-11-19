@@ -415,4 +415,4 @@ Task("Tester", "Read API contract from memory 'swarm/shared/api-contract'. Write
 
 You've mastered parallel execution! Now let's dive deeper into memory coordination patterns.
 
-→ **Next**: [Memory Coordination](memory-coordination.md)
+→ **Next**: [Memory Coordination](memory-coordination-tutorial.md)
