@@ -1,0 +1,166 @@
+{
+  "FINDING-001": {
+    "id": "FINDING-001",
+    "slug": "captains-log-automation",
+    "title": "Captain's Log Automation Not Working",
+    "status": "Open",
+    "type": "Bug",
+    "priority": "Critical",
+    "root_cause": "System (claude-flow missing journal hook implementation)",
+    "created": "2025-11-21",
+    "updated": "2025-11-21",
+    "resolved": "N/A",
+    "file": "records/FINDING-001-captains-log-automation.md",
+    "related_findings": [
+      "FINDING-010"
+    ]
+  },
+  "FINDING-002": {
+    "id": "FINDING-002",
+    "slug": "doc-code-sync",
+    "title": "Documentation-Code Synchronization Confusion",
+    "status": "Open",
+    "type": "Process",
+    "priority": "High",
+    "root_cause": "Hybrid (User workflow + System tracking)",
+    "created": "2025-11-21",
+    "updated": "2025-11-21",
+    "resolved": "N/A",
+    "file": "records/FINDING-002-doc-code-sync.md",
+    "related_findings": [
+      "FINDING-007"
+    ]
+  },
+  "FINDING-003": {
+    "id": "FINDING-003",
+    "slug": "session-naming",
+    "title": "Session Naming Protocol Violations",
+    "status": "Open",
+    "type": "Bug/Education",
+    "priority": "High",
+    "root_cause": "User (manual session creation bypassing protocol)",
+    "created": "2025-11-21",
+    "updated": "2025-11-21",
+    "resolved": "N/A",
+    "file": "records/FINDING-003-session-naming.md",
+    "related_findings": [
+      "FINDING-007",
+      "FINDING-008"
+    ]
+  },
+  "FINDING-004": {
+    "id": "FINDING-004",
+    "slug": "documentation-links",
+    "title": "Documentation Link Breakage After Restructures",
+    "status": "In Progress",
+    "type": "Process",
+    "priority": "Medium",
+    "root_cause": "System (no automated link validation)",
+    "created": "2025-11-21",
+    "updated": "2025-11-21",
+    "resolved": "N/A",
+    "file": "records/FINDING-004-documentation-links.md",
+    "related_findings": [
+      "FINDING-002"
+    ]
+  },
+  "FINDING-005": {
+    "id": "FINDING-005",
+    "slug": "false-positive-tests",
+    "title": "False Positive Test Reports",
+    "status": "Open",
+    "type": "Bug",
+    "priority": "Medium",
+    "root_cause": "System (stale test artifacts not timestamped)",
+    "created": "2025-11-21",
+    "updated": "2025-11-21",
+    "resolved": "N/A",
+    "file": "records/FINDING-005-false-positive-tests.md",
+    "related_findings": [
+      "FINDING-002"
+    ]
+  },
+  "FINDING-006": {
+    "id": "FINDING-006",
+    "slug": "integration-gap",
+    "title": "Integration vs Documentation Quality Gap",
+    "status": "Open",
+    "type": "Improvement",
+    "priority": "Medium",
+    "root_cause": "Hybrid (metrics measure docs, not UX)",
+    "created": "2025-11-21",
+    "updated": "2025-11-21",
+    "resolved": "N/A",
+    "file": "records/FINDING-006-integration-gap.md",
+    "related_findings": [
+      "FINDING-001",
+      "FINDING-007",
+      "FINDING-008",
+      "FINDING-002"
+    ]
+  },
+  "FINDING-007": {
+    "id": "FINDING-007",
+    "slug": "session-commands",
+    "title": "Missing Session Management Commands",
+    "status": "Open",
+    "type": "Bug/Education",
+    "priority": "High",
+    "root_cause": "System (commands documented but not implemented)",
+    "created": "2025-11-21",
+    "updated": "2025-11-21",
+    "resolved": "N/A",
+    "file": "records/FINDING-007-session-commands.md",
+    "related_findings": [
+      "FINDING-003",
+      "FINDING-006"
+    ]
+  },
+  "FINDING-008": {
+    "id": "FINDING-008",
+    "slug": "file-routing",
+    "title": "File Routing Compliance Requires Manual Vigilance",
+    "status": "Open",
+    "type": "Improvement",
+    "priority": "High",
+    "root_cause": "System (no automated enforcement)",
+    "created": "2025-11-21",
+    "updated": "2025-11-21",
+    "resolved": "N/A",
+    "file": "records/FINDING-008-file-routing.md",
+    "related_findings": [
+      "FINDING-003",
+      "FINDING-006"
+    ]
+  },
+  "FINDING-009": {
+    "id": "FINDING-009",
+    "slug": "file-routing-compliance-violations",
+    "title": "File Routing Compliance Violations",
+    "status": "Open",
+    "type": "process",
+    "priority": "High",
+    "root_cause": "System",
+    "created": "2025-11-21",
+    "updated": "2025-11-21",
+    "resolved": "N/A",
+    "file": "records/FINDING-009-file-routing-compliance-violations.md",
+    "related_findings": []
+  },
+  "FINDING-010": {
+    "id": "FINDING-010",
+    "slug": "log-growth",
+    "title": "Captain's Log Unbounded Growth",
+    "status": "Open",
+    "type": "Bug",
+    "priority": "Low",
+    "root_cause": "System (no automated rotation/archival)",
+    "created": "2025-11-21",
+    "updated": "2025-11-21",
+    "resolved": "N/A",
+    "file": "records/FINDING-010-log-growth.md",
+    "related_findings": [
+      "FINDING-001"
+    ]
+  }
+}

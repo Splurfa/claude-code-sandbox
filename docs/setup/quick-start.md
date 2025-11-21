@@ -18,6 +18,28 @@ In 15 minutes, you'll understand:
 
 ---
 
+## 🎓 Optional: Take the Interactive Tour
+
+**Prefer guided learning?** The tour-guide skill provides an interactive, proficiency-based walkthrough of this workspace:
+
+```bash
+/tour
+```
+
+**When to use:**
+- ✅ First time in this workspace (comprehensive orientation)
+- ✅ Want structured exploration before hands-on work
+- ✅ Need architectural depth (advanced/expert pathways)
+
+**When to skip:**
+- ❌ Already familiar with Claude Code and sessions
+- ❌ Prefer quick reference (this guide is faster)
+- ❌ Want hands-on practice immediately (use tutor-mode instead)
+
+**Time**: 20-90 minutes depending on proficiency level (beginner/intermediate/advanced/expert)
+
+---
+
 ## Prerequisites
 
 ✅ **Verified Requirements** (Evidence Level: 5/5):

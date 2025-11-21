@@ -9,6 +9,16 @@
 
 We organize documentation by **when** you need it in your workflow.
 
+**🎓 New User? Take the Interactive Tour**
+
+Before diving into documentation, consider using the **tour-guide skill** for a personalized, interactive walkthrough:
+
+```bash
+/tour
+```
+
+The tour adapts to your experience level (beginner/intermediate/advanced/expert) and provides guided exploration of this workspace. Takes 20-90 minutes depending on proficiency level.
+
 ### 1. [Setup](setup/) (Get Ready)
 *Installation, configuration, and environment.*
 - **[Quick Start](setup/quick-start.md)**: 0 to Productive in 15 minutes.

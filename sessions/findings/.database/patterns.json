@@ -1,0 +1,38 @@
+{
+  "file-routing-violation": {
+    "pattern_id": "file-routing-violation",
+    "pattern_name": "File Routing Violations",
+    "category": "protocol",
+    "occurrences": 3,
+    "first_seen": "2025-11-21T19:17:57Z",
+    "last_seen": "2025-11-21T19:17:57Z",
+    "sessions": [
+      "session-001",
+      "session-002",
+      "session-003"
+    ],
+    "severity": "high",
+    "threshold": 3,
+    "threshold_reached": true,
+    "finding_created": "FINDING-009",
+    "status": "tracked",
+    "metadata": {}
+  },
+  "session-naming-violation": {
+    "pattern_id": "session-naming-violation",
+    "pattern_name": "Session Naming Protocol Violations",
+    "category": "protocol",
+    "occurrences": 1,
+    "first_seen": "2025-11-21T20:39:32Z",
+    "last_seen": "2025-11-21T20:39:32Z",
+    "sessions": [
+      "--help"
+    ],
+    "severity": "high",
+    "threshold": 3,
+    "threshold_reached": false,
+    "finding_created": "null",
+    "status": "tracked",
+    "metadata": {}
+  }
+}

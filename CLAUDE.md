@@ -37,6 +37,104 @@ When spawning agents, include session path: `Task("Agent", "Task. Save to sessio
 
 **Full lifecycle documentation**: See [Session Management Explained](docs/operate/session-management.md)
 
+### 📊 FINDINGS TRACKING SYSTEM
+
+**Architecture**: JSON Database + Generated Views (matches Pattern Database pattern)
+
+**Centralized Database**: `sessions/findings/.database/findings.json` (4.3 KB, 10 findings)
+- **Source of Truth**: JSON for programmatic access via jq
+- **Generated Views**:
+  - `findings-log.md` - Chronological timeline (newest first)
+  - `README.md` - Auto-generated statistics dashboard
+- **Preserved**: Individual FINDING-*.md files for rich content and git history
+
+**Key Features**:
+- ✅ 100% automatic statistics (zero manual updates)
+- ✅ Scales to 1000+ findings
+- ✅ Programmatic queries via jq
+- ✅ Auto-created by pattern database (threshold: 3 occurrences)
+- ✅ Git-friendly (individual files preserved)
+
+**Commands**:
+```bash
+# Create new finding (auto-stores in JSON)
+bash sessions/findings/bin/findings create "Finding title" high bug system
+
+# Generate views from JSON database
+bash sessions/findings/bin/findings generate-log      # → findings-log.md
+bash sessions/findings/bin/findings generate-stats    # → README.md
+
+# Update finding status
+bash sessions/findings/bin/findings update-status FINDING-001 "In Progress"
+
+# Query findings
+bash sessions/findings/bin/findings list-json open
+bash sessions/findings/bin/findings get FINDING-001
+```
+
+**Automatic Detection (Stop Hook)**:
+```bash
+# Configured in .claude/settings.json "Stop" hook
+# Runs automatically on chat end:
+/bin/bash .claude/hooks/session-end-with-issues.sh
+
+# This wrapper:
+# 1. Runs stock session-end hook (preserves behavior)
+# 2. Detects current session ID (3 fallback strategies)
+# 3. Runs finding detection with pattern tracking
+# 4. Auto-creates findings via pattern database (threshold: 3)
+# 5. Updates JSON database automatically
+# 6. Stores results: .swarm/backups/last-issue-detection.json
+# 7. Always exits 0 (non-blocking)
+```
+
+**Manual Closeout (HITL)**:
+```bash
+# Run slash command for HITL approval workflow:
+/session-closeout
+
+# Displays:
+# - Pattern analysis summary
+# - Findings created (if any)
+# - Session summary
+# - HITL approval request
+```
+
+**Pattern Database Integration**: `sessions/findings/.database/patterns.json`
+- File-backed JSON storage (not MCP memory)
+- Tracks: session-naming, file-routing, incomplete-tasks, doc-code-sync, etc.
+- Auto-creates findings when threshold (3) is reached
+- New findings automatically stored in `findings.json`
+- Commands: `bash sessions/findings/bin/pattern-db [store|get|increment|list|stats]`
+
+**Detection Criteria**:
+- Recurring corrections (>2 occurrences)
+- Protocol violations (session naming, file routing)
+- Documentation-code sync gaps
+- Test failures or false positives
+- Incomplete outputs
+- User corrections in session summary
+
+**Finding Categories**:
+- **System**: Fix in automation, tooling, configuration (70%)
+- **User**: Adjust workflow, habits, understanding (30%)
+- **Hybrid**: Both system and user changes needed (20%)
+
+**Current Statistics** (auto-generated from JSON):
+- **Total**: 10 findings
+- **Open**: 9 (90%)
+- **In Progress**: 1 (10%) - FINDING-004
+- **Resolved**: 0 (0%)
+- **By Priority**: 1 critical, 4 high, 3 medium, 2 low
+
+**Testing**: Run comprehensive test suite
+```bash
+bash sessions/findings/tests/integration/test-integration.sh
+# Tests: pattern tracking, threshold triggering, JSON database, view generation
+```
+
+**For full details**: See [sessions/findings/docs/README.md](sessions/findings/docs/README.md) (auto-generated)
+
 ---
 
 ## 🚨 CRITICAL: CONCURRENT EXECUTION & FILE MANAGEMENT
@@ -177,6 +275,16 @@ The wizard handles agent spawning, coordination, and result consolidation automa
 
 ### Core Development
 `coder`, `reviewer`, `tester`, `planner`, `researcher`
+
+## 🎓 Available Skills
+
+### Learning & Discovery
+- `tour-guide` - Interactive workspace tour tailored to proficiency level (beginner/intermediate/advanced/expert)
+- `tutor-mode` - Hands-on interactive learning with exercises and practice
+- `meta-skill` - Skill discovery and routing via natural language
+
+### Advanced Features
+(See `.claude/skills/` for complete skill catalog)
 
 ### Swarm Coordination
 `hierarchical-coordinator`, `mesh-coordinator`, `adaptive-coordinator`, `collective-intelligence-coordinator`, `swarm-memory-manager`

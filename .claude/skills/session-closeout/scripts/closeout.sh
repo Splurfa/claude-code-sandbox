@@ -54,6 +54,56 @@ fi
 source "$SCRIPT_DIR/lib/closeout-preview.sh"
 show_closeout_preview "$SESSION_ID" "$SUMMARY_FILE"
 
+# Display issue detection results
+ISSUE_RESULTS=".swarm/backups/last-issue-detection.json"
+if [[ -f "$ISSUE_RESULTS" ]]; then
+  echo "=== Issue Detection Results ==="
+
+  # Extract key metrics
+  if command -v jq &> /dev/null; then
+    PATTERN_COUNT=$(jq -r '.pattern_count // 0' "$ISSUE_RESULTS")
+    ISSUES_CREATED=$(jq -r '.issues_created // 0' "$ISSUE_RESULTS")
+    DETECTION_SESSION=$(jq -r '.session_id // "unknown"' "$ISSUE_RESULTS")
+
+    echo "📊 Pattern Analysis:"
+    echo "  • Patterns tracked: $PATTERN_COUNT"
+    echo "  • Issues created: $ISSUES_CREATED"
+    echo "  • Session: $DETECTION_SESSION"
+    echo
+
+    # Show pattern details if any exist
+    if [[ "$PATTERN_COUNT" -gt 0 ]]; then
+      echo "⚠️  Pattern Details:"
+
+      # Display pattern database summary
+      if [[ -f "sessions/findings/.pattern-database.json" ]]; then
+        jq -r 'to_entries[] | "  • \(.value.pattern_name) (\(.value.occurrences) occurrences) - \(if .value.threshold_reached then "⚠️ THRESHOLD REACHED" else "tracking" end)"' \
+          sessions/findings/.pattern-database.json 2>/dev/null || echo "  (Pattern details unavailable)"
+      fi
+      echo
+
+      if [[ "$ISSUES_CREATED" -gt 0 ]]; then
+        echo "🚨 New Issues Created:"
+        jq -r 'to_entries[] | select(.value.threshold_reached == true and .value.issue_created != null and .value.issue_created != "null") | "  • \(.value.issue_created): \(.value.pattern_name)"' \
+          sessions/findings/.pattern-database.json 2>/dev/null || echo "  (Issue details unavailable)"
+        echo
+      fi
+
+      echo "📋 Full Issue Registry: sessions/findings/README.md"
+      echo
+    else
+      echo "✅ No issues detected - clean session!"
+      echo
+    fi
+  else
+    echo "  (jq not found, issue details unavailable)"
+    echo
+  fi
+else
+  echo "ℹ️  Issue detection not run yet - will run automatically on session end"
+  echo
+fi
+
 # Interactive choice menu
 echo "What would you like to do?"
 echo
