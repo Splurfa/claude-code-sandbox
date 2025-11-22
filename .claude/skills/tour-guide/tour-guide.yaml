@@ -164,7 +164,7 @@ pathways:
 
 # Intake menu configuration
 intake_menu:
-  title: "Welcome to Common-Thread Workspace"
+  title: "Welcome to claude-code-sandbox Workspace"
   
   # Feature explorer shown before proficiency assessment
   pre_intake_feature_explorer:

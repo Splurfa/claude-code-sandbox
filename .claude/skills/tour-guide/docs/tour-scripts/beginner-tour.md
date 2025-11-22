@@ -1345,7 +1345,7 @@ Remember: Everyone was a beginner once. You've got this! 💪
 
 **Thank you for taking this tour!**
 
-You're now oriented to the claude-code workspace. The next step is yours—whether that's more learning, practicing, or building something real.
+You're now oriented to the claude-code-sandbox workspace. The next step is yours—whether that's more learning, practicing, or building something real.
 
 Good luck, and remember: **The AI agents are here to help you succeed.** All you need to bring is your imagination and willingness to learn.
 

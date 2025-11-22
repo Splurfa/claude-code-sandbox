@@ -1,4 +1,4 @@
-# Common Thread Sandbox
+# Claude Code Sandbox
 
 A workspace built on **Three Principles** for AI-human collaboration:
 

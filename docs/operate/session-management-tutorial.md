@@ -172,9 +172,9 @@ sessions/session-YYYYMMDD-HHMMSS-<topic>/artifacts/
 **❌ WRONG** (Root directory):
 ```
 claude-code-sandbox/
-├── auth.js          ← NO!
-├── test.js          ← NO!
-└── notes.md         ← NO!
+├── auth.js                     ← NO!
+├── test.js                     ← NO!
+└── notes.md                    ← NO!
 ```
 
 ### Artifact Organization

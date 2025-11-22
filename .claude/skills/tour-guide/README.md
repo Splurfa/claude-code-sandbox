@@ -4,7 +4,7 @@ Interactive workspace orientation tailored to your proficiency level.
 
 ## What This Skill Does
 
-Tour-guide provides a personalized, interactive walkthrough of the common-thread workspace. It assesses your experience level and delivers content at the appropriate depth—from complete beginner to expert contributor.
+Tour-guide provides a personalized, interactive walkthrough of the claude-code-sandbox workspace. It assesses your experience level and delivers content at the appropriate depth—from complete beginner to expert contributor.
 
 **Core features:**
 - **Proficiency-based pathways**: Content adapted to your experience (Beginner/Intermediate/Advanced/Expert)

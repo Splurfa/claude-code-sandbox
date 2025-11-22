@@ -13,7 +13,7 @@ Don't worry about the difference yet. Just know both exist.
 ## Root Directory Structure
 
 ```
-claude-code-sandbox/           ← You are here
+claude-code-sandbox/             ← You are here
 ├── sessions/                    ← Chat session artifacts
 ├── .swarm/                      ← Coordination memory & backups
 ├── .claude/                     ← Agent configs & hooks

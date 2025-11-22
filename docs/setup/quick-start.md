@@ -54,7 +54,7 @@ In 15 minutes, you'll understand:
 npx claude-flow@alpha --version
 # Expected output: v2.7.35 or higher ✅
 
-# Verify workspace structure
+# Verify workspace structure (from claude-code-sandbox/)
 ls -la sessions/ inbox/ .swarm/
 # Should show directories without errors ✅
 ```
