@@ -1,0 +1,310 @@
+#!/bin/bash
+# Issue Detection for Session Closeout
+# Analyzes session artifacts, memory, and system state to detect issues
+
+set -e
+
+SESSION_ID="${1:-}"
+ISSUES_DIR="sessions/issues"
+CAPTAINS_LOG_DIR="sessions/captains-log"
+
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m'
+
+# Source pattern database
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [ -f "$SCRIPT_DIR/pattern-database.sh" ]; then
+    source "$SCRIPT_DIR/pattern-database.sh" 2>/dev/null || true
+fi
+
+# Storage for findings
+declare -a NEW_ISSUES
+declare -a UPDATED_ISSUES
+declare -a RESOLVED_ISSUES
+declare -a PATTERNS
+
+# Validate session ID
+if [ -z "$SESSION_ID" ]; then
+    echo -e "${RED}Error: Session ID required${NC}"
+    echo "Usage: $0 <session-id>"
+    exit 1
+fi
+
+SESSION_DIR="sessions/$SESSION_ID"
+if [ ! -d "$SESSION_DIR" ]; then
+    echo -e "${YELLOW}Warning: Session directory not found: $SESSION_DIR${NC}"
+    echo -e "${YELLOW}Analyzing current workspace state instead...${NC}"
+fi
+
+echo -e "${BLUE}=== Issue Detection for Session: $SESSION_ID ===${NC}"
+echo ""
+
+# 1. Detect session naming violations
+detect_session_naming() {
+    echo -e "${BLUE}Checking session naming compliance...${NC}"
+
+    local violations=0
+    for dir in sessions/*/; do
+        local dirname=$(basename "$dir")
+
+        # Skip known valid directories
+        if [[ "$dirname" == ".archive" ]] || [[ "$dirname" == "captains-log" ]] || [[ "$dirname" == "issues" ]]; then
+            continue
+        fi
+
+        # Check if matches pattern: session-YYYYMMDD-HHMMSS-topic
+        if [[ ! "$dirname" =~ ^session-[0-9]{8}-[0-9]{6}-[a-z0-9-]+$ ]]; then
+            echo -e "${YELLOW}  ⚠ Invalid session name: $dirname${NC}"
+            violations=$((violations + 1))
+        fi
+    done
+
+    if [ $violations -gt 0 ]; then
+        PATTERNS+=("Session naming violations: $violations found (ISSUE-003)")
+        # Track pattern in database
+        if type increment_pattern &>/dev/null; then
+            increment_pattern "session-naming-violation" "Session Naming Protocol Violations" "$SESSION_ID" "high" >/dev/null 2>&1 || true
+        fi
+        return 1
+    else
+        echo -e "${GREEN}  ✓ All sessions properly named${NC}"
+        return 0
+    fi
+}
+
+# 2. Detect file routing violations
+detect_file_routing() {
+    echo -e "${BLUE}Checking file routing compliance...${NC}"
+
+    local violations=0
+
+    # Check for files in root tests/, docs/, scripts/ that should be in sessions/
+    for dir in tests docs scripts; do
+        if [ -d "$dir" ]; then
+            local file_count=$(find "$dir" -type f 2>/dev/null | wc -l | tr -d ' ')
+            if [ "$file_count" -gt 0 ]; then
+                echo -e "${YELLOW}  ⚠ Found $file_count files in root $dir/${NC}"
+                violations=$((violations + 1))
+            fi
+        fi
+    done
+
+    if [ $violations -gt 0 ]; then
+        PATTERNS+=("File routing violations: Found files in root directories (ISSUE-008)")
+        # Track pattern in database
+        if type increment_pattern &>/dev/null; then
+            increment_pattern "file-routing-violation" "File Routing Compliance Violations" "$SESSION_ID" "high" >/dev/null 2>&1 || true
+        fi
+        return 1
+    else
+        echo -e "${GREEN}  ✓ File routing compliant${NC}"
+        return 0
+    fi
+}
+
+# 3. Detect incomplete tasks (if TODO.md exists)
+detect_incomplete_tasks() {
+    echo -e "${BLUE}Checking for incomplete tasks...${NC}"
+
+    if [ -f "$SESSION_DIR/TODO.md" ] || [ -f "$SESSION_DIR/TASKS.md" ]; then
+        local incomplete=$(grep -E '^\- \[ \]' "$SESSION_DIR/TODO.md" "$SESSION_DIR/TASKS.md" 2>/dev/null | wc -l | tr -d ' ')
+
+        if [ "$incomplete" -gt 0 ]; then
+            echo -e "${YELLOW}  ⚠ Found $incomplete incomplete tasks${NC}"
+            PATTERNS+=("Incomplete outputs: $incomplete tasks not completed")
+            # Track pattern in database
+            if type increment_pattern &>/dev/null; then
+                increment_pattern "incomplete-tasks" "Incomplete Task Outputs" "$SESSION_ID" "medium" >/dev/null 2>&1 || true
+            fi
+            return 1
+        fi
+    fi
+
+    echo -e "${GREEN}  ✓ No incomplete tasks detected${NC}"
+    return 0
+}
+
+# 4. Detect documentation-code sync issues
+detect_doc_code_sync() {
+    echo -e "${BLUE}Checking documentation-code synchronization...${NC}"
+
+    if [ -f "$SESSION_DIR/SUMMARY.md" ] || [ -f "$SESSION_DIR/FINAL-SUMMARY.md" ]; then
+        local summary_file="$SESSION_DIR/SUMMARY.md"
+        [ -f "$SESSION_DIR/FINAL-SUMMARY.md" ] && summary_file="$SESSION_DIR/FINAL-SUMMARY.md"
+
+        # Check if summary claims "deployed" or "complete"
+        if grep -qi "deployed\|deployment complete\|status: deployed" "$summary_file" 2>/dev/null; then
+            # Check if any code files were actually modified
+            local code_files=$(find "$SESSION_DIR/artifacts/code" -type f 2>/dev/null | wc -l | tr -d ' ')
+
+            if [ "$code_files" -eq 0 ]; then
+                echo -e "${YELLOW}  ⚠ Summary claims deployment but no code files found${NC}"
+                PATTERNS+=("Documentation-code sync issue: Claims deployment with no code (ISSUE-002)")
+                # Track pattern in database
+                if type increment_pattern &>/dev/null; then
+                    increment_pattern "doc-code-sync-gap" "Documentation-Code Synchronization Gaps" "$SESSION_ID" "high" >/dev/null 2>&1 || true
+                fi
+                return 1
+            fi
+        fi
+    fi
+
+    echo -e "${GREEN}  ✓ Documentation-code sync OK${NC}"
+    return 0
+}
+
+# 5. Detect test failures or false positives
+detect_test_issues() {
+    echo -e "${BLUE}Checking for test issues...${NC}"
+
+    # Look for test results in artifacts
+    if [ -d "$SESSION_DIR/artifacts/tests" ]; then
+        local test_files=$(find "$SESSION_DIR/artifacts/tests" -name "*test*.js" -o -name "*test*.ts" 2>/dev/null)
+
+        if [ -n "$test_files" ]; then
+            # Check for error logs or failure indicators
+            if grep -r "FAIL\|Error:\|failed" "$SESSION_DIR/artifacts/tests" 2>/dev/null > /dev/null; then
+                echo -e "${YELLOW}  ⚠ Test failures detected in session${NC}"
+                PATTERNS+=("Test failures detected in session artifacts")
+                # Track pattern in database
+                if type increment_pattern &>/dev/null; then
+                    increment_pattern "test-failures" "Test Failures or False Positives" "$SESSION_ID" "medium" >/dev/null 2>&1 || true
+                fi
+                return 1
+            fi
+        fi
+    fi
+
+    echo -e "${GREEN}  ✓ No test issues detected${NC}"
+    return 0
+}
+
+# 6. Detect recurring user corrections
+detect_user_corrections() {
+    echo -e "${BLUE}Checking for user corrections...${NC}"
+
+    # Look for correction phrases in chat transcripts or summaries
+    if [ -f "$SESSION_DIR/SUMMARY.md" ]; then
+        local corrections=$(grep -i "actually\|instead\|no, \|correction\|fix:" "$SESSION_DIR/SUMMARY.md" 2>/dev/null | wc -l | tr -d ' ')
+
+        if [ "$corrections" -gt 3 ]; then
+            echo -e "${YELLOW}  ⚠ Multiple user corrections detected: $corrections${NC}"
+            PATTERNS+=("Recurring corrections: $corrections found in session")
+            # Track pattern in database
+            if type increment_pattern &>/dev/null; then
+                increment_pattern "user-corrections" "Recurring User Corrections" "$SESSION_ID" "medium" >/dev/null 2>&1 || true
+            fi
+            return 1
+        fi
+    fi
+
+    echo -e "${GREEN}  ✓ No excessive corrections detected${NC}"
+    return 0
+}
+
+# 7. Query pattern database for statistics
+query_pattern_database() {
+    echo -e "${BLUE}Querying pattern database...${NC}"
+
+    if type get_stats &>/dev/null; then
+        get_stats 2>/dev/null || true
+    else
+        echo -e "${YELLOW}  ⚠ Pattern database not available${NC}"
+    fi
+}
+
+# 8. Generate findings report
+generate_report() {
+    echo ""
+    echo -e "${BLUE}=== Issue Detection Report ===${NC}"
+    echo ""
+
+    # Count findings
+    local new_count=${#NEW_ISSUES[@]}
+    local updated_count=${#UPDATED_ISSUES[@]}
+    local resolved_count=${#RESOLVED_ISSUES[@]}
+    local pattern_count=${#PATTERNS[@]}
+
+    if [ $pattern_count -eq 0 ]; then
+        echo -e "${GREEN}✓ No issues detected in this session!${NC}"
+        echo ""
+        return 0
+    fi
+
+    # New issues
+    if [ $new_count -gt 0 ]; then
+        echo -e "${YELLOW}### New Issues Detected ($new_count)${NC}"
+        for issue in "${NEW_ISSUES[@]}"; do
+            echo "- $issue"
+        done
+        echo ""
+    fi
+
+    # Updates to existing
+    if [ $updated_count -gt 0 ]; then
+        echo -e "${BLUE}### Updates to Existing Issues ($updated_count)${NC}"
+        for issue in "${UPDATED_ISSUES[@]}"; do
+            echo "- $issue"
+        done
+        echo ""
+    fi
+
+    # Resolved issues
+    if [ $resolved_count -gt 0 ]; then
+        echo -e "${GREEN}### Issues Resolved ($resolved_count)${NC}"
+        for issue in "${RESOLVED_ISSUES[@]}"; do
+            echo "- $issue"
+        done
+        echo ""
+    fi
+
+    # Patterns detected
+    if [ $pattern_count -gt 0 ]; then
+        echo -e "${YELLOW}### Pattern Analysis${NC}"
+        for pattern in "${PATTERNS[@]}"; do
+            echo "- $pattern"
+        done
+        echo ""
+    fi
+
+    # Show pattern database summary
+    echo -e "${BLUE}### Pattern Database Summary${NC}"
+    if type list_all_patterns &>/dev/null; then
+        list_all_patterns 2>/dev/null || echo "  Pattern database not available"
+    fi
+
+    echo -e "${BLUE}→ Action Required: Review findings in ${ISSUES_DIR}/${NC}"
+    echo ""
+}
+
+# 9. Main detection workflow
+main() {
+    echo -e "${BLUE}Starting issue detection for session: $SESSION_ID${NC}"
+    echo ""
+
+    # Run all detection checks
+    detect_session_naming || true
+    detect_file_routing || true
+    detect_incomplete_tasks || true
+    detect_doc_code_sync || true
+    detect_test_issues || true
+    detect_user_corrections || true
+    query_pattern_database || true
+
+    # Generate and display report
+    generate_report
+
+    # Return exit code based on findings
+    if [ ${#PATTERNS[@]} -gt 0 ]; then
+        return 1  # Issues found
+    else
+        return 0  # No issues
+    fi
+}
+
+# Run main
+main

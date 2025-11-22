@@ -29,8 +29,9 @@ SESSIONS_DIR="$SCRIPT_DIR"
 ARCHIVE_DIR="$SESSIONS_DIR/.archive"
 BACKUP_PREFIX="backup-before-batch-closeout"
 TIMESTAMP="$(date +%Y%m%d-%H%M%S)"
-LOG_FILE="$SESSIONS_DIR/batch-closeout-$TIMESTAMP.log"
-REPORT_FILE="$SESSIONS_DIR/batch-closeout-report-$TIMESTAMP.md"
+BATCH_DIR="$SESSIONS_DIR/.batch-closeout"
+LOG_FILE="$BATCH_DIR/logs/batch-closeout-$TIMESTAMP.log"
+REPORT_FILE="$BATCH_DIR/reports/batch-closeout-report-$TIMESTAMP.md"
 
 # Colors for output
 RED='\033[0;31m'

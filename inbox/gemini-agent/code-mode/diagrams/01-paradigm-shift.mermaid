@@ -1,0 +1,25 @@
+sequenceDiagram
+    participant U as User/Agent
+    participant S as System/MCP
+
+    rect rgb(255, 230, 230)
+    note right of U: Traditional Tool Loop (High Latency)
+    U->>S: Call Tool A (e.g., swarm_init)
+    S-->>U: Result A
+    U->>U: Reason about next step...
+    U->>S: Call Tool B (e.g., agent_spawn)
+    S-->>U: Result B
+    end
+
+    rect rgb(230, 255, 230)
+    note right of U: Code Mode Loop (Low Latency)
+    U->>U: Write Plan (Calls A & B via SDK)
+    U->>S: Execute Plan
+    activate S
+    S->>S: Run Script in Sandbox
+    S->>S: Proxy Call Tool A
+    S->>S: Proxy Call Tool B
+    S-->>U: Final Result (Logs + Data)
+    deactivate S
+    end
+

@@ -1,0 +1,28 @@
+graph TD
+    subgraph "Claude Flow Workspace"
+        Agent[Claude Code Agent]
+        FS[FileSystem (Session Artifacts)]
+        
+        subgraph "MCP Server Context"
+            Registry[Tool Registry]
+            
+            subgraph "Code Mode Integration"
+                Wrapper[Tool Wrapper (execute_plan)]
+                Runtime[Runtime Harness (VM)]
+                SDK[SDK Shim Proxy]
+            end
+            
+            Existing[Existing MCP Tools]
+        end
+    end
+
+    Agent -->|1. Writes Plan| FS
+    Agent -->|2. Calls execute_plan| Wrapper
+    Wrapper -->|3. Reads Plan| FS
+    Wrapper -->|4. Invokes| Runtime
+    Runtime -->|5. Uses| SDK
+    SDK -->|6. Proxies Calls| Existing
+    Existing -->|7. Returns Result| SDK
+    Runtime -->|8. Returns Logs| Wrapper
+    Wrapper -->|9. Final Output| Agent
+

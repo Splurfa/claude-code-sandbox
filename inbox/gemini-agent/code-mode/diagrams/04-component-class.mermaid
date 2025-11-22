@@ -1,0 +1,33 @@
+classDiagram
+    class CodeModeManager {
+        +runtime: CodeModeRuntime
+        +workspaceRoot: string
+        +constructor(root, toolCaller)
+        +getToolDefinition()
+        +handleToolCall(params)
+        -extractSessionId(path)
+    }
+
+    class CodeModeRuntime {
+        -toolExecutor: Function
+        +constructor(toolExecutor)
+        +execute(code, sessionContext): ExecutionResult
+    }
+
+    class ToolExecutor {
+        <<interface>>
+        (toolName, params) => Promise<any>
+    }
+
+    class ExecutionResult {
+        <<interface>>
+        +success: boolean
+        +result: any
+        +error: string
+        +logs: string[]
+    }
+
+    CodeModeManager *-- CodeModeRuntime
+    CodeModeRuntime o-- ToolExecutor : Injected
+    CodeModeRuntime ..> ExecutionResult : Returns
+

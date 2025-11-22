@@ -1,0 +1,25 @@
+sequenceDiagram
+    participant Agent
+    participant FS as FileSystem
+    participant MCP as MCP Server
+    participant Runtime as VM Sandbox
+
+    Note over Agent: "I need to init swarm & spawn agents"
+    
+    Agent->>FS: Write sessions/.../plan.ts
+    Note right of FS: await sdk.swarm_init(...)<br/>await sdk.agent_spawn(...)
+    
+    Agent->>MCP: execute_plan({ path: ".../plan.ts" })
+    
+    MCP->>FS: Read plan.ts
+    MCP->>Runtime: Execute(code)
+    
+    activate Runtime
+    Runtime->>MCP: Proxy: swarm_init()
+    MCP-->>Runtime: Success
+    Runtime->>MCP: Proxy: agent_spawn()
+    MCP-->>Runtime: Success
+    deactivate Runtime
+    
+    MCP-->>Agent: ToolResult (Logs + Success)
+

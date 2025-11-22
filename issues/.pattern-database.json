@@ -1,0 +1,21 @@
+{
+  "file-routing-violation": {
+    "pattern_id": "file-routing-violation",
+    "pattern_name": "File Routing Violations",
+    "category": "protocol",
+    "occurrences": 3,
+    "first_seen": "2025-11-21T19:17:57Z",
+    "last_seen": "2025-11-21T19:17:57Z",
+    "sessions": [
+      "session-001",
+      "session-002",
+      "session-003"
+    ],
+    "severity": "high",
+    "threshold": 3,
+    "threshold_reached": true,
+    "issue_created": "ISSUE-009",
+    "status": "tracked",
+    "metadata": {}
+  }
+}
