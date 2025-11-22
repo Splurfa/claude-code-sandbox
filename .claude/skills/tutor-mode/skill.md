@@ -81,6 +81,7 @@ The tutor will guide you through each phase.
 
 **Key Topics**:
 - Spawning Agents (`learning/02-essential-skills/spawning-agents.md`)
+- Understanding Agent Definitions (see section below)
 - Parallel Execution (`learning/02-essential-skills/parallel-execution.md`)
 - Memory Coordination (`learning/02-essential-skills/memory-coordination.md`)
 - Session Management (`learning/02-essential-skills/session-management.md`)
@@ -344,6 +345,125 @@ tutor-mode/questions/{topic}   # FAQ responses
 # Close when done
 /session-closeout
 \`\`\`
+
+---
+
+## System Architecture: Stock vs. Custom
+
+### Understanding the Boundary
+This workspace is built on a "Stock-First" philosophy, meaning we use the powerful native engine for execution and only add thin custom layers for organization.
+
+1. **Stock Claude Code** (The Execution Layer):
+   - CLI interface
+   - Task() tool for parallel execution
+   - File operations
+
+2. **Stock Claude Flow** (The Orchestration Layer):
+   - **SPARC Methodology**: Native systematic development process
+   - **Orchestration Topologies**: Mesh, Hierarchical, Star, Ring (Native)
+   - **ReasoningBank**: Native learning system
+   - **Custom Commands**: Native engine for slash commands
+   - **Skill Integration**: Native framework
+
+3. **Custom Extensions** (The User Layer):
+   - **Session Management**: Organization protocol for containment
+   - **Interactive Learning**: Tutor Mode and Tour Guide skills
+   - **Captains Log**: Documentation protocol
+
+### Why This Matters
+Knowing what is "Stock" helps you trust the system. When you use SPARC or Parallel Execution, you are using the core, battle-tested engine, not a custom script. When you use Tutor Mode, you are using a helpful custom guide layered on top.
+
+---
+
+## Understanding Agent Definitions
+
+### What Are Agent Definitions?
+
+Agent definition files in `.claude/agents/` are **reference documentation** for agent types. They are NOT automatically loaded when you use Task() tool, but they provide valuable information about agent capabilities and behavior.
+
+### Key Concepts
+
+1. **Agent Definitions vs Agent Types**:
+   - Agent definitions: Reference documentation files (`.claude/agents/core/coder.md`)
+   - Agent types: String identifiers used in Task() tool (`"coder"`, `"researcher"`)
+   - Task() uses agent-type as semantic hint, NOT file reference
+
+2. **What Agent Definitions Contain**:
+   - YAML frontmatter: Metadata (name, type, capabilities, hooks)
+   - Markdown content: Detailed prompts and instructions
+   - Hooks examples: Reference examples (not automatically executed)
+   - Capability descriptions: What the agent can do
+
+3. **How to Use Agent Definitions**:
+   - **Reference**: Check definitions to understand agent capabilities
+   - **Documentation**: Learn what each agent type does
+   - **Templates**: Use as templates when creating custom agents
+   - **Coordination**: Reference hooks examples for coordination patterns
+
+### Practical Usage
+
+**Example: Understanding Coder Agent**
+```javascript
+// Check agent definition for capabilities
+Read: .claude/agents/core/coder.md
+
+// Learn what coder agent does:
+// - Code implementation
+// - API design
+// - Refactoring
+// - Optimization
+// - Error handling
+
+// Use in Task() with semantic understanding
+Task("Backend Developer", "Implement REST API. Save to sessions/$SESSION_ID/artifacts/code/.", "coder")
+//                    ↑
+//            Agent-type is semantic hint
+//            NOT loaded from coder.md file
+```
+
+**Example: Creating Custom Agent**
+```javascript
+// Use agent definition as template
+1. Copy structure from .claude/agents/core/coder.md
+2. Modify YAML frontmatter for your agent
+3. Update markdown content with your prompts
+4. Use new agent-type in Task() calls
+```
+
+### Common Misconceptions
+
+❌ **Wrong**: "Agent definitions are automatically loaded when I use Task()"
+✅ **Correct**: "Agent definitions are reference documentation. Task() uses agent-type as semantic hint."
+
+❌ **Wrong**: "I need to load agent definitions manually"
+✅ **Correct**: "Agent definitions are optional reference material. Task() works without them."
+
+❌ **Wrong**: "Agent definition hooks are automatically executed"
+✅ **Correct**: "Agent definition hooks are examples. Workspace hooks in .claude/settings.json are executed."
+
+### Advanced: Agent Definition Hooks
+
+Agent definitions contain hooks in YAML frontmatter, but these are **reference examples**, not automatically executed code.
+
+**Workspace Hooks** (actually executed):
+- Configured in `.claude/settings.json`
+- Fire automatically via Claude Code native hooks
+- PreToolUse: Before file operations
+- PostToolUse: After file operations
+
+**Agent Definition Hooks** (reference examples):
+- Shown in YAML frontmatter
+- Demonstrate coordination patterns
+- NOT automatically executed
+- Use as reference for custom hooks
+
+### Best Practices
+
+1. **Use as Reference**: Check agent definitions to understand capabilities
+2. **Don't Expect Auto-Loading**: Task() works independently
+3. **Learn Patterns**: Study hooks examples for coordination ideas
+4. **Create Custom**: Use definitions as templates for custom agents
+5. **Stay Stock-First**: Keep definitions as reference, don't modify core behavior
 
 ---
 
@@ -903,6 +1023,36 @@ mcp__claude-flow_alpha__memory_usage({
 
 **Time**: 1-2 hours
 
+#### Exercise E4: Explore Agent Definitions
+**Goal**: Understand what agent definitions are and how to use them.
+
+**Prerequisites**: Exercise E1 completed
+
+**Steps**:
+1. List all agent definitions: `ls -R .claude/agents/`
+2. Read a core agent definition: `read .claude/agents/core/coder.md`
+3. Identify YAML frontmatter sections
+4. Note capabilities listed
+5. Spawn agent using agent-type from definition
+6. Verify agent-type is semantic hint (not file reference)
+
+**Questions to Answer**:
+- What information do agent definitions contain?
+- How do agent definitions relate to Task() tool?
+- Are agent definitions automatically loaded?
+- How can you use agent definitions as reference?
+
+**Success Criteria**:
+- ✅ Can locate agent definition files
+- ✅ Understands YAML frontmatter structure
+- ✅ Recognizes agent definitions as reference documentation
+- ✅ Successfully spawns agent using agent-type
+- ✅ Understands agent-type is semantic hint, not file reference
+
+**Expected Outcome**: Clear understanding that agent definitions are reference documentation, not runtime code.
+
+**Time**: 20-30 minutes
+
 ### Intermediate Exercises
 
 #### Exercise I1: Swarm Topology Selection
@@ -1154,6 +1304,8 @@ duplicating work or missing files.
 - ✅ Knows memory coordination patterns (handoff, fan-out/fan-in)
 - ✅ Can explain session artifacts structure
 - ✅ Understands HITL approval process
+- ✅ Understands agent definitions are reference documentation (not automatically loaded)
+- ✅ Knows difference between agent definitions and agent types
 
 **Skills**:
 - ✅ Spawns 5+ agents in one message

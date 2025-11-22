@@ -350,7 +350,7 @@ Nice to have but not blockers:
 
 1. **Fix Database Path** (2 minutes)
 ```bash
-cd /Users/splurfa/common-thread-sandbox
+cd /Users/splurfa/claude-code-sandbox
 jq '.["FINDING-009"].file = "records/FINDING-009-file-routing-compliance-violations.md"' \
   sessions/findings/.database/findings.json > temp.json
 mv temp.json sessions/findings/.database/findings.json

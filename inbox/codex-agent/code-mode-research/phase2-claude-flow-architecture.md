@@ -8,7 +8,7 @@
 | [^phase12] | `docs/phase-1-2-implementation-summary.md` | Progressive disclosure + `tools/search` implementation (98.7% token reduction) |
 | [^mcp2025] | `docs/mcp-2025-implementation-summary.md` | MCP 2025-11 compliance (version negotiation, async jobs, registry) |
 
-> All file paths refer to the Claude-Flow repository root (`/Users/splurfa/common-thread-sandbox/claude-flow` wrapper).
+> All file paths refer to the Claude-Flow repository root (`/Users/splurfa/claude-code-sandbox/claude-flow` wrapper).
 
 ---
 

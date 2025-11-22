@@ -171,7 +171,7 @@ sessions/session-YYYYMMDD-HHMMSS-<topic>/artifacts/
 
 **❌ WRONG** (Root directory):
 ```
-common-thread-sandbox/
+claude-code-sandbox/
 ├── auth.js          ← NO!
 ├── test.js          ← NO!
 └── notes.md         ← NO!

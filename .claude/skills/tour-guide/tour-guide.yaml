@@ -2,7 +2,7 @@
 name: tour-guide
 description: Interactive workspace tour tailored to proficiency level
 version: 1.0.0
-author: common-thread-sandbox
+author: claude-code-sandbox
 tags: [orientation, onboarding, learning, navigation]
 
 # Skill metadata
@@ -165,11 +165,27 @@ pathways:
 # Intake menu configuration
 intake_menu:
   title: "Welcome to Common-Thread Workspace"
+  
+  # Feature explorer shown before proficiency assessment
+  pre_intake_feature_explorer:
+    enabled: true
+    default_overview: advanced
+    skip_option: true
+    navigation_commands:
+      - "1-10: View feature details"
+      - "skills: View custom skills catalog"
+      - "breakdown: Stock vs custom comparison"
+      - "continue: Proceed to proficiency assessment"
+      - "skip: Skip directly to Advanced pathway"
+      - "back: Return to overview"
+  
   intro: |
-    I'll help you explore this workspace at a pace that matches your experience level.
-    This quick assessment (3 questions) will help me tailor the tour to your needs.
-
-    Ready to start? (Or skip to manual selection below)
+    Before we assess your experience level, let's explore the impressive
+    capabilities of this workspace. This overview highlights features that
+    demonstrate large-scale high-quality work coordination.
+    
+    After exploring features, we'll assess your proficiency level
+    to tailor the tour to your needs.
 
   questions:
     - id: q1
@@ -250,9 +266,9 @@ intake_menu:
       pathway: expert
     - condition: { q1: D, q2: D, q3: D }
       pathway: expert
-    # Default fallback
+    # Default fallback (changed to advanced per plan)
     - condition: { default: true }
-      pathway: intermediate
+      pathway: advanced
 
   manual_selection:
     title: "Or skip the questionnaire and choose your level:"

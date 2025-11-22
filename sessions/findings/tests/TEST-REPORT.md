@@ -3,7 +3,7 @@
 **Date**: 2025-11-21
 **Test Suite**: Complete Integration Validation
 **Execution**: Full automated test suite
-**Location**: `/Users/splurfa/common-thread-sandbox/sessions/findings/tests/integration/test-integration.sh`
+**Location**: `/Users/splurfa/claude-code-sandbox/sessions/findings/tests/integration/test-integration.sh`
 
 ---
 
@@ -238,7 +238,7 @@ These are purely optional and not required for system operation.
 ## Test Suite Details
 
 ### Test File Location
-`/Users/splurfa/common-thread-sandbox/sessions/findings/tests/integration/test-integration.sh`
+`/Users/splurfa/claude-code-sandbox/sessions/findings/tests/integration/test-integration.sh`
 
 ### Test Categories
 1. Pattern Tracking Tests (3 tests)

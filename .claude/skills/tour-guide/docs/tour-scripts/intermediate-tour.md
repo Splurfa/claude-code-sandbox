@@ -107,13 +107,14 @@ Strict file routing rules ensure all work stays organized in session artifacts. 
 
 ### Stock vs. Custom (Overview)
 
-This workspace has an **82/100 stock-first score**:
+This workspace has a **92/100 stock-first score**:
 
-- **Core**: 100% stock claude-flow (swarm, memory, neural)
-- **Extensions**: Session management, file routing (5% custom code)
-- **Hooks**: 98% stock (uses claude-flow CLI + Claude Code native hooks)
+- **Core**: 100% Stock Claude Flow (SPARC, Topologies, Reasoning, Swarm, Custom Commands)
+- **Execution**: 100% Stock Claude Code (CLI, Task tool, File ops)
+- **Extensions**: Custom Skills (31 domain skills), Session Management, Protocols
+- **Philosophy**: Use the powerful stock engine for all execution, add thin custom layers for organization and learning.
 
-The custom extensions add workflow management without modifying the core claude-flow system. This means you get the battle-tested foundation (68% stock architecture, 97.5% stock implementation) plus productivity enhancements.
+This means you get the battle-tested foundation (Stock Claude Flow) plus productivity enhancements (Session Mgmt, Tutor Mode) without modifying the core system.
 
 For a deep dive into stock vs. custom analysis, see the Advanced pathway (`/tour jump advanced`).
 
@@ -1220,6 +1221,134 @@ Edit("package.json")                                        # Original location
 
 → `/tour next` - Next Steps & Resources
 → `/tour back` - Memory coordination
+
+---
+
+## Section 5.5: Skill Composition & Custom Commands (NEW)
+
+**Duration**: ~8 minutes
+**Goal**: Understand how skills integrate and how to create custom workflows
+
+### Skill Integration: How Skills Work Together
+
+This workspace includes 31 custom skills that integrate seamlessly. Skills don't work in isolation—they compose into powerful workflows.
+
+**Meta-Skill Routing**:
+```bash
+# Natural language skill discovery
+/meta-skill "help me optimize my prompts"
+
+# Meta-skill analyzes your request:
+→ Extracts keywords: ["optimize", "prompts"]
+→ Scores skills: prompt-improver (95%), verification-quality (38%)
+→ Auto-invokes prompt-improver (>80% confidence)
+```
+
+**Stream-Chain Sequential Execution**:
+```bash
+# Execute skills in sequence with data flow
+/stream-chain prompt-improver → verification-quality → github-code-review
+
+# Each skill receives output from previous skill
+# Data flows automatically between skills
+```
+
+### Custom Commands: Powerful Workflow Composition
+
+Custom commands let you combine multiple skills into reusable workflows. This is where the real power of skill integration shines.
+
+**Example: Full-Stack Feature Command**:
+```bash
+/full-stack-feature user-authentication --topology=mesh --phases=all
+
+# This custom command executes:
+1. SPARC Specification Phase
+   - researcher skill: Gather requirements
+   - planner skill: Create user stories
+   
+2. SPARC Architecture Phase
+   - system-architect skill: Design system
+   - db-architect skill: Design database
+   
+3. Swarm Orchestration Setup
+   - swarm-orchestration skill: Initialize mesh topology
+   - Spawn backend, frontend, database agents
+   
+4. SPARC Refinement Phase (Parallel)
+   - coder skill: Implement backend
+   - coder skill: Implement frontend
+   - tester skill: Write tests
+   
+5. Quality Gates
+   - github-code-review skill: Review code
+   - verification-quality skill: Score quality, rollback if needed
+   
+6. SPARC Completion Phase
+   - documenter skill: Generate documentation
+   - workflow-manager skill: Prepare deployment
+```
+
+**Why Custom Commands Are Powerful**:
+- **Reusable**: Save workflows for repeated use
+- **Composable**: Combine any skills into workflows
+- **Parameterized**: Execute with different parameters
+- **Coordinated**: Skills work together seamlessly
+- **Scalable**: Handle complex multi-phase workflows
+
+### Creating Your Own Custom Commands
+
+You can create custom commands by combining skills:
+
+```bash
+# Example: Code review workflow
+/custom-command code-review-workflow
+  Step 1: swarm-orchestration --topology=star
+  Step 2: github-code-review --strict
+  Step 3: verification-quality --threshold=80
+  Step 4: prompt-improver --suggest-improvements
+```
+
+**Best Practices**:
+- Start with meta-skill to discover relevant skills
+- Use stream-chain for sequential execution
+- Combine with SPARC methodology for structured workflows
+- Use memory to pass data between skills
+- Test workflows before saving as custom commands
+
+### Integration Examples
+
+**Skill + Topology Integration**:
+```bash
+# Skills can request specific topologies
+/swarm-orchestration --topology=hierarchical --max-agents=8
+→ Skills coordinate agents using hierarchical topology
+```
+
+**Skill + Memory Integration**:
+```bash
+# Skills store patterns in memory
+/prompt-improver "optimize this code"
+→ Stores successful patterns in memory
+→ Future prompts use learned patterns
+```
+
+**Skill + SPARC Integration**:
+```bash
+# SPARC methodology uses skills for each phase
+/sparc-methodology full-feature
+→ Specification phase: Uses researcher, planner skills
+→ Architecture phase: Uses system-architect, db-architect skills
+→ Refinement phase: Uses coder, tester skills
+→ Completion phase: Uses documenter, workflow-manager skills
+```
+
+### Next: Advanced Patterns
+
+In the Advanced pathway, you'll learn:
+- Deep SPARC + topology integration
+- Advanced orchestration patterns
+- Custom command optimization
+- ReasoningBank learning patterns
 
 ---
 

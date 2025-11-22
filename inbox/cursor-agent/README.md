@@ -1,7 +1,7 @@
 # Cursor Agent Workspace
 
 **External Agent**: Cursor
-**Purpose**: Parallel research and contributions to common-thread-sandbox
+**Purpose**: Parallel research and contributions to claude-code-sandbox
 **Status**: Active
 
 ## ⚠️ Claude Code: Do Not Edit

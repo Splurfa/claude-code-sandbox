@@ -1,5 +1,7 @@
 # Natural Language Agent Patterns
 
+> **Important Distinction**: This README describes **"Agent Patterns"** - natural language trigger phrases that execute bash workflows. The actual `.claude/agents/*.md` files in this directory are **"Agent Definitions"** - reference documentation for agent types used by the Task() tool. See below for clarification.
+
 ## Why This Exists
 
 **Problem:** Workflow automation requires learning CLI syntax, remembering command flags, and chaining multiple tools. Friction kills adoption.
@@ -10,6 +12,14 @@
 
 Agent patterns are **trigger phrases** that execute stock claude-flow commands. They're thin wrappers around battle-tested CLI tools, not custom frameworks.
 
+**Note**: The `.claude/agents/*.md` files in this directory serve a dual purpose:
+1. **Agent Patterns** (described in this README): Some files define natural language triggers for bash workflows
+2. **Agent Definitions** (reference documentation): Most files contain detailed prompts, instructions, and YAML frontmatter for agent types used by the Task() tool
+
+**Key Distinction**:
+- **Agent Patterns**: Natural language → bash commands (executed workflows)
+- **Agent Definitions**: Reference documentation for Task() tool's agent-type parameter (NOT automatically loaded)
+
 **Example:**
 ```
 You say: "Close out this session"
@@ -19,14 +29,39 @@ System runs:
   3. Archives to .swarm/backups/session-$TIMESTAMP.json
 ```
 
-## How Agent.md Files Work
+## How Agent Pattern Files Work
 
-Each `.claude/agents/*.md` file defines:
+Some `.claude/agents/*.md` files define **Agent Patterns** (natural language triggers):
 
 1. **Trigger phrase** (what you say)
 2. **Bash commands** (what executes)
 3. **Validation** (safety checks)
 4. **Documentation** (why this pattern exists)
+
+**Examples of Agent Pattern Files**:
+- `session-closeout.md` - Natural language trigger for session closeout workflow
+- `captains-log.md` - Natural language trigger for logging workflow
+- `file-routing.md` - Natural language trigger for file routing checks
+
+## Agent Definitions vs Agent Patterns
+
+**Most `.claude/agents/*.md` files are Agent Definitions** (reference documentation):
+
+- **Purpose**: Provide detailed prompts, instructions, and YAML frontmatter for agent types
+- **Usage**: Reference when crafting Task() tool calls with agent-type parameter
+- **NOT automatically loaded**: Task() uses agent-type as semantic hint, not file reference
+- **Examples**: `core/coder.md`, `core/researcher.md`, `templates/implementer-sparc-coder.md`
+
+**Some `.claude/agents/*.md` files are Agent Patterns** (bash workflows):
+
+- **Purpose**: Natural language triggers that execute stock claude-flow commands
+- **Usage**: Say the trigger phrase, system executes bash workflow
+- **Examples**: `session-closeout.md`, `captains-log.md`
+
+**For more information on Agent Definitions**, see:
+- `CLAUDE.md` - "Understanding Agent Definitions" section
+- `.claude/skills/tutor-mode/skill.md` - "Understanding Agent Definitions" section
+- `inbox/cursor-agent/claude-flow-setup/agent-definitions-research.md` - Research findings
 
 ### File Structure
 

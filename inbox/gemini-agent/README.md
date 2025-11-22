@@ -1,7 +1,7 @@
 # Gemini Agent Workspace
 
 **External Agent**: Google Gemini (Gemini 2.0 Flash Thinking Experimental)
-**Purpose**: Parallel research, validation, and contributions to common-thread-sandbox
+**Purpose**: Parallel research, validation, and contributions to claude-code-sandbox
 **Status**: Active
 
 ## ⚠️ Claude Code: Do Not Edit

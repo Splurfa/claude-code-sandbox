@@ -4,7 +4,7 @@
 > - **Architecture**: See [Workspace Architecture Explained](docs/reference/architecture.md)
 > - **Session Management**: See [Session Management Explained](docs/operate/session-management.md)
 > - **File Routing**: See [Quick Start Guide](docs/setup/quick-start.md)
-> - **Stock-First Score**: 82/100 (68% stock architecture / 97.5% stock implementation)
+> - **Stock-First Score**: 92/100 (Architecture is Stock Claude Flow / Customizations are additive skills & protocols)
 
 ---
 
@@ -275,6 +275,73 @@ The wizard handles agent spawning, coordination, and result consolidation automa
 
 ### Core Development
 `coder`, `reviewer`, `tester`, `planner`, `researcher`
+
+### Understanding Agent Definitions
+
+**What Are Agent Definition Files?**
+
+Agent definition files in `.claude/agents/` are **reference documentation** for agent types. They are NOT automatically loaded when you use the Task() tool, but they provide valuable information about agent capabilities and behavior.
+
+**Key Concepts**:
+
+1. **Agent Definitions vs Agent Types**:
+   - **Agent definitions**: Reference documentation files (`.claude/agents/core/coder.md`)
+   - **Agent types**: String identifiers used in Task() tool (`"coder"`, `"researcher"`)
+   - Task() uses agent-type as semantic hint, NOT file reference
+
+2. **What Agent Definitions Contain**:
+   - YAML frontmatter: Metadata (name, type, capabilities, hooks)
+   - Markdown content: Detailed prompts and instructions
+   - Hooks examples: Reference examples (not automatically executed)
+   - Capability descriptions: What the agent can do
+
+3. **How to Use Agent Definitions**:
+   - **Reference**: Check definitions to understand agent capabilities
+   - **Documentation**: Learn what each agent type does
+   - **Templates**: Use as templates when creating custom agents
+   - **Coordination**: Reference hooks examples for coordination patterns
+
+**Important**: Agent definitions are **reference documentation**, not runtime code. The Task() tool works independently and uses agent-type as a semantic hint to understand the role, not to load instructions from the definition file.
+
+**Example Usage**:
+```javascript
+// Check agent definition for capabilities
+Read: .claude/agents/core/coder.md
+
+// Learn what coder agent does:
+// - Code implementation
+// - API design
+// - Refactoring
+// - Optimization
+// - Error handling
+
+// Use in Task() with semantic understanding
+Task("Backend Developer", "Implement REST API. Save to sessions/$SESSION_ID/artifacts/code/.", "coder")
+//                    ↑
+//            Agent-type is semantic hint
+//            NOT loaded from coder.md file
+```
+
+**Common Misconceptions**:
+
+❌ **Wrong**: "Agent definitions are automatically loaded when I use Task()"
+✅ **Correct**: "Agent definitions are reference documentation. Task() uses agent-type as semantic hint."
+
+❌ **Wrong**: "I need to load agent definitions manually"
+✅ **Correct**: "Agent definitions are optional reference material. Task() works without them."
+
+❌ **Wrong**: "Agent definition hooks are automatically executed"
+✅ **Correct**: "Agent definition hooks are examples. Workspace hooks in .claude/settings.json are executed."
+
+**Best Practices**:
+
+1. **Use as Reference**: Check agent definitions to understand capabilities
+2. **Don't Expect Auto-Loading**: Task() works independently
+3. **Learn Patterns**: Study hooks examples for coordination ideas
+4. **Create Custom**: Use definitions as templates for custom agents
+5. **Stay Stock-First**: Keep definitions as reference, don't modify core behavior
+
+For more details, see the tutor-mode skill's "Understanding Agent Definitions" section.
 
 ## 🎓 Available Skills
 

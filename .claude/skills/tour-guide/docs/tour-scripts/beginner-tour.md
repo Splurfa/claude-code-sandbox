@@ -16,7 +16,7 @@
 
 ### Welcome! 👋
 
-Hello and welcome to your workspace tour! If you're reading this, you've just opened a special development environment called "common-thread-sandbox." Don't worry if those words sound technical—by the end of this tour, you'll understand exactly what everything means.
+Hello and welcome to your workspace tour! If you're reading this, you've just opened a special development environment called "claude-code-sandbox." Don't worry if those words sound technical—by the end of this tour, you'll understand exactly what everything means.
 
 **First, the most important thing: You don't need to know anything about programming or AI to start this tour.** We'll explain everything from the ground up using simple, everyday language.
 
@@ -80,6 +80,7 @@ With this workspace:
 - Multiple AI specialists can work together
 - Work is automatically saved and organized
 - You can pick up where you left off
+    - **Advanced capabilities**: This workspace leverages the **Stock Claude Flow** engine for powerful orchestration (SPARC methodology, ReasoningBank learning, 4+ topologies) while adding a custom layer for **Session Management** and **Interactive Learning** (Tour Guide, Tutor Mode). You'll learn more about these features as you progress, or you can explore them in the feature explorer we showed you earlier.
 
 ### Tour Duration & Navigation
 
@@ -320,7 +321,7 @@ Do create a new session when you start something completely different, like swit
 When you look at the workspace folder structure, sessions live here:
 
 ```
-common-thread-sandbox/              (the main workspace folder)
+claude-code-sandbox/              (the main workspace folder)
 └── sessions/                       (all sessions go here)
     ├── session-20251121-143000-calculator-app/
     ├── session-20251121-150000-todo-list/
@@ -1344,7 +1345,7 @@ Remember: Everyone was a beginner once. You've got this! 💪
 
 **Thank you for taking this tour!**
 
-You're now oriented to the common-thread workspace. The next step is yours—whether that's more learning, practicing, or building something real.
+You're now oriented to the claude-code workspace. The next step is yours—whether that's more learning, practicing, or building something real.
 
 Good luck, and remember: **The AI agents are here to help you succeed.** All you need to bring is your imagination and willingness to learn.
 

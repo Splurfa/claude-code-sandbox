@@ -13,7 +13,7 @@ Don't worry about the difference yet. Just know both exist.
 ## Root Directory Structure
 
 ```
-common-thread-sandbox/           ← You are here
+claude-code-sandbox/           ← You are here
 ├── sessions/                    ← Chat session artifacts
 ├── .swarm/                      ← Coordination memory & backups
 ├── .claude/                     ← Agent configs & hooks
@@ -194,7 +194,7 @@ sessions/session-YYYYMMDD-HHMMSS-<topic>/artifacts/
 ### ❌ Wrong (Don't Do This)
 
 ```
-common-thread-sandbox/
+claude-code-sandbox/
 ├── test.js       ← NO! Goes to sessions/.../artifacts/tests/
 ├── notes.md      ← NO! Goes to sessions/.../artifacts/notes/
 └── script.sh     ← NO! Goes to sessions/.../artifacts/scripts/
@@ -216,7 +216,7 @@ node_modules/        ← NPM dependencies (ignored by Git)
 
 ```json
 {
-  "name": "common-thread-sandbox",
+  "name": "claude-code-sandbox",
   "dependencies": {
     "claude-flow": "^2.0.0",
     ...

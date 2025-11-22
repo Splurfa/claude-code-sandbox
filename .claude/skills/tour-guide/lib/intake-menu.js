@@ -3,7 +3,10 @@
  *
  * Assesses user proficiency through 3-question assessment and routes
  * to appropriate pathway (Beginner/Intermediate/Advanced/Expert).
+ * Shows feature explorer before assessment (defaults to Advanced overview).
  */
+
+const featureExplorer = require('./feature-explorer');
 
 const PROFICIENCY_LEVELS = {
   BEGINNER: 'beginner',
@@ -77,18 +80,36 @@ const ROUTING_MATRIX = {
 };
 
 /**
- * Generate initial greeting
+ * Generate initial greeting with feature explorer
  */
 function generateGreeting() {
   return `╔══════════════════════════════════════════════════════════╗
 ║           Welcome to Common-Thread Workspace             ║
 ╚══════════════════════════════════════════════════════════╝
 
-I'll help you explore this workspace at a pace that matches
-your experience level. This quick assessment (3 questions)
-will help me tailor the tour to your needs.
+Before we assess your experience level, let's explore the impressive
+capabilities of this workspace. This overview highlights features that
+demonstrate large-scale high-quality work coordination.
 
-Ready to start? (Or skip to manual selection below)`;
+${featureExplorer.generateMainOverview()}
+
+──────────────────────────────────────────────────────────
+After exploring features, we'll assess your proficiency level
+to tailor the tour to your needs.`;
+}
+
+/**
+ * Show feature explorer interface
+ */
+function showFeatureExplorer() {
+  return {
+    overview: featureExplorer.generateMainOverview(),
+    getFeatureDetail: (featureId) => featureExplorer.generateFeatureDetail(featureId),
+    getSkillsCatalog: () => featureExplorer.generateCustomSkillsCatalog(),
+    getStockVsCustom: () => featureExplorer.generateStockVsCustomBreakdown(),
+    parseInput: (input) => featureExplorer.parseUserInput(input),
+    help: featureExplorer.generateHelp()
+  };
 }
 
 /**
@@ -193,6 +214,7 @@ function parseManualSelection(input) {
 function conductIntake() {
   return {
     greeting: generateGreeting(),
+    featureExplorer: showFeatureExplorer(),
     manualMenu: generateManualMenu(),
     questions: QUESTIONS,
     needsQuestion3,
@@ -209,6 +231,7 @@ module.exports = {
   ROUTING_MATRIX,
   generateGreeting,
   generateManualMenu,
+  showFeatureExplorer,
   needsQuestion3,
   routeToProficiency,
   generateConfirmation,

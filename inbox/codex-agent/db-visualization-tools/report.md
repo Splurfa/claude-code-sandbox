@@ -37,7 +37,7 @@ pip install --user sqlite-web
 From your workspace root:
 
 ```bash
-cd /Users/splurfa/.cursor/worktrees/common-thread-sandbox/1CLGn
+cd /Users/splurfa/.cursor/worktrees/claude-code-sandbox/1CLGn
 sqlite_web path/to/agent.db        # or your Reasoning Bank db file
 ```
 
@@ -65,7 +65,7 @@ pip install --user datasette
 **Run**
 
 ```bash
-cd /Users/splurfa/.cursor/worktrees/common-thread-sandbox/1CLGn
+cd /Users/splurfa/.cursor/worktrees/claude-code-sandbox/1CLGn
 datasette path/to/agent.db path/to/reasoning_bank.db
 ```
 

@@ -380,7 +380,7 @@ sessions/
 ### Complete Workspace Map
 
 ```
-/Users/splurfa/common-thread-sandbox/
+/Users/splurfa/claude-code-sandbox/
 │
 ├── .claude/                          # Claude Code configuration (1.9MB)
 │   ├── agents/                       # 54 agent definitions

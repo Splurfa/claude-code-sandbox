@@ -46,7 +46,7 @@ In 15 minutes, you'll understand:
 - Claude Code installed (you're reading this, so you have it)
 - Node.js 18+ (`node --version`)
 - Git repository initialized
-- Working directory: `/Users/[username]/common-thread-sandbox/`
+- Working directory: `/Users/[username]/claude-code-sandbox/`
 
 **Installation Check**:
 ```bash

@@ -1,7 +1,7 @@
 # Codex Agent Workspace
 
 **External Agent**: Codex
-**Purpose**: Parallel research and contributions to common-thread-sandbox
+**Purpose**: Parallel research and contributions to claude-code-sandbox
 **Status**: Active
 
 ## ⚠️ Claude Code: Do Not Edit

@@ -1,0 +1,231 @@
+{
+  "top10Features": {
+    "1": {
+      "id": 1,
+      "name": "SPARC Methodology",
+      "category": "stock",
+      "icon": "🎯",
+      "summary": "Systematic development with orchestration integration (Native to Claude Flow)",
+      "details": "5-phase methodology (Specification → Pseudocode → Architecture → Refinement → Completion) with 17 specialized modes, quality gates, and topology integration. Enables structured workflows from requirements to deployment.",
+      "performance": "2.8-4.4x speed improvement, 85% success rate",
+      "integration": "Works with all 4 topologies, integrates with skills and custom commands",
+      "whyImpressive": "Systematic quality enforcement with seamless orchestration integration. Handles complex projects with 10+ agents across 5 phases."
+    },
+    "2": {
+      "id": 2,
+      "name": "Orchestration Topology Integration",
+      "category": "stock",
+      "icon": "🌐",
+      "summary": "4 coordination patterns integrated with workflows",
+      "details": "Mesh (peer-to-peer), Hierarchical (tree), Star (centralized), Ring (circular) topologies that integrate directly with SPARC methodology, skills, and custom workflows. Optimal coordination for different use cases.",
+      "performance": "Optimal agent coordination, scalable to 10+ agents",
+      "integration": "SPARC uses topologies, skills request topologies, custom commands combine topologies",
+      "whyImpressive": "Four distinct coordination patterns that integrate directly with workflows, enabling optimal agent coordination for different use cases."
+    },
+    "3": {
+      "id": 3,
+      "name": "ReasoningBank Learning",
+      "category": "stock",
+      "icon": "🧬",
+      "summary": "Adaptive learning from experience (Native to Claude Flow)",
+      "details": "Stores successful patterns and automatically applies optimized strategies. Pattern recognition, strategy optimization, continuous learning, meta-learning.",
+      "performance": "Self-improving over time, pattern-based optimization",
+      "integration": "Learns from SPARC workflows, optimizes topologies, improves skill composition",
+      "whyImpressive": "Adaptive learning system that stores successful patterns and automatically applies optimized strategies in future sessions."
+    },
+    "4": {
+      "id": 4,
+      "name": "Hive-Mind Coordination",
+      "category": "stock",
+      "icon": "🐝",
+      "summary": "Advanced swarm patterns with consensus (Native to Claude Flow)",
+      "details": "Queen-led collective intelligence, consensus mechanisms (Byzantine, Raft), and adaptive swarm behavior.",
+      "performance": "Robust decision making, fault tolerance",
+      "integration": "Integrates with topologies for advanced coordination strategies",
+      "whyImpressive": "Advanced swarm intelligence patterns that enable robust decision making and consensus in distributed agent systems."
+    },
+    "5": {
+      "id": 5,
+      "name": "Session Management System",
+      "category": "custom",
+      "icon": "📁",
+      "summary": "Containment-promotion architecture (Custom Extension)",
+      "details": "Isolated workspaces for AI-generated content with HITL approval for promotion. File routing enforcement, lifecycle management, curated promotion.",
+      "performance": "Clean workspace organization, scalable to high-volume generation",
+      "integration": "All agents use sessions, SPARC organizes by session, skills generate in sessions",
+      "whyImpressive": "Containment-promotion architecture that isolates AI-generated content, enabling clean workspace organization and curated promotion."
+    },
+    "6": {
+      "id": 6,
+      "name": "Tour Guide & Tutor Mode",
+      "category": "custom",
+      "icon": "🎓",
+      "summary": "Interactive learning and orientation (Custom Skills)",
+      "details": "Adaptive learning paths, interactive exercises, and workspace orientation tailored to proficiency levels.",
+      "performance": "Accelerated onboarding, practical skill acquisition",
+      "integration": "Uses meta-skill for discovery, memory for tracking progress",
+      "whyImpressive: "Custom-built educational layer that adapts to user proficiency and guides them through the system's capabilities."
+    },
+    "7": {
+      "id": 7,
+      "name": "Captain's Log & Findings",
+      "category": "custom",
+      "icon": "📓",
+      "summary": "Decision journaling and issue tracking (Custom Protocol)",
+      "details": "Human-readable journal for decisions, insights, and blockers. Automated findings tracking and pattern recognition.",
+      "performance": "Preserves context, tracks technical debt",
+      "integration": "Integrated with session closeout hooks",
+      "whyImpressive: "Structured protocol for preserving human context and tracking technical debt across sessions."
+    },
+    "8": {
+      "id": 8,
+      "name": "Custom Command Engine",
+      "category": "stock",
+      "icon": "⚙️",
+      "summary": "Combine any skills into powerful workflows (Native Capability)",
+      "details": "Create custom commands that combine multiple skills, pass data between skills, branch conditionally, and save reusable workflow templates. Enables powerful multi-phase workflows.",
+      "performance": "Reusable workflows, parameterized execution",
+      "integration": "Uses meta-skill, stream-chain, SPARC, topologies, memory",
+      "whyImpressive": "Powerful composition capability that combines any skills into reusable workflows, enabling complex multi-phase operations."
+    },
+    "9": {
+      "id": 9,
+      "name": "Skill Integration Framework",
+      "category": "stock",
+      "icon": "🔗",
+      "summary": "Seamless skill composition mechanism (Native Capability)",
+      "details": "The underlying framework that allows skills (Stock or Custom) to integrate via natural language discovery and data flow.",
+      "performance": "Lazy loading, high-confidence matching",
+      "integration": "Enables Meta-skill, stream-chain sequences",
+      "whyImpressive": "The architectural backbone that allows disparate skills to function as a cohesive system through natural language and data flow."
+    },
+    "10": {
+      "id": 10,
+      "name": "Prompting Flexibility",
+      "category": "stock",
+      "icon": "💬",
+      "summary": "Open vs structured prompting spectrum (Native Capability)",
+      "details": "Seamless transition between natural language (exploration) and structured commands (execution). Adapts to Flow modes.",
+      performance: "Reduced friction, adaptive learning",
+      integration: "Works with all skills and commands",
+      whyImpressive: "Seamless transition between creative exploration and precise execution, adapting to user needs and workflow context."
+    }
+  },
+  "customSkills": {
+    "total": 31,
+    "categories": {
+      "coreWorkflow": {
+        "name": "Core Workflow",
+        "skills": [
+          "session-closeout",
+          "meta-skill",
+          "file-routing",
+          "prompt-improver",
+          "hooks-automation"
+        ]
+      },
+      "learning": {
+        "name": "Learning & Education",
+        "skills": [
+          "tour-guide",
+          "tutor-mode",
+          "skill-builder",
+          "pair-programming"
+        ]
+      },
+      "multiAgent": {
+        "name": "Multi-Agent Coordination",
+        "skills": [
+          "swarm-orchestration",
+          "swarm-advanced",
+          "hive-mind-advanced",
+          "stream-chain"
+        ]
+      },
+      "sparc": {
+        "name": "SPARC Methodology",
+        "skills": [
+          "sparc-methodology",
+          "sparc-coord",
+          "sparc-coder"
+        ]
+      },
+      "quality": {
+        "name": "Quality & Review",
+        "skills": [
+          "verification-quality",
+          "github-code-review",
+          "code-analyzer"
+        ]
+      },
+      "development": {
+        "name": "Development Workflows",
+        "skills": [
+          "backend-dev",
+          "mobile-dev",
+          "ml-developer",
+          "cicd-engineer",
+          "api-docs",
+          "system-architect"
+        ]
+      },
+      "coordination": {
+        "name": "Advanced Coordination",
+        "skills": [
+          "hive-mind",
+          "reasoningbank-intelligence",
+          "hierarchical-coordinator",
+          "mesh-coordinator",
+          "adaptive-coordinator"
+        ]
+      }
+    }
+  },
+  "stockVsCustom": {
+    "stockFeatures": [
+      "SPARC Methodology (Native to Claude Flow)",
+      "ReasoningBank Learning (Native to Claude Flow)",
+      "Hive-Mind Coordination (Native to Claude Flow)",
+      "Orchestration Topologies (4 patterns)",
+      "Custom Commands (Native Capability)",
+      "Skill Integration Framework (Native Capability)",
+      "Prompting Flexibility (Native Capability)",
+      "Parallel Agent Execution (Stock Claude Code)",
+      "Memory Coordination (Stock Claude Flow)"
+    ],
+    "customFeatures": [
+      "Session Management System (Containment-promotion)",
+      "Captain's Log & Findings Protocols",
+      "Tour Guide & Tutor Mode (Custom Skills)",
+      "31 Custom Skills (Domain specific logic)"
+    ],
+    "stockFirstScore": 92,
+    "philosophy": "Leverage the powerful stock engine for execution, add thin custom layers for organization and specific domains."
+  },
+  "performanceMetrics": {
+    "parallelExecution": {
+      "speedImprovement": "2.8-4.4x",
+      "tokenReduction": "32.3%",
+      "successRate": "85%"
+    },
+    "memory": {
+      "totalEntries": 68219,
+      "namespaces": 15,
+      "databaseSize": "118MB"
+    },
+    "metaSkill": {
+      "matchingAccuracy": "95%",
+      "confidenceThreshold": ">80% auto-invoke"
+    },
+    "sparc": {
+      "speedImprovement": "2.8-4.4x",
+      "successRate": "85%"
+    }
+  },
+  "integrationExamples": {
+    "sparcTopology": "SPARC methodology integrates with all 4 topologies (mesh, hierarchical, star, ring)",
+    "skillComposition": "Meta-skill routes to skills, stream-chain sequences them, custom commands combine them",
+    "memoryCoordination": "SPARC uses memory for phase transitions, topologies coordinate via memory, skills store patterns",
+    "sessionIntegration": "All agents use sessions, SPARC organizes by session, skills generate in sessions"
+  }
+}

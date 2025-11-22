@@ -400,7 +400,7 @@ Tour-guide references these key docs:
 
 **Version**: 1.0.0
 **Created**: 2025-11-21
-**Workspace**: common-thread-sandbox
+**Workspace**: claude-code-sandbox
 **Stock Adherence**: 100% (pure skill, no core modifications)
 
 ## Related Skills
@@ -426,7 +426,7 @@ Tour-guide references these key docs:
 - `/tour list` - See all sections
 - `/tour status` - Current position
 
-**Community**: This is a custom skill for the common-thread workspace. For Claude Flow questions, see https://github.com/ruvnet/claude-flow
+**Community**: This is a custom skill for the claude-code-sandbox workspace. For Claude Flow questions, see https://github.com/ruvnet/claude-flow
 
 ---
 

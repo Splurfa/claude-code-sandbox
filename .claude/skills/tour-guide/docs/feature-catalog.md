@@ -1,569 +1,344 @@
-# Feature Catalog - Complete System Reference
+## Top 10 Impressive Capabilities
 
-**Purpose**: Comprehensive reference of all workspace features for tour-guide to draw upon during tours.
+These features demonstrate **large-scale high-quality work coordination** through integration, composition, systematic quality, and adaptive learning.
 
-**Source**: Compiled from Phase 1 research (workspace-inventory.md, features-catalog.md, skills-catalog.md)
+### 1. SPARC Methodology (Stock Claude Flow)
 
----
+**What Makes It Impressive**: Systematic development methodology that integrates seamlessly with multi-agent orchestration topologies, enabling structured workflows from specification to completion.
 
-## Core System Features
+**Key Capabilities**:
+- **5-Phase Systematic Process**: Specification → Pseudocode → Architecture → Refinement → Completion
+- **17 Specialized Modes**: Orchestrator, swarm-coordinator, workflow-manager, batch-executor, coder, tester, reviewer, etc.
+- **Topology Integration**: Works with mesh, hierarchical, star, and ring topologies
+- **Quality Gates**: Enforced transitions between phases with validation
+- **TDD Integration**: Test-driven development built into refinement phase
+- **Memory Coordination**: Persistent knowledge sharing across phases
 
-### 1. Parallel Agent Execution
+**Performance**: 2.8-4.4x speed improvement, 85% success rate
 
-**What it does**: Spawn multiple agents concurrently in a single message
+**Large-Scale Coordination Example**:
+```javascript
+// SPARC with hierarchical topology for complex feature
+mcp__claude-flow__swarm_init({ topology: "hierarchical", maxAgents: 12 })
 
-**Performance**: 10-20x faster than sequential spawning
+// Phase 1: Specification (parallel research)
+Task("Requirements Analyst", "Gather requirements. Store in memory.", "researcher")
+Task("User Story Writer", "Create user stories. Store in memory.", "planner")
 
-**Benefits**:
-- 2.8-4.4x speed improvement for complex workflows
-- 32.3% token reduction through efficient coordination
-- 84.8% SWE-Bench solve rate (industry-leading)
+// Phase 2: Architecture (coordinated design)
+Task("System Architect", "Design architecture from memory. Store design.", "system-architect")
+Task("Database Designer", "Design schema from architecture. Store schema.", "code-analyzer")
 
-**Key principle**: "1 MESSAGE = ALL RELATED OPERATIONS"
+// Phase 3: Refinement (parallel implementation with TDD)
+Task("Backend Coder", "Implement backend with TDD. Check memory for design.", "coder")
+Task("Frontend Coder", "Implement frontend with TDD. Check memory for API contracts.", "coder")
+Task("Test Engineer", "Write integration tests. Check memory for requirements.", "tester")
+```
 
-**Referenced in**: All pathways (Beginner: basic, Intermediate: patterns, Advanced: optimization)
+**Integration Points**:
+- Works with all 4 swarm topologies (mesh, hierarchical, star, ring)
+- Integrates with hooks system for automatic coordination
+- Uses memory for cross-phase knowledge sharing
+- Supports custom workflows via workflow-manager mode
 
----
-
-### 2. Memory Coordination System
-
-**What it does**: Persistent cross-session memory for agent coordination
-
-**Storage**: SQLite database (`.swarm/memory.db`, 111MB)
-
-**Current state**:
-- 68,219 memory entries
-- 15 active namespaces
-- Cross-session persistence
-
-**Operations via MCP**:
-- Store: `mcp__claude-flow_alpha__memory_usage({ action: "store", ... })`
-- Retrieve: `mcp__claude-flow_alpha__memory_usage({ action: "retrieve", ... })`
-- Search: `mcp__claude-flow_alpha__memory_search({ pattern: "...", ... })`
-
-**Referenced in**: Intermediate (basics), Advanced (patterns), Expert (internals)
-
----
-
-### 3. Session Management (Containment-Promotion)
-
-**What it does**: Isolated workspaces for all AI-generated content
-
-**Lifecycle**:
-1. Auto-initialize → `sessions/session-YYYYMMDD-HHMMSS-<topic>/`
-2. Work phase → All artifacts to `sessions/<id>/artifacts/{code,tests,docs,scripts,notes}/`
-3. Closeout → HITL approval → Archive to `.swarm/backups/`
-4. Promotion → Curate valuable artifacts to main workspace
-
-**Key rule**: ONE SESSION = ONE CHAT THREAD
-
-**File routing**:
-- ✅ `sessions/<id>/artifacts/code/` - All source code
-- ✅ `sessions/<id>/artifacts/tests/` - All tests
-- ✅ `sessions/<id>/artifacts/docs/` - All documentation
-- ❌ Root directories - NEVER write here
-
-**Referenced in**: All pathways (Beginner: basics, Intermediate: deep-dive, Advanced: architecture, Expert: implementation)
+**Referenced in**: Advanced (deep dive), Expert (full implementation)
 
 ---
 
-### 4. Hooks System (Auto-Fire Coordination)
+### 2. Orchestration Topology Integration (Stock Claude Flow)
 
-**What it does**: Automatic pre/post operation coordination via Claude Code native hooks
+**What Makes It Impressive**: Four distinct coordination patterns (mesh, hierarchical, star, ring) that integrate directly with workflows, enabling optimal agent coordination for different use cases.
 
-**Configuration**: `.claude/settings.json`
+**Key Capabilities**:
+- **Mesh Topology**: Peer-to-peer communication for collaborative tasks
+- **Hierarchical Topology**: Tree structure for delegation and clear command chains
+- **Star Topology**: Centralized coordinator with worker agents
+- **Ring Topology**: Circular pipeline for sequential processing
+- **Dynamic Adaptation**: Topology selection based on workload characteristics
+- **Queen Selection**: Intelligent coordinator selection (strategic, tactical, adaptive)
 
-**Hook types**:
-- PreToolUse: Before file operations (validation, prep, context loading)
-- PostToolUse: After file operations (memory update, metrics, backups)
+**Large-Scale Coordination Example**:
+```javascript
+// Hierarchical topology for feature development
+mcp__claude-flow__swarm_init({
+  topology: "hierarchical",
+  maxAgents: 12,
+  strategy: "balanced"
+})
 
-**Stock adherence**: 98% (uses stock claude-flow CLI + Claude Code native hooks)
+// Coordinator spawns specialized teams
+Task("Feature Coordinator", "Coordinate authentication feature. Track in memory.", "hierarchical-coordinator")
 
-**Referenced in**: Intermediate (automation), Advanced (architecture), Expert (implementation details)
+// Backend team (reports to coordinator)
+Task("Auth Backend", "JWT implementation. Report to coordinator via memory.", "backend-dev")
+Task("Auth DB", "User schema. Report to coordinator via memory.", "db-architect")
+```
 
----
-
-### 5. Swarm Topologies (4 Types)
-
-**What it does**: Multiple coordination patterns for different use cases
-
-**Topologies**:
-1. **Mesh** (Peer-to-Peer) - Best for collaboration, distributed tasks
-2. **Hierarchical** (Tree) - Best for delegation, clear command chain
-3. **Star** (Centralized) - Best for single coordinator, many workers
-4. **Ring** (Circular) - Best for sequential processing, pipeline
-
-**Initialization**: `mcp__claude-flow__swarm_init({ topology: "mesh", ... })`
+**Integration Points**:
+- SPARC uses topologies for phase coordination
+- Skills request topologies for optimal execution
+- Custom commands combine topologies for complex workflows
 
 **Referenced in**: Intermediate (intro), Advanced (deep patterns), Expert (optimization)
 
 ---
 
-### 6. Neural Network Training (27+ Models)
-
-**What it does**: Train and deploy neural networks with WASM acceleration
-
-**Features**:
-- 27+ neural models available
-- WASM SIMD acceleration for performance
-- Distributed training support
-- Pattern recognition and learning
-
-**Operations via MCP**:
-- Train: `mcp__claude-flow_alpha__neural_train({ pattern_type: "coordination", ... })`
-- Status: `mcp__claude-flow_alpha__neural_status({ modelId: "..." })`
-- Patterns: `mcp__claude-flow_alpha__neural_patterns({ action: "analyze", ... })`
-
-**Referenced in**: Advanced (overview), Expert (internals)
-
----
-
-## Custom Extensions (5% Custom Code)
-
-### 1. Session Closeout with HITL
-
-**Extension**: `.claude/skills/session-closeout/`
-
-**Features**:
-- Auto-generates session summary
-- HITL approval required (no auto-closeout)
-- Archives to `.swarm/backups/`
-- Updates Captain's Log (`sessions/captains-log/YYYY-MM-DD.md`)
-- Optional document promotion with routing guide
-
-**Protocol**: Generate summary → Present for approval → If approved: Archive + log + cleanup
-
-**Referenced in**: All pathways (lifecycle explanation)
-
----
-
-### 2. Meta-Skill Routing
-
-**Extension**: `.claude/skills/meta-skill/`
-
-**Features**:
-- Natural language matching (95% confidence)
-- Category-based browsing (9 categories)
-- Semantic search (TF-IDF algorithm)
-- Multi-skill workflow suggestions
-- Lazy loading (reduces context bloat)
-
-**Thresholds**:
-- >80%: Auto-invoke (high confidence)
-- 30-80%: Present options menu
-- <30%: Show category menu
-
-**Referenced in**: All pathways (skill discovery)
-
----
-
-### 3. Tutor Mode (Adaptive Learning)
-
-**Extension**: `.claude/skills/tutor-mode/`
-
-**Learning phases**:
-1. Foundations (1-2 weeks) - Basics, first session, memory
-2. Essential Skills (2-3 weeks) - Parallel execution, coordination
-3. Intermediate (3-4 weeks) - Swarm topologies, consensus
-4. Advanced (3-6 months) - Hive-mind, BFT, self-learning
-
-**Features**:
-- Quality-scored references (SAFE ≥70, CAUTIONARY 40-69, EXCLUDE <40)
-- Progress tracking (stored in memory)
-- Hands-on exercises with verification
-- Adaptive difficulty
-- Context-aware guidance
-
-**Referenced in**: All pathways (practice recommendations)
-
----
-
-### 4. File Routing Compliance
-
-**Extension**: `.claude/skills/file-routing/`
-
-**Features**:
-- 3-question decision tree
-- Session artifacts routing guide
-- Document promotion checklist
-- Compliance verification
-
-**Decision tree**:
-1. Is this a new file? → Session artifacts
-2. Is this an existing project file? → Edit in place
-3. Is this user-facing documentation? → Promote after review
-
-**Referenced in**: Beginner (basics), Intermediate (rules), Advanced (architecture)
-
----
-
-### 5. Verification & Quality Gates
-
-**Extension**: `.claude/skills/verification-quality/`
-
-**Features**:
-- Truth scoring (0-100 scale)
-- 0.95 accuracy threshold (95% required to pass)
-- Automatic rollback on failure
-- Quality metrics tracking
-- Codebase reliability checks
-
-**Quality gates**:
-- Code quality verification
-- Test coverage checks (>80% required)
-- Security scanning
-- Performance benchmarks
-- Best practices enforcement
-
-**Referenced in**: Advanced (quality overview), Expert (implementation)
-
----
-
-## Integration Features
-
-### GitHub Integration (5 Skills)
-
-**Capabilities**:
-- Workflow automation (CI/CD)
-- Code review with swarm coordination
-- Release management (versioning, testing, deployment)
-- Project management (issues, boards, sprints)
-- Multi-repo coordination
-
-**Skills**: github-workflow-automation, github-code-review, github-release-management, github-project-management, github-multi-repo
-
-**Referenced in**: Advanced/Expert pathways
-
----
-
-### AgentDB Integration (5 Skills)
-
-**Capabilities**:
-- Vector search (semantic retrieval, 150x faster)
-- Memory patterns (session, long-term, pattern learning)
-- Optimization (4-32x memory reduction, HNSW indexing)
-- Learning (9 RL algorithms: Q-Learning, SARSA, Actor-Critic, etc.)
-- Advanced features (QUIC sync, multi-DB, hybrid search)
-
-**Skills**: agentdb-vector-search, agentdb-memory-patterns, agentdb-optimization, agentdb-learning, agentdb-advanced
-
-**Referenced in**: Advanced/Expert pathways
-
----
-
-### Flow-Nexus Integration (3 Skills, Optional)
-
-**Capabilities** (requires registration):
-- Cloud-based swarm deployment
-- E2B sandbox execution
-- Neural network training (distributed)
-- Event-driven workflows
-- Platform management (auth, apps, payments)
-
-**Skills**: flow-nexus-swarm, flow-nexus-neural, flow-nexus-platform
-
-**Access**: https://flow-nexus.ruv.io
-
-**Referenced in**: Expert pathway only
-
----
-
-### Hive-Mind Coordination
-
-**Storage**: `.hive-mind/hive.db` (3.5MB)
-
-**Features**:
-- Queen selection (strategic/tactical/adaptive)
-- Worker specialization
-- Scout exploration
-- Memory manager
-- Consensus building (majority, weighted, Byzantine)
-- Persistent hive memory
-
-**Consensus types**:
-1. Majority - Simple voting (>50% agreement)
-2. Weighted - Vote by expertise/confidence
-3. Byzantine - BFT consensus (2/3+ majority, tolerates faulty nodes)
-
-**Skill**: hive-mind-advanced
-
-**Referenced in**: Advanced (overview), Expert (implementation)
-
----
-
-### ReasoningBank Intelligence
-
-**Features**:
-- Trajectory tracking (decision history)
-- Verdict judgment (outcome analysis)
-- Memory distillation (pattern extraction)
-- Pattern recognition (>70% accuracy)
-- Experience replay (learn from history)
-- Meta-cognitive system design
-
-**Skills**: reasoningbank-intelligence, reasoningbank-agentdb (integrated with AgentDB)
-
-**Referenced in**: Expert pathway
-
----
-
-## Development Features
-
-### SPARC Methodology
-
-**Phases**:
-1. Specification - Requirements analysis
-2. Pseudocode - Algorithm design
-3. Architecture - System design
-4. Refinement - TDD implementation
-5. Completion - Integration
-
-**Commands**:
-```bash
-npx claude-flow sparc run <mode> "<task>"
-npx claude-flow sparc tdd "<feature>"
-npx claude-flow sparc batch <modes> "<task>"
+### 3. ReasoningBank Learning (Stock Claude Flow)
+
+**What Makes It Impressive**: Adaptive learning system that stores successful patterns and automatically applies optimized strategies in future sessions.
+
+**Key Capabilities**:
+- **Pattern Recognition**: Learns from successful workflows
+- **Strategy Optimization**: Compares and selects best strategies
+- **Continuous Learning**: Auto-learns from high-confidence outcomes
+- **Meta-Learning**: Learns about learning itself
+- **Transfer Learning**: Applies knowledge across domains
+
+**Large-Scale Coordination Example**:
+```javascript
+// ReasoningBank learns from successful SPARC workflow
+await rb.recordExperience({
+  task: 'full_stack_feature',
+  approach: 'sparc_hierarchical_mesh',
+  outcome: {
+    success: true,
+    metrics: {
+      time_taken: 1800,  // 30 minutes
+      agents_used: 8,
+      quality_score: 0.92
+    }
+  },
+  context: {
+    feature_type: 'authentication',
+    complexity: 'high'
+  }
+})
+
+// Future similar tasks use learned strategy
+const strategy = await rb.recommendStrategy('full_stack_feature', {
+  feature_type: 'authentication',
+  complexity: 'high'
+})
+// Returns: sparc_hierarchical_mesh (learned from past success)
 ```
 
-**Skill**: sparc-methodology
+**Integration Points**:
+- Learns from SPARC methodology workflows
+- Optimizes topology selection
+- Improves skill composition
+- Enhances custom commands
+- Refines prompting patterns
 
-**Referenced in**: Advanced/Expert pathways
-
----
-
-### Pair Programming Mode
-
-**Modes**:
-- Driver - AI drives, you navigate
-- Navigator - You drive, AI navigates
-- Switch - Alternate roles
-
-**Features**:
-- Real-time verification (truth-score)
-- Quality monitoring
-- TDD workflows
-- Debugging assistance
-- Automatic role switching
-- Security scanning
-
-**Skill**: pair-programming
-
-**Referenced in**: Advanced/Expert pathways
+**Referenced in**: Advanced (learning patterns), Expert (meta-learning)
 
 ---
 
-### Agent Spawning (80+ Agent Types)
+### 4. Hive-Mind Coordination (Stock Claude Flow)
 
-**Categories**:
-- Core (5) - researcher, coder, tester, planner, reviewer
-- Consensus (7) - Byzantine, Raft, Gossip, CRDT, etc.
-- Swarm (3) - hierarchical, mesh, adaptive coordinators
-- Hive-Mind (5) - queen, worker, scout, memory-manager
-- GitHub (13) - PR, issues, releases, workflows
-- Flow-Nexus (9) - sandboxes, neural, auth, payments
-- SPARC (4) - specification, pseudocode, architecture, refinement
-- Templates (9) - agent templates
-- Optimization (5) - load-balancer, resource-allocator
-- Testing (2) - TDD swarm, production validator
-- Development (1) - backend developer
-- Specialized (1) - mobile developer
-- Architecture (1) - system architect
-- DevOps (1) - CI/CD engineer
-- Documentation (1) - API docs generator
-- Analysis (2) - code analyzer, code review swarm
+**What Makes It Impressive**: Advanced swarm patterns enabling robust decision making and consensus in distributed agent systems.
 
-**Total**: 80+ agent definitions in `.claude/agents/`
+**Key Capabilities**:
+- **Collective Intelligence**: Queen-led decision making
+- **Consensus Protocols**: Byzantine Fault Tolerance, Raft
+- **Adaptive Behavior**: Swarm reconfigures based on task complexity
+- **Scout-Worker Pattern**: Efficient exploration and execution
 
-**Referenced in**: Beginner (basic types), Intermediate (spawning patterns), Advanced (advanced patterns), Expert (agent catalog)
+**Performance**: Robust decision making, fault tolerance
+
+**Referenced in**: Advanced (deep patterns), Expert (internals)
 
 ---
 
-## Performance Metrics
+### 5. Session Management System (Custom Extension)
 
-### Speed Improvements
-- 2.8-4.4x speed improvement over sequential execution
-- 32.3% token reduction through batching
-- 10-20x faster agent spawning via concurrent execution
-- 84.8% SWE-Bench solve rate (industry-leading)
+**What Makes It Impressive**: Containment-promotion architecture that isolates AI-generated content in sessions, enabling clean workspace organization and curated promotion.
 
-### Efficiency Gains
-- AgentDB: 150x faster vector search (HNSW indexing)
-- AgentDB: 4-32x memory reduction (quantization)
-- Parallel execution: ~3.5x average speedup
-- Memory caching: Instant retrieval of computed results
+**Key Capabilities**:
+- **Containment**: All AI work isolated in `sessions/<id>/artifacts/`
+- **Promotion**: Curate valuable artifacts to main workspace
+- **Lifecycle**: Auto-initialize → Work → Closeout → Archive
+- **File Routing**: Enforced routing to session artifacts
+- **HITL Approval**: Human-in-the-loop for session closeout
 
-### System Stats
-- Memory database: 111MB with 68,219 entries
-- Active sessions: 156MB workspace data
-- Hive database: 3.5MB coordination state
-- Session backups: 49 snapshots (avg 2.1MB each)
+**Large-Scale Coordination Example**:
+```javascript
+// Session auto-initializes
+Session: session-20251122-120000-auth-feature
 
-**Referenced in**: Advanced (optimization section), Expert (performance analysis)
+// All work goes to session artifacts
+Task("Coder", "Implement auth. Save to sessions/session-20251122-120000-auth-feature/artifacts/code/.", "coder")
+Task("Tester", "Write tests. Save to sessions/session-20251122-120000-auth-feature/artifacts/tests/.", "tester")
 
----
-
-## Stock-First Principles
-
-### Stock Adherence Score: 82/100
-- Core architecture: 100% stock
-- Implementation patterns: 97.5% stock
-- Extensions: Additive, not modifying
-
-### 100% Stock (No modifications)
-- Claude Flow core coordination
-- MCP protocol implementation
-- Swarm topology algorithms
-- Memory storage mechanism
-- Neural training capabilities
-- GitHub integration tools
-
-### Custom Extensions (Additive)
-1. Session Management System
-2. File Routing Protocol
-3. HITL Session Closeout
-4. Hooks Integration via Claude Code Native System
-
-### What we explicitly avoid
-- ❌ Forking Claude Flow codebase
-- ❌ Modifying core coordination algorithms
-- ❌ Replacing MCP protocol
-- ❌ Custom agent execution runtimes
-- ❌ Filesystem monkey-patching
-
-**Referenced in**: Advanced (overview), Expert (deep comparison)
-
----
-
-## System Architecture
-
-### High-Level Components
-
-```
-┌───────────────────────────────────────────────────────────┐
-│                   User Interface Layer                     │
-│                      (Claude Code)                         │
-├───────────────────────────────────────────────────────────┤
-│                  MCP Integration Layer                     │
-│  ┌─────────────────┐  ┌──────────────────────────────┐   │
-│  │  Claude Flow    │  │  Optional MCPs               │   │
-│  │  Alpha (Core)   │  │  (ruv-swarm, flow-nexus)     │   │
-│  └─────────────────┘  └──────────────────────────────┘   │
-├───────────────────────────────────────────────────────────┤
-│              Coordination & State Layer                    │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐   │
-│  │    Swarm     │  │    Memory    │  │   Hooks      │   │
-│  │ Coordination │  │  Management  │  │  Automation  │   │
-│  └──────────────┘  └──────────────┘  └──────────────┘   │
-├───────────────────────────────────────────────────────────┤
-│              Session Management Layer                      │
-│  ┌────────────────────────────────────────────────────┐   │
-│  │  Session Lifecycle Management (Custom Extension)   │   │
-│  │  - Creation, Active Work, Closeout, Archival       │   │
-│  └────────────────────────────────────────────────────┘   │
-├───────────────────────────────────────────────────────────┤
-│                  File System Layer                         │
-│  ┌────────────────────────────────────────────────────┐   │
-│  │  sessions/session-ID/artifacts/{code,tests,docs}   │   │
-│  │  .swarm/{memory.db, backups/, coordination.json}   │   │
-│  └────────────────────────────────────────────────────┘   │
-└───────────────────────────────────────────────────────────┘
+// Session closeout with HITL
+/session-closeout
+→ Shows summary
+→ Requests approval
+→ Archives to .swarm/backups/
+→ Promotes selected artifacts to main workspace
 ```
 
-**Referenced in**: Intermediate (overview), Advanced (deep dive), Expert (internals)
+**Integration Points**:
+- All agents use session paths
+- SPARC methodology organizes by session
+- Skills generate content in sessions
+- Custom commands respect session boundaries
+- Memory tracks session context
+
+**Referenced in**: All pathways (Beginner: basics, Intermediate: deep-dive, Advanced: architecture, Expert: implementation)
 
 ---
 
-## Key Documentation Locations
+### 6. Tour Guide & Tutor Mode (Custom Skills)
 
-### Setup & Getting Started
-- `docs/setup/quick-start.md` - Quick start guide
-- `docs/setup/orientation.md` - Workspace orientation
-- `docs/setup/what-is-claude-flow.md` - Claude Flow intro
-- `docs/setup/cross-model-compatibility.md` - Multi-model support
+**What Makes It Impressive**: Custom-built educational layer that adapts to user proficiency and guides them through the system's capabilities.
 
-### Operations & Daily Use
-- `docs/operate/session-management.md` - Session lifecycle
-- `docs/operate/first-session.md` - First session walkthrough
-- `docs/operate/memory-basics.md` - Memory system basics
-- `docs/operate/parallel-execution.md` - Concurrent operations
-- `docs/operate/troubleshooting.md` - Common issues
+**Key Capabilities**:
+- **Adaptive Learning Paths**: Beginner to Expert
+- **Interactive Exercises**: Hands-on practice
+- **Context-Aware Guidance**: References verified documentation
+- **Progress Tracking**: Monitors mastery across sessions
 
-### Building & Extending
-- `docs/build/spawning-agents.md` - Agent creation
-- `docs/build/create-skills.md` - Skill development
-- `docs/build/custom-agents.md` - Custom agent types
-- `docs/build/extending-system.md` - System extensions
-
-### Coordination & Advanced
-- `docs/coordinate/swarm-topologies.md` - Topology patterns
-- `docs/coordinate/hive-mind.md` - Hive-Mind coordination
-- `docs/coordinate/consensus-mechanisms.md` - Consensus algorithms
-- `docs/coordinate/performance-tuning.md` - Optimization guide
-
-### Reference & Deep Dive
-- `docs/reference/architecture.md` - System architecture
-- `docs/reference/agent-catalog.md` - All 80+ agents
-- `docs/reference/limitations.md` - Known limitations
-- `docs/reference/what-actually-works.md` - Battle-tested patterns
-
-**Referenced in**: All pathways (appropriate to proficiency level)
+**Referenced in**: All pathways (Orientation)
 
 ---
 
-## All 32 Skills Summary
+### 7. Captain's Log & Findings (Custom Protocol)
 
-### Core Workflow (5)
-1. session-closeout - Natural language session closeout
-2. meta-skill - Intelligent skill routing
-3. file-routing - File placement compliance
-4. prompt-improver - Prompt optimization
-5. hooks-automation - Hook system management
+**What Makes It Impressive**: Structured protocol for preserving human context and tracking technical debt across sessions.
 
-### Learning & Education (3)
-6. tutor-mode - Adaptive learning guide
-7. skill-builder - Create custom skills
-8. pair-programming - AI-assisted coding
+**Key Capabilities**:
+- **Decision Journaling**: Captures "why" behind choices
+- **Automated Findings**: Tracks recurring issues
+- **Pattern Recognition**: Identifies systemic bottlenecks
+- **Cross-Session Context**: Maintains project history
 
-### Multi-Agent Coordination (4)
-9. swarm-orchestration - Multi-agent swarms
-10. swarm-advanced - Advanced swarm patterns
-11. hive-mind-advanced - Queen-led coordination
-12. stream-chain - Stream-JSON chaining
-
-### Quality & Verification (2)
-13. verification-quality - Truth scoring & rollback
-14. github-code-review - Code review automation
-
-### AgentDB Integration (5)
-15. agentdb-vector-search - Semantic retrieval
-16. agentdb-optimization - Performance tuning
-17. agentdb-memory-patterns - Persistent memory
-18. agentdb-learning - Reinforcement learning
-19. agentdb-advanced - Advanced features
-
-### GitHub Integration (5)
-20. github-workflow-automation - CI/CD automation
-21. github-release-management - Release orchestration
-22. github-project-management - Project tracking
-23. github-multi-repo - Multi-repo coordination
-24. github-code-review - (listed above)
-
-### Flow-Nexus Integration (3)
-25. flow-nexus-swarm - Cloud swarm deployment
-26. flow-nexus-neural - Distributed neural training
-27. flow-nexus-platform - Platform management
-
-### Advanced Coordination (3)
-28. reasoningbank-intelligence - Adaptive learning
-29. reasoningbank-agentdb - ReasoningBank + AgentDB
-30. agentic-jujutsu - Agent version control
-
-### Development Methodology (2)
-31. sparc-methodology - SPARC development
-32. pair-programming - (listed above)
-
-**Referenced in**: Meta-skill and skill discovery discussions across all pathways
+**Referenced in**: Intermediate (protocols), Advanced (patterns)
 
 ---
 
-This feature catalog provides the complete reference material for tour-guide to draw upon when creating proficiency-adapted content. All facts are sourced from Phase 1 verified research.
+### 8. Custom Command Engine (Stock Claude Flow)
+
+**What Makes It Impressive**: Powerful composition capability that combines any skills into reusable workflows, enabling complex multi-phase operations.
+
+**Key Capabilities**:
+- **Workflow Composition**: Combine multiple skills into single command
+- **Data Flow**: Pass data between skills in workflow
+- **Conditional Branching**: Branch workflows based on conditions
+- **Reusable Templates**: Save workflows for repeated use
+- **Parameterization**: Execute workflows with different parameters
+
+**Large-Scale Coordination Example**:
+```javascript
+// Custom command: full-stack-feature
+/full-stack-feature user-authentication --topology=mesh --phases=all
+
+// Executes:
+1. SPARC Specification Phase
+   - researcher skill: Gather requirements
+   - planner skill: Create user stories
+   
+2. SPARC Architecture Phase
+   - system-architect skill: Design system
+   - db-architect skill: Design database
+   
+3. Swarm Orchestration Setup
+   - swarm-orchestration skill: Initialize mesh topology
+   - Spawn backend, frontend, database agents
+   
+4. SPARC Refinement Phase (Parallel)
+   - coder skill: Implement backend
+   - coder skill: Implement frontend
+   - tester skill: Write tests
+   
+5. Quality Gates
+   - github-code-review skill: Review code
+   - verification-quality skill: Score quality, rollback if needed
+   
+6. SPARC Completion Phase
+   - documenter skill: Generate documentation
+   - workflow-manager skill: Prepare deployment
+```
+
+**Integration Points**:
+- Uses meta-skill for skill discovery
+- Integrates with SPARC methodology
+- Works with all orchestration topologies
+- Leverages stream-chain for sequential execution
+- Coordinates via memory system
+
+**Referenced in**: Advanced (composition), Expert (custom workflows)
+
+---
+
+### 9. Skill Integration Framework (Stock Claude Flow)
+
+**What Makes It Impressive**: The architectural backbone that allows disparate skills to function as a cohesive system through natural language and data flow.
+
+**Key Capabilities**:
+- **Meta-Skill Routing**: 95% confidence natural language matching
+- **Stream-Chain**: Sequential skill execution with data flow
+- **Lazy Loading**: Reduces context bloat by loading only selected skills
+- **Menu Interface**: Browse skills by category
+
+**Performance**: 95% matching accuracy, lazy loading efficiency
+
+**Integration Points**:
+- Routes to all 31 custom skills
+- Suggests skill combinations
+- Works with stream-chain for sequential execution
+- Integrates with custom commands
+- Uses memory for pattern matching
+
+**Referenced in**: Intermediate (skill basics), Advanced (composition), Expert (custom workflows)
+
+---
+
+### 10. Prompting Flexibility (Stock Claude Flow)
+
+**What Makes It Impressive**: Seamless transition between open natural language prompting and highly structured command-based prompting, enabling both creative exploration and precise execution.
+
+**Key Capabilities**:
+- **Open Prompting**: Natural language for exploration and discovery
+- **Structured Prompting**: Command-based for precise execution
+- **Hybrid Approach**: Mix open and structured in same workflow
+- **Prompt Improvement**: Auto-suggest improvements based on patterns
+- **Mode Adaptation**: Adapts to current Flow mode (hive, swarm, wizard, direct)
+
+**Large-Scale Coordination Example**:
+```javascript
+// Open prompting for exploration
+User: "I want to build a review system but I'm not sure how to structure it"
+
+System: 
+- Uses meta-skill to discover relevant skills
+- Presents options menu
+- Explains different approaches
+- Learns from user selection
+
+// Structured prompting for execution
+User: "/full-stack-feature user-authentication --topology=mesh --phases=all --quality-gates=enabled"
+
+System:
+- Executes predefined workflow
+- Uses structured parameters
+- Follows exact sequence
+- Reports structured results
+
+// Hybrid approach
+User: "Build authentication but use the approach that worked best last time"
+
+System:
+- Uses open prompting to understand intent
+- Checks memory for past successful patterns
+- Applies structured workflow from memory
+- Adapts based on context
+```
+
+**Integration Points**:
+- Meta-skill uses natural language matching
+- Custom commands use structured syntax
+- Prompt-improver skill enhances both styles
+- Memory stores successful patterns
+- Works with all skills and topologies
+
+**Referenced in**: Intermediate (basics), Advanced (patterns), Expert (optimization)
