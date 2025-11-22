@@ -1,0 +1,28 @@
+Batch Session Closeout - 2025-11-21 17:09:57
+[2025-11-21 17:09:57] [INFO] Starting batch session closeout
+[2025-11-21 17:09:57] [INFO] Mode: DRY-RUN
+[2025-11-21 17:09:57] [INFO] Processing all active sessions
+[2025-11-21 17:09:57] [INFO] Found 2 session(s) to process
+[2025-11-21 17:09:57] [INFO] Processing session: session-20251121-121218-workspace-org-analysis
+[2025-11-21 17:09:57] [INFO] session-20251121-121218-workspace-org-analysis missing FINAL-SUMMARY.md, generating...
+[2025-11-21 17:09:57] [INFO] Generating FINAL-SUMMARY.md for session-20251121-121218-workspace-org-analysis
+[2025-11-21 17:09:57] [INFO] [DRY-RUN] Would generate FINAL-SUMMARY.md
+[2025-11-21 17:09:57] [INFO] Creating backup of session-20251121-121218-workspace-org-analysis
+[2025-11-21 17:09:57] [INFO] [DRY-RUN] Would backup to /Users/splurfa/common-thread-sandbox/sessions/backup-before-batch-closeout-20251121-170957/session-20251121-121218-workspace-org-analysis
+[2025-11-21 17:09:57] [INFO] Archiving session-20251121-121218-workspace-org-analysis to .archive/
+[2025-11-21 17:09:57] [INFO] [DRY-RUN] Would move session-20251121-121218-workspace-org-analysis to .archive/
+[2025-11-21 17:09:57] [INFO] [DRY-RUN] Would validate archive for session-20251121-121218-workspace-org-analysis
+[2025-11-21 17:09:57] [SUCCESS] Successfully closed out session-20251121-121218-workspace-org-analysis
+[2025-11-21 17:09:57] [INFO] Processing session: session-20251121-120000-issue-tracking-restructure
+[2025-11-21 17:09:57] [INFO] Creating backup of session-20251121-120000-issue-tracking-restructure
+[2025-11-21 17:09:57] [INFO] [DRY-RUN] Would backup to /Users/splurfa/common-thread-sandbox/sessions/backup-before-batch-closeout-20251121-170957/session-20251121-120000-issue-tracking-restructure
+[2025-11-21 17:09:57] [INFO] Archiving session-20251121-120000-issue-tracking-restructure to .archive/
+[2025-11-21 17:09:57] [INFO] [DRY-RUN] Would move session-20251121-120000-issue-tracking-restructure to .archive/
+[2025-11-21 17:09:57] [INFO] [DRY-RUN] Would validate archive for session-20251121-120000-issue-tracking-restructure
+[2025-11-21 17:09:57] [SUCCESS] Successfully closed out session-20251121-120000-issue-tracking-restructure
+[2025-11-21 17:09:57] [INFO] Cleaning up old backup directories
+[2025-11-21 17:09:57] [INFO] [DRY-RUN] Would remove backup directories:
+[2025-11-21 17:09:57] [INFO]   - issues-backup-20251121-121704
+[2025-11-21 17:09:57] [INFO]   - issues-backup-$(date +%Y%m%d-%H%M%S)
+[2025-11-21 17:09:57] [INFO] Generating reconciliation report
+[2025-11-21 17:09:57] [SUCCESS] Report generated: /Users/splurfa/common-thread-sandbox/sessions/batch-closeout-report-20251121-170957.md

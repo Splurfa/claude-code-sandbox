@@ -1,0 +1,655 @@
+---
+name: tour-guide
+description: Interactive workspace tour tailored to proficiency level
+version: 1.0.0
+author: common-thread-sandbox
+tags: [orientation, onboarding, learning, navigation]
+
+# Skill metadata
+metadata:
+  category: learning
+  difficulty: beginner-friendly
+  estimated_time: 30-90 minutes (pathway dependent)
+  prerequisites: none
+
+# State management for tour progress
+state:
+  intake_completed: false
+  current_pathway: null  # beginner|intermediate|advanced|expert
+  current_section: 0
+  visited_sections: []
+  bookmarks: {}
+  proficiency_assessment:
+    q1_response: null
+    q2_response: null
+    q3_response: null
+  start_time: null
+  manual_override: false
+
+# Pathway definitions
+pathways:
+  beginner:
+    name: "Beginner Pathway"
+    description: "For first-time Claude Code users, new to AI agents"
+    estimated_time: "32 minutes"
+    sections:
+      - id: "welcome-overview"
+        title: "Welcome & Overview"
+        file: "tour-scripts/beginner-tour.md"
+        section_marker: "## Section 1: Welcome & Overview"
+        duration: "5 min"
+      - id: "session-basics"
+        title: "Session Basics"
+        file: "tour-scripts/beginner-tour.md"
+        section_marker: "## Section 2: Session Basics"
+        duration: "7 min"
+      - id: "first-agent"
+        title: "Your First Agent"
+        file: "tour-scripts/beginner-tour.md"
+        section_marker: "## Section 3: Your First Agent"
+        duration: "8 min"
+      - id: "multiple-agents"
+        title: "Multiple Agents Working Together"
+        file: "tour-scripts/beginner-tour.md"
+        section_marker: "## Section 4: Multiple Agents"
+        duration: "7 min"
+      - id: "finding-help"
+        title: "Finding Help & Next Steps"
+        file: "tour-scripts/beginner-tour.md"
+        section_marker: "## Section 5: Finding Help"
+        duration: "5 min"
+
+  intermediate:
+    name: "Intermediate Pathway"
+    description: "For regular Claude Code users, want practical patterns"
+    estimated_time: "52 minutes"
+    sections:
+      - id: "workspace-architecture"
+        title: "Workspace Architecture"
+        file: "tour-scripts/intermediate-tour.md"
+        section_marker: "## Section 1: Workspace Architecture"
+        duration: "7 min"
+      - id: "session-management"
+        title: "Session Management Deep Dive"
+        file: "tour-scripts/intermediate-tour.md"
+        section_marker: "## Section 2: Session Management"
+        duration: "10 min"
+      - id: "agent-spawning"
+        title: "Agent Spawning Patterns"
+        file: "tour-scripts/intermediate-tour.md"
+        section_marker: "## Section 3: Agent Spawning"
+        duration: "12 min"
+      - id: "memory-coordination"
+        title: "Memory Coordination"
+        file: "tour-scripts/intermediate-tour.md"
+        section_marker: "## Section 4: Memory Coordination"
+        duration: "10 min"
+      - id: "file-routing"
+        title: "File Routing Rules"
+        file: "tour-scripts/intermediate-tour.md"
+        section_marker: "## Section 5: File Routing"
+        duration: "8 min"
+      - id: "next-steps"
+        title: "Next Steps & Advanced Topics"
+        file: "tour-scripts/intermediate-tour.md"
+        section_marker: "## Section 6: Next Steps"
+        duration: "5 min"
+
+  advanced:
+    name: "Advanced Pathway"
+    description: "For experienced users, seek architectural depth"
+    estimated_time: "70 minutes"
+    sections:
+      - id: "architecture-deepdive"
+        title: "Architecture Deep Dive"
+        file: "tour-scripts/advanced-tour.md"
+        section_marker: "## Section 1: Architecture"
+        duration: "12 min"
+      - id: "custom-modifications"
+        title: "Custom Modifications Overview"
+        file: "tour-scripts/advanced-tour.md"
+        section_marker: "## Section 2: Custom Modifications"
+        duration: "12 min"
+      - id: "coordination-patterns"
+        title: "Advanced Coordination Patterns"
+        file: "tour-scripts/advanced-tour.md"
+        section_marker: "## Section 3: Coordination"
+        duration: "15 min"
+      - id: "performance-optimization"
+        title: "Performance Optimization"
+        file: "tour-scripts/advanced-tour.md"
+        section_marker: "## Section 4: Performance"
+        duration: "12 min"
+      - id: "extension-points"
+        title: "Extension Points"
+        file: "tour-scripts/advanced-tour.md"
+        section_marker: "## Section 5: Extensions"
+        duration: "10 min"
+      - id: "troubleshooting"
+        title: "Advanced Troubleshooting"
+        file: "tour-scripts/advanced-tour.md"
+        section_marker: "## Section 6: Troubleshooting"
+        duration: "9 min"
+
+  expert:
+    name: "Expert Pathway"
+    description: "For system architects, contributors, framework developers"
+    estimated_time: "70 minutes"
+    sections:
+      - id: "stock-vs-custom"
+        title: "Stock vs Custom Comparison"
+        file: "tour-scripts/expert-tour.md"
+        section_marker: "## Section 1: Stock vs Custom"
+        duration: "15 min"
+      - id: "implementation-internals"
+        title: "Implementation Internals"
+        file: "tour-scripts/expert-tour.md"
+        section_marker: "## Section 2: Internals"
+        duration: "15 min"
+      - id: "extension-architecture"
+        title: "Extension Architecture"
+        file: "tour-scripts/expert-tour.md"
+        section_marker: "## Section 3: Extension Architecture"
+        duration: "15 min"
+      - id: "contribution-guidelines"
+        title: "Contribution Guidelines"
+        file: "tour-scripts/expert-tour.md"
+        section_marker: "## Section 4: Contributing"
+        duration: "10 min"
+      - id: "advanced-usecases"
+        title: "Advanced Use Cases"
+        file: "tour-scripts/expert-tour.md"
+        section_marker: "## Section 5: Use Cases"
+        duration: "15 min"
+
+# Intake menu configuration
+intake_menu:
+  title: "Welcome to Common-Thread Workspace"
+  intro: |
+    I'll help you explore this workspace at a pace that matches your experience level.
+    This quick assessment (3 questions) will help me tailor the tour to your needs.
+
+    Ready to start? (Or skip to manual selection below)
+
+  questions:
+    - id: q1
+      title: "AI Agent Experience"
+      prompt: "How familiar are you with multi-agent AI systems?"
+      options:
+        - key: A
+          text: "New to me - what's a multi-agent system?"
+          signal: beginner
+        - key: B
+          text: "I've heard of them but haven't used one"
+          signal: beginner
+        - key: C
+          text: "I've used Claude Code or similar AI assistants"
+          signal: intermediate
+        - key: D
+          text: "I've built or coordinated multi-agent workflows"
+          signal: advanced
+
+    - id: q2
+      title: "Claude Code Familiarity"
+      prompt: "Have you used Claude Code before?"
+      options:
+        - key: A
+          text: "First time using Claude Code"
+          signal: beginner
+        - key: B
+          text: "I've used Claude Code for simple tasks"
+          signal: intermediate
+        - key: C
+          text: "Regular Claude Code user, new to this workspace"
+          signal: intermediate
+        - key: D
+          text: "Experienced with Claude Code + multi-agent patterns"
+          signal: advanced
+
+    - id: q3
+      title: "Your Goals Here"
+      prompt: "What brings you to this workspace?"
+      condition:
+        - q1: [D]
+        - q2: [D]
+      options:
+        - key: A
+          text: "Learn the basics and start building"
+          signal: intermediate
+        - key: B
+          text: "Understand the architecture and patterns"
+          signal: advanced
+        - key: C
+          text: "Evaluate stock vs. custom modifications"
+          signal: expert
+        - key: D
+          text: "Extend the system with custom capabilities"
+          signal: expert
+
+  # Proficiency routing decision matrix
+  routing_matrix:
+    - condition: { q1: A, q2: A }
+      pathway: beginner
+    - condition: { q1: A, q2: B }
+      pathway: beginner
+    - condition: { q1: B, q2: A }
+      pathway: beginner
+    - condition: { q1: B, q2: B }
+      pathway: intermediate
+    - condition: { q1: C, q2: B }
+      pathway: intermediate
+    - condition: { q1: C, q2: C }
+      pathway: intermediate
+    - condition: { q1: C, q2: D, q3: A }
+      pathway: intermediate
+    - condition: { q1: D, q2: C, q3: B }
+      pathway: advanced
+    - condition: { q1: D, q2: D, q3: B }
+      pathway: advanced
+    - condition: { q1: D, q2: D, q3: C }
+      pathway: expert
+    - condition: { q1: D, q2: D, q3: D }
+      pathway: expert
+    # Default fallback
+    - condition: { default: true }
+      pathway: intermediate
+
+  manual_selection:
+    title: "Or skip the questionnaire and choose your level:"
+    options:
+      - number: 1
+        level: beginner
+        description: "I'm new to AI agents and Claude Code"
+      - number: 2
+        level: intermediate
+        description: "I know Claude Code, new to this workspace"
+      - number: 3
+        level: advanced
+        description: "I want architectural depth and patterns"
+      - number: 4
+        level: expert
+        description: "Show me the full technical details"
+
+# Command definitions
+commands:
+  start:
+    aliases: ["/tour"]
+    description: "Start or resume tour"
+    handler: start_tour
+    context_required: false
+    behavior: |
+      - If first invocation (new conversation): Display intake menu
+      - If intake_completed and current_pathway set: Resume from last position
+      - If tour completed: Offer restart or level switch options
+
+  next:
+    aliases: ["/tour next", "/tour n", "/tour continue"]
+    description: "Move to next section"
+    handler: next_section
+    context_required: true
+    behavior: |
+      - Increment current_section
+      - Load and display next section content
+      - Add section to visited_sections
+      - Show navigation options
+      - If at end: Suggest level jump or completion
+
+  back:
+    aliases: ["/tour back", "/tour b", "/tour previous", "/tour prev"]
+    description: "Move to previous section"
+    handler: previous_section
+    context_required: true
+    behavior: |
+      - Decrement current_section (minimum 0)
+      - Load and display previous section content
+      - Show navigation options
+      - If at beginning: Explain position, show alternatives
+
+  skip:
+    aliases: ["/tour skip [section]", "/tour goto [section]"]
+    description: "Jump to specific section by name"
+    handler: skip_to_section
+    context_required: true
+    parameters:
+      - name: section_name
+        type: string
+        required: true
+    behavior: |
+      - Parse section name (fuzzy match, case-insensitive)
+      - Search current pathway sections for match
+      - If exact match: Jump to section
+      - If fuzzy match: Confirm and jump
+      - If multiple matches: Show numbered menu
+      - If no match: Suggest /tour list
+
+  jump:
+    aliases: ["/tour jump [level]"]
+    description: "Switch proficiency pathways"
+    handler: jump_pathway
+    context_required: false
+    parameters:
+      - name: level
+        type: string
+        required: true
+        valid_values: [beginner, intermediate, advanced, expert, basic, intro, inter, mid, adv, exp, master]
+    behavior: |
+      - Validate level (with alias resolution)
+      - If significant progress (>= 2 sections): Ask confirmation
+      - Switch to new pathway
+      - Reset to section 0 of new pathway
+      - Clear visited_sections for new pathway
+      - Set manual_override: true
+
+  status:
+    aliases: ["/tour status", "/tour progress", "/tour where"]
+    description: "Show current position and progress"
+    handler: show_status
+    context_required: true
+    behavior: |
+      - Display current pathway and section
+      - Show progress bar (completed vs total sections)
+      - List completed sections with checkmarks
+      - Show remaining sections
+      - Estimate time remaining
+      - Display navigation options
+
+  list:
+    aliases: ["/tour list", "/tour list [pathway]", "/tour list all"]
+    description: "Show all sections in pathway(s)"
+    handler: list_sections
+    context_required: false
+    parameters:
+      - name: pathway
+        type: string
+        required: false
+        valid_values: [current, beginner, intermediate, advanced, expert, all]
+    behavior: |
+      - If no parameter: List current pathway sections
+      - If pathway specified: List that pathway sections
+      - If "all": List all 4 pathways with descriptions
+      - Indicate current section with marker
+      - Show estimated duration per section
+
+  bookmark:
+    aliases: ["/tour bookmark [name]", "/tour bookmark delete [name]"]
+    description: "Save current position for later return"
+    handler: manage_bookmark
+    context_required: true
+    parameters:
+      - name: action
+        type: string
+        default: add
+        valid_values: [add, delete]
+      - name: name
+        type: string
+        required: false
+    behavior: |
+      - If action=add: Save current pathway+section with name
+      - If no name: Auto-generate "bookmark-N"
+      - If action=delete: Remove bookmark by name
+      - Store in state.bookmarks
+      - Max 10 bookmarks per session
+      - Display return command
+
+  bookmarks:
+    aliases: ["/tour bookmarks"]
+    description: "List all saved bookmarks"
+    handler: list_bookmarks
+    context_required: false
+    behavior: |
+      - Display all bookmarks with pathway->section info
+      - Show return command for each
+      - If no bookmarks: Explain bookmark feature
+
+  reset:
+    aliases: ["/tour reset", "/tour restart", "/tour start-over"]
+    description: "Restart tour from intake menu"
+    handler: reset_tour
+    context_required: false
+    behavior: |
+      - If significant progress (>= 2 sections): Ask confirmation
+      - Clear all state (pathway, sections, bookmarks)
+      - Set intake_completed: false
+      - Display intake menu
+
+  help:
+    aliases: ["/tour help", "/tour help [command]"]
+    description: "Show command reference"
+    handler: show_help
+    context_required: false
+    parameters:
+      - name: command
+        type: string
+        required: false
+    behavior: |
+      - If no parameter: Show all commands with brief descriptions
+      - If command specified: Show detailed help for that command
+      - Include syntax, aliases, examples, notes, related commands
+      - For unknown command: Suggest similar commands
+
+# Navigation rendering
+display:
+  section_header_format: |
+    ════════════════════════════════════════════════════════════
+      {pathway_name}: Section {section_num} of {total_sections} - {section_title}
+    ════════════════════════════════════════════════════════════
+
+  navigation_footer_format: |
+
+    Navigation:
+      /tour next - {next_section_title}
+      /tour back - {previous_section_title}
+      /tour status - See progress
+      /tour help - Command reference
+
+  progress_bar_format: |
+    Progress: {filled_blocks}{empty_blocks} {percentage}%
+
+  progress_bar_width: 40
+  progress_bar_filled_char: "█"
+  progress_bar_empty_char: "░"
+
+# Content loading strategy
+content_loader:
+  method: read_tool
+  base_path: ".claude/skills/tour-guide/tour-scripts"
+  section_delimiter: "##"
+  cache_sections: true
+  fallback_message: |
+    Content not available. This section is under development.
+
+    Continue with: /tour next
+    Or switch pathways: /tour jump [level]
+
+# Skill coordination references
+related_skills:
+  - name: tutor-mode
+    description: "Adaptive learning guide with hands-on exercises"
+    when_to_reference: "User asks about interactive practice or exercises"
+    invocation: "Use /tutor-mode or Skill tool"
+
+  - name: meta-skill
+    description: "Intelligent skill routing and discovery"
+    when_to_reference: "User needs help finding the right skill"
+    invocation: "Use /meta-skill or Skill tool"
+
+  - name: swarm-orchestration
+    description: "Multi-agent swarm coordination patterns"
+    when_to_reference: "Advanced/Expert users ask about coordination"
+    invocation: "Use /swarm-orchestration or Skill tool"
+
+  - name: reasoningbank-intelligence
+    description: "Adaptive learning and pattern recognition"
+    when_to_reference: "Expert users ask about learning systems"
+    invocation: "Use /reasoningbank-intelligence or Skill tool"
+
+# Behavioral rules
+rules:
+  - id: read_only
+    description: "Tour-guide never modifies workspace files"
+    enforcement: "Only use Read tool, never Write/Edit"
+
+  - id: no_execution
+    description: "Tour-guide never runs commands or spawns agents"
+    enforcement: "Never use Bash or Task tools"
+
+  - id: show_dont_do
+    description: "Guide users to capabilities, don't execute on their behalf"
+    enforcement: "Explain and reference, never invoke other skills automatically"
+
+  - id: no_external_calls
+    description: "Purely internal navigation and documentation reading"
+    enforcement: "No WebFetch, no external APIs"
+
+  - id: user_control
+    description: "User maintains full control over tour progression"
+    enforcement: "Never auto-advance sections, always wait for explicit command"
+
+  - id: graceful_degradation
+    description: "Handle missing content or invalid commands gracefully"
+    enforcement: "Clear error messages, suggest alternatives, never fail silently"
+
+# Quality attributes
+quality:
+  response_time_target: "< 2 seconds"
+  memory_footprint_target: "< 1KB in conversation context"
+  clarity_principle: "Clear navigation cues at every step"
+  flexibility_principle: "Easy to skip/jump between sections"
+  context_principle: "Always show 'where you are' indicator"
+
+# Testing hooks
+testing:
+  validate_pathways: true
+  validate_commands: true
+  validate_routing_matrix: true
+  test_scenarios:
+    - name: "absolute_beginner"
+      inputs: { q1: A, q2: A }
+      expected_pathway: beginner
+    - name: "claude_code_veteran"
+      inputs: { q1: D, q2: D, q3: D }
+      expected_pathway: expert
+    - name: "manual_override"
+      inputs: { manual_select: 3 }
+      expected_pathway: advanced
+    - name: "mid_tour_switch"
+      scenario: "Start intermediate section 3, jump to beginner"
+      expected: "Reset to beginner section 0"
+
+# Error messages
+error_messages:
+  no_active_tour: |
+    No active tour. Start with /tour
+
+  invalid_section: |
+    No section found matching "{section_name}"
+
+    See all sections: /tour list
+    Or continue: /tour next
+
+  invalid_level: |
+    Unknown proficiency level: "{level}"
+
+    Valid levels:
+      - beginner (basic, intro)
+      - intermediate (inter, mid)
+      - advanced (adv)
+      - expert (exp, master)
+
+    Usage: /tour jump [level]
+
+  invalid_command: |
+    Unknown command: "{command}"
+
+    See all commands: /tour help
+
+  at_beginning: |
+    You're at the beginning of the {pathway} pathway.
+
+    Options:
+      - /tour next - Continue forward
+      - /tour jump [level] - Switch pathways
+      - /tour list - See all sections
+
+  at_end: |
+    You've reached the end of the {pathway} pathway!
+
+    Next options:
+      - /tour jump {next_level} (level up)
+      - /tour reset (restart)
+      - Exit tour and start building
+
+  context_required: |
+    This command requires an active tour.
+
+    Start tour: /tour
+    Get help: /tour help
+
+# Success metrics
+metrics:
+  track_completion_rate: true
+  track_pathway_switches: true
+  track_average_time_per_pathway: true
+  track_section_skips: true
+  track_bookmark_usage: true
+
+# Documentation references
+documentation:
+  beginner_pathway_docs:
+    - "docs/setup/quick-start.md"
+    - "docs/operate/session-management.md"
+
+  intermediate_pathway_docs:
+    - "docs/reference/architecture.md"
+    - "docs/operate/session-management.md"
+    - "docs/build/spawning-agents.md"
+    - "docs/operate/memory-coordination-tutorial.md"
+
+  advanced_pathway_docs:
+    - "docs/reference/architecture.md"
+    - "docs/coordinate/swarm-coordination.md"
+    - "docs/operate/troubleshooting.md"
+
+  expert_pathway_docs:
+    - "docs/reference/architecture.md"
+    - "docs/reference/stock-vs-custom.md"
+    - "docs/build/extending-the-system.md"
+
+# Version history
+changelog:
+  - version: 1.0.0
+    date: 2025-11-21
+    changes:
+      - "Initial implementation with 4 proficiency pathways"
+      - "Intake menu with 3-question assessment"
+      - "Navigation commands: next, back, skip, jump, status, list"
+      - "Bookmark system for saving progress"
+      - "Fuzzy section matching"
+      - "Manual level selection override"
+      - "Comprehensive error handling"
+
+# Future enhancements
+roadmap:
+  - feature: "Interactive examples with 'try this' prompts"
+    priority: high
+    estimated_effort: "2-3 days"
+
+  - feature: "Visual progress indicators per pathway"
+    priority: medium
+    estimated_effort: "1 day"
+
+  - feature: "Quiz functionality for knowledge testing"
+    priority: medium
+    estimated_effort: "2 days"
+
+  - feature: "Personal notes system"
+    priority: low
+    estimated_effort: "1 day"
+
+  - feature: "Multi-language support"
+    priority: low
+    estimated_effort: "5-7 days"
+
+  - feature: "Export tour progress and notes"
+    priority: low
+    estimated_effort: "1-2 days"

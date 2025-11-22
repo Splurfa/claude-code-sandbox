@@ -1,0 +1,29 @@
+Batch Session Closeout - 2025-11-21 17:10:02
+[2025-11-21 17:10:02] [INFO] Starting batch session closeout
+[2025-11-21 17:10:02] [INFO] Mode: LIVE
+[2025-11-21 17:10:02] [INFO] Processing all active sessions
+[2025-11-21 17:10:02] [INFO] Found 2 session(s) to process
+[2025-11-21 17:10:02] [INFO] Processing session: session-20251121-121218-workspace-org-analysis
+[2025-11-21 17:10:02] [INFO] session-20251121-121218-workspace-org-analysis missing FINAL-SUMMARY.md, generating...
+[2025-11-21 17:10:02] [INFO] Generating FINAL-SUMMARY.md for session-20251121-121218-workspace-org-analysis
+[2025-11-21 17:10:02] [SUCCESS] Generated FINAL-SUMMARY.md for session-20251121-121218-workspace-org-analysis
+[2025-11-21 17:10:02] [INFO] Creating backup of session-20251121-121218-workspace-org-analysis
+[2025-11-21 17:10:02] [SUCCESS] Backed up session-20251121-121218-workspace-org-analysis to /Users/splurfa/common-thread-sandbox/sessions/backup-before-batch-closeout-20251121-171002
+[2025-11-21 17:10:02] [INFO] Archiving session-20251121-121218-workspace-org-analysis to .archive/
+[2025-11-21 17:10:02] [SUCCESS] Archived session-20251121-121218-workspace-org-analysis
+[2025-11-21 17:10:02] [INFO] Validating archive for session-20251121-121218-workspace-org-analysis
+[2025-11-21 17:10:02] [WARNING] metadata.json missing in archive
+[2025-11-21 17:10:02] [SUCCESS] Archive validation passed for session-20251121-121218-workspace-org-analysis
+[2025-11-21 17:10:02] [SUCCESS] Successfully closed out session-20251121-121218-workspace-org-analysis
+[2025-11-21 17:10:02] [INFO] Processing session: session-20251121-120000-issue-tracking-restructure
+[2025-11-21 17:10:02] [INFO] Creating backup of session-20251121-120000-issue-tracking-restructure
+[2025-11-21 17:10:02] [SUCCESS] Backed up session-20251121-120000-issue-tracking-restructure to /Users/splurfa/common-thread-sandbox/sessions/backup-before-batch-closeout-20251121-171002
+[2025-11-21 17:10:02] [INFO] Archiving session-20251121-120000-issue-tracking-restructure to .archive/
+[2025-11-21 17:10:02] [SUCCESS] Archived session-20251121-120000-issue-tracking-restructure
+[2025-11-21 17:10:02] [INFO] Validating archive for session-20251121-120000-issue-tracking-restructure
+[2025-11-21 17:10:02] [SUCCESS] Archive validation passed for session-20251121-120000-issue-tracking-restructure
+[2025-11-21 17:10:02] [SUCCESS] Successfully closed out session-20251121-120000-issue-tracking-restructure
+[2025-11-21 17:10:02] [INFO] Cleaning up old backup directories
+[2025-11-21 17:10:02] [SUCCESS] Cleaned up old backups
+[2025-11-21 17:10:02] [INFO] Generating reconciliation report
+[2025-11-21 17:10:02] [SUCCESS] Report generated: /Users/splurfa/common-thread-sandbox/sessions/batch-closeout-report-20251121-171002.md
